@@ -3,28 +3,36 @@
 **Installation von Komponenten**
 
 **1. Symfony CLI**
+
 Symfony CLI (CLI = Command Line Interface) (https://github.com/symfony-cli/symfony-cli/releases)
+
 -> symfony-cli_windows_amd64.zip
 
 - Lege die entpackte 'symfony.exe' in einen Ordner unter C:\ (im besten fall einfach ´symfony´) ab.
-C:\symfony\symfony.exe
+- C:\symfony\symfony.exe
 
 **2. PHP**
+
 PHP ist die programmiersprache, mit der wir arbeiten (https://windows.php.net/download#php-8.2)
+
 -> VS16 x64 Non Thread Safe
 
 - Lege die entpackten daten in einem Ordner unter C:\ (im besten fall einfach ´´´php´´´) ab.
-C:\php\php.exe (und alle anderen dateien)
+- C:\php\php.exe (und alle anderen dateien)
 
 **3. Composer**
+
 Composer ist ein Pakete-Manager. Pakete benutzen wir um verschiedene funktionen zusammen zu setzen oder projekte zu managen. (https://getcomposer.org/download/)
+
 -> Windows Installer
 
 - Führe den Composer Setup aus, wähle, wenn du gefragt wirst, die php.exe (C:\php\php.exe aus schritt 2) aus.
 - Wähle außerdem "Add this php to your PATH" an. (Das ermöglicht uns PHP jederzeit von einem Termainl/Command Line auszuführen)
 
 **4. NodeJS**
+
 NodeJS ist eine Entwicklungsumgebung für JavaScript (https://nodejs.org/en)
+
 -> Download NodeJS
 
 - Führe Node.js Setup aus, während des Setups wirst du gefragt, welche pakete du installieren willst. Stelle sicher das ALLE optionen aktiviert sind.
@@ -37,18 +45,24 @@ NodeJS ist eine Entwicklungsumgebung für JavaScript (https://nodejs.org/en)
 **Installation von Entwicklertools**
 
 **1. GitHub Desktop & GitHub.com**
+
 GitHub ist eine Online Versionsverwaltung von Code (https://github.com/)
+
 -> Lege dir einen Account an bei GitHub.com
 -> Lade dir GitHub Desktop herunter (https://desktop.github.com/) und installiere es.
 
 - Melde dich mit deinem GitHub Account bei GitHub Desktop an.
 
 **2. Visual Studio Code - VSCode (https://code.visualstudio.com/)**
+
 Visual Studio Code ist ein Code-Editor.
+
 -> Download for Windows
 
 **3. XAMPP (https://www.apachefriends.org/de/index.html)**
+
 XAMPP ermöglicht es dir einen lokalen Server inkl. Datenbank zu starten.
+
 -> XAMPP für Windows
 -> Direkter Link (https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-portable-windows-x64-8.2.12-0-VS16-installer.exe)
 
