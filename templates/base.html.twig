@@ -13,6 +13,13 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container-fluid">
+
+            <div class="header"></div>
+            <div class="sidebar-left"></div>
+            <div class="sidebar-right"></div>
+            
+            <div class="content">{% block body %}{% endblock %}</div>
+        </div>
     </body>
 </html>
