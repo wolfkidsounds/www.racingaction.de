@@ -10,6 +10,7 @@ Symfony CLI (CLI = Command Line Interface) (https://github.com/symfony-cli/symfo
 
 - Lege die entpackte 'symfony.exe' in einen Ordner unter C:\ (im besten fall einfach ´symfony´) ab.
 - C:\symfony\symfony.exe
+- Symfony zu den "PATH" variablen unter Windows hinzufügen (https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10)  - **Der Ordner sollte hinzugefügt werden, nicht symfony.exe**
 
 **2. PHP**
 
