@@ -88,11 +88,9 @@ Was ist ein Repository? Ein Repository ist der Ort/Speicherort/Link/Adresse an d
 2. Rechtsklick -> Mit Code Öffnen (Alternativ kannst du VSCode starten und unter File->Open Folder den Ordner auswählen)
 3. Nachdem VSCode geöffnet ist Terminal->New Terminal
 4. Im Terminal kannst du nun ```./install``` eintippen.
-5. ./install führt nun die befehle aus, um das projekt auf deinem rechner zu installieren.
-5.1 composer install
-5.2 npm install
-6. mit dem befehel ```symfony serve -d``` startest du den internen server von symfony.
-7. mit dem befehel ```npm run watch``` startest du webpack, webpack ist ein anderer server, der nach änderungen schaut und diese an deine website ausliefert.
+5. ./install führt nun die befehle aus, um das projekt auf deinem rechner zu installieren. (alternativ -> composer install | npm install)
+6. mit dem befehl ```symfony serve -d``` startest du den internen server von symfony.
+7. mit dem befehl ```npm run watch``` startest du webpack, webpack ist ein anderer server, der nach änderungen schaut und diese an deine website ausliefert.
 8. unter http://127.0.0.1:8000 kannst du dir nun deine lokale website ansehen.
 
 ---
