@@ -6,7 +6,7 @@
 Symfony CLI (CLI = Command Line Interface) (https://github.com/symfony-cli/symfony-cli/releases)
 -> symfony-cli_windows_amd64.zip
 
-- Lege die entpackte 'symfony.exe' in einen Ordner unter C:\ (im besten fall einfach ´´´symfony´´´) ab.
+- Lege die entpackte 'symfony.exe' in einen Ordner unter C:\ (im besten fall einfach ´symfony´) ab.
 C:\symfony\symfony.exe
 
 **2. PHP**
