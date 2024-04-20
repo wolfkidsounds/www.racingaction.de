@@ -78,3 +78,9 @@ Was ist ein Repository? Ein Repository ist der Ort/Speicherort/Link/Adresse an d
 6. mit dem befehel ```symfony serve -d``` startest du den internen server von symfony.
 7. mit dem befehel ```npm run watch``` startest du webpack, webpack ist ein anderer server, der nach änderungen schaut und diese an deine website ausliefert.
 8. unter http://127.0.0.1:8000 kannst du dir nun deine lokale website ansehen.
+
+**Weiterführende Informationen**
+
+- Symfony Dokumentation: https://symfony.com/doc/current/index.html
+- Symfony Maker Bundle: https://symfony.com/bundles/SymfonyMakerBundle/current/index.html
+- EasyAdmin Dokumentation: https://symfony.com/bundles/EasyAdminBundle/current/index.html
