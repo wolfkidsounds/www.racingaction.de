@@ -1,10 +1,18 @@
+// Importiere Stimulus Controller
 import './bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
-import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+// Importiere Node.js JavaScript Module
+import '@popperjs/core';
+import 'bootstrap';
+
+// Importiere Node.js CSS Module
+import '@fortawesome/fontawesome-free/css/all.css';
+
+// Importiere JavaScript
+import './js/app.js';
+
+// Importiere SASS
+import './scss/app.scss';
+
+// Importiere CSS
+import './css/app.css';
