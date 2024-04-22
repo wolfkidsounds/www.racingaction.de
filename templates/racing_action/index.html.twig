@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Racing Action{% endblock %}
+{% block title %}{{ parent() }} | Coming Soon{% endblock %}
 
 {% block body %}
 <div class="p-3 mb-3 bg-body-tertiary rounded-3">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Willkommen bei Racing Action!</h1>
-        <p class="col-md-8 fs-4">
-            Hier entsteht bald eine große Platrtform, auf der ihr Rennveranstaltungen, Trainings jeglicher Art und andere Termine rund ums Motorradrennenfahren (angefangen mit Flat Track und Speedway) finden, speichern und organisieren könnt!
-            Bis es soweit ist, könnt ihr euch auf der Seite https://jojogp215.wixsite.com/my-site-1 über Renn- und Trainingsveranstaltungen informieren.
-            Auf meinem Instagram Profil werdet ihr informiert, sobald die Webseite für euch eröffnet ist.</p>
-        <button class="btn btn-outline-primary btn-lg" type="button">Example button</button>
-        <button class="btn btn-outline-danger btn-lg" type="button">Diesen Knopf bitte nicht drücken</button>
+        <div class="col-md-8 fs-4">
+            <p>Hier entsteht bald eine große Plattform, auf der ihr Rennveranstaltungen, Trainings jeglicher Art und andere Termine rund ums Motorradrennenfahren (angefangen mit Flat Track und Speedway) finden, speichern und organisieren könnt!</p>
+            <p>Bis es soweit ist, könnt ihr euch auf dem Kalender über Renn- und Trainingsveranstaltungen informieren.</p>
+            <p>Über mein Instagram Profil werdet ihr informiert, sobald die Webseite für euch eröffnet ist.</p>
+        </div>
+        <a href="https://jojogp215.wixsite.com/my-site-1" class="btn btn-outline-primary btn-lg" type="button">
+            <i class="fas fa-calendar-days me-2"></i>Kalender
+        </a>
+        <a href="https://www.instagram.com/jojogp_215/" class="btn btn-outline-primary btn-lg" type="button">
+            <i class="fa-brands fa-instagram me-2"></i>jojogp_215
+        </a>
+        <a href="https://www.facebook.com/dieeinzigwahrejojo" class="btn btn-outline-primary btn-lg" type="button">
+            <i class="fa-brands fa-facebook me-2"></i>jojogp_215
+        </a>
     </div>
 </div>
-<div>  </div>
-
-
-
-
-→ instagrambutton jojogp_215
-
-LOVE YOURSELF, DO FLAT TRACK!
 {% endblock %}
