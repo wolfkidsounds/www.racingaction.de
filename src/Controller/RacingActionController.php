@@ -12,7 +12,7 @@ class RacingActionController extends AbstractController
     public function index(): Response
     {
         return $this->render('racing_action/index.html.twig', [
-            'controller_name' => 'RacingActionController',
+            'controller_name' => 'Hello Controller Sachendings',
         ]);
     }
 }
