@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'app_racing_action')]
+    #[Route('/', name: 'public_index')]
     public function index(): Response
     {
         return $this->render('seiten/index.html.twig', [
@@ -16,10 +16,10 @@ class IndexController extends AbstractController
         ]);
     }
 
-    #[Route('/hallo', name: 'app_hallo')]
-    public function hallo(): Response
+    #[Route('/organizer', name: 'public_organizer')]
+    public function organizer(): Response
     {
-        return $this->render('seiten/hallo.html.twig', [
+        return $this->render('seiten/organizer/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }
