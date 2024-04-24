@@ -12,7 +12,15 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         return $this->render('seiten/index.html.twig', [
-            'controller_name' => 'Hello Controller Sachendings',
+            'controller_name' => 'IndexController',
+        ]);
+    }
+
+    #[Route('/hallo', name: 'app_hallo')]
+    public function hallo(): Response
+    {
+        return $this->render('seiten/hallo.html.twig', [
+            'controller_name' => 'IndexController',
         ]);
     }
 }

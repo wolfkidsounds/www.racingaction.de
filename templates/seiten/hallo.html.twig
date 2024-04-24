@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Hallo{% endblock %}
+
+{% block body %}
+<div class="p-3 bg-secondary">
+    Hallo, ich bin eine neue route "Hallo".
+    <div class="mt-3 p-3">
+        Controller -> IndexController
+        <br>
+        Route -> "/hallo"
+        <br>
+        Template -> "/seiten/hallo.html.twig"
+    </div>
+</div>
+{% endblock %}
