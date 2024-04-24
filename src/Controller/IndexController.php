@@ -19,7 +19,23 @@ class IndexController extends AbstractController
     #[Route('/organizer', name: 'public_organizer')]
     public function organizer(): Response
     {
-        return $this->render('seiten/organizer/index.html.twig', [
+        return $this->render('seiten/user/organizer/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
+
+    #[Route('/rider', name: 'rider')]
+    public function rider(): Response
+    {
+        return $this->render('seiten/user/rider/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
+
+    #[Route('/event', name: 'event')]
+    public function event(): Response
+    {
+        return $this->render('seiten/calendar/event/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }
