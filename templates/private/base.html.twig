@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+{% block main %}
+    <div class="container-fluid">
+        <div id="header">{{ include('_partial/_header.html.twig') }}</div>
+        <div id="sidebar-left">{{ include('_partial/_left-sidebar.html.twig') }}</div>
+        <div id="sidebar-right">{{ include('_partial/_right-sidebar.html.twig') }}</div>
+        <div id="content">{% block body %}{% endblock %}</div>
+        <div id="footer">{{ include('_partial/_footer.html.twig') }}</div>
+    </div>
+{% endblock %}
