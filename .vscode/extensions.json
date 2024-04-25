@@ -37,6 +37,7 @@
         "davidanson.vscode-markdownlint",
         "zainchen.json",
         "ecmel.vscode-html-css",
-        "shaharkazaz.git-merger"
+        "shaharkazaz.git-merger",
+        "junstyle.php-cs-fixer"
     ]
 }
