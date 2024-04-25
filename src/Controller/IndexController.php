@@ -1,4 +1,4 @@
-<?php
+<?php // src/Controller/IndexController.php
 
 namespace App\Controller;
 
@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/', name:'public_')]
 class IndexController extends AbstractController
 {
     /**
@@ -18,7 +19,7 @@ class IndexController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/', name: 'public_index')]
+    #[Route('/', name: 'index')]
     public function index(): Response
     {
         //TODO: Kalender in das Template schicken
@@ -35,7 +36,7 @@ class IndexController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/organizer', name: 'public_organizer')]
+    #[Route('/organizer', name: 'organizer')]
     public function organizer(): Response
     {
         //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
