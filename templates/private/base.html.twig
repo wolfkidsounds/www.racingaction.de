@@ -1,6 +1,11 @@
+{#  
+    Verwende diese Datei für Private Seiten
+    {% extends 'private/base.html.twig' %}
+#}
+
 {% extends 'base.html.twig' %}
-{% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
-{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+{% block stylesheets %}{{ encore_entry_link_tags('private') }}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('private') }}{% endblock %}
 {% block main %}
     <div class="container-fluid">
         <div id="header">{{ include('_partial/_header.html.twig') }}</div>
