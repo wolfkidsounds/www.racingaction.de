@@ -14,7 +14,7 @@ class IndexController extends AbstractController
      * Diese Seite ist die erste, die man sieht.
      * Besucher können hier einen Kalender sehen (?)
      * 
-     * Typ: Öffentlich
+     * Sichtbarkeit: Öffentlich
      *
      * @return Response
      */
@@ -31,7 +31,7 @@ class IndexController extends AbstractController
     /**
      * Organizer (Übersicht?)
      * 
-     * Typ: Öffentlich
+     * Sichtbarkeit: Öffentlich
      *
      * @return Response
      */
@@ -49,7 +49,7 @@ class IndexController extends AbstractController
     /**
      * Rider (Übersicht?)
      * 
-     * Typ: Öffentlich
+     * Sichtbarkeit: Öffentlich
      *
      * @return Response
      */
@@ -67,7 +67,7 @@ class IndexController extends AbstractController
     /**
      * Event (Übersicht?)
      * 
-     * Typ: Öffentlich
+     * Sichtbarkeit: Öffentlich
      *
      * @return Response
      */
