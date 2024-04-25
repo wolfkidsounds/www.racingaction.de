@@ -23,7 +23,6 @@
         "rholdos.twig-language-support",
         "emmanuelbeziat.vscode-great-icons",
         "redhat.vscode-yaml",
-        "formulahendry.auto-complete-tag",
         "formulahendry.auto-rename-tag",
         "tal7aouy.theme",
         "zepich.twig-braces-helper",
@@ -31,10 +30,15 @@
         "mblode.twig-language-2",
         "dbaeumer.vscode-eslint",
         "thenouillet.symfony-vscode",
-        "bmewburn.vscode-intelephense-client",
         "codezombiech.gitignore",
         "naumovs.color-highlight",
         "syler.sass-indented",
-        "wix.vscode-import-cost"
+        "wix.vscode-import-cost",
+        "phproberto.vscode-php-getters-setters",
+        "bmewburn.vscode-intelephense-client",
+        "davidanson.vscode-markdownlint",
+        "zainchen.json",
+        "ecmel.vscode-html-css",
+        "shaharkazaz.git-merger"
     ]
 }
