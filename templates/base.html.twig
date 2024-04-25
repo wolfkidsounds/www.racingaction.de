@@ -9,14 +9,8 @@
         {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </head>
     <body>
-        <div class="container-fluid">
-            <div id="header">{{ include('_partial/_header.html.twig') }}</div>
-            <div id="sidebar-left">{{ include('_partial/_left-sidebar.html.twig') }}</div>
-            {% if user %}
-                <div id="sidebar-right">{{ include('_partial/_right-sidebar.html.twig') }}</div>
-            {% endif %}
-            <div id="content">{% block body %}{% endblock %}</div>
-            <div id="footer">{{ include('_partial/_footer.html.twig') }}</div>
-        </div>
+        {% block main %}
+            <div class="d-flex justify-content-center align-items-center h-100 w-100 p-3 bg-danger-subtle">Dieses Template bleibt leer, wenn %block main% nicht überschrieben wird.</div>
+        {% endblock %}
     </body>
 </html>
