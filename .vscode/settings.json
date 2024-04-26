@@ -1,0 +1,15 @@
+{
+    "symfony-vscode.consolePath": "/bin/console",
+    "files.autoSave": "onWindowChange",
+    "workbench.colorTheme": "Theme",
+    "workbench.preferredDarkColorTheme": "Theme",
+    "workbench.preferredHighContrastColorTheme": "Theme Mix",
+    "workbench.iconTheme": "vscode-great-icons",
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
+    "php.suggest.basic": true,
+    "php-cs-fixer.executablePath": "/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
+    "php-cs-fixer.executablePathWindows": "/vendor/friendsofphp/php-cs-fixer/php-cs-fixer",
+    "php-cs-fixer.formatHtml": true,
+    "php-cs-fixer.onsave": true,
+    "php-cs-fixer.config": ".php-cs-fixer.dist.php",
+}

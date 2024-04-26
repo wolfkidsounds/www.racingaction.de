@@ -14,13 +14,21 @@ Encore
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[hash:8].[ext]',
+        pattern: /\.(png|jpg|jpeg)$/
+    })
+
     /*
      * ENTRY CONFIG
      *
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
+    .addEntry('public', './assets/public.js') // für öffentliche seiten
+    .addEntry('private', './assets/private.js') // für private seiten
+    // 'app' wird hier nicht mehr verwendet
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

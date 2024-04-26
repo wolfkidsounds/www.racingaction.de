@@ -1,0 +1,15 @@
+{#  
+    Verwende diese Datei für Öffentliche Seiten
+    {% extends 'public/base.html.twig' %}
+#}
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}{{ encore_entry_link_tags('public') }}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('public') }}{% endblock %}
+{% block main %}
+    <div class="container-fluid">
+        <div id="header">{{ include('_partial/_header.html.twig') }}</div>
+        <div id="content">{% block body %}{% endblock %}</div>
+        <div id="footer">{{ include('_partial/_footer.html.twig') }}</div>
+    </div>
+{% endblock %}
