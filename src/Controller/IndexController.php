@@ -39,16 +39,16 @@ class IndexController extends AbstractController
     #[Route('/organizer', name: 'organizer')]
     public function organizer(): Response
     {
-        //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
-        // entsprechends template wählen (public/organizer.html.twig)?
-        // einzahl oder mehrzahl? (organizers -> viele)
-        return $this->render('seiten/user/organizer/index.html.twig', [
+        // JJ: öffentliche Seite
+        // JJ: in templates abgelegt
+        // JJ: ich würde alles in einzahl bennenen
+        return $this->render('public/organizer/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }
 
     /**
-     * Rider (Übersicht?)
+     * Rider (Übersicht?) JJ: Ja, Daten nach Öffentlichkeitsstatus. Wenn Rider (privat) ausgewählt, dann wird er in der Liste mit "FAHRER" angezeigt
      * 
      * Sichtbarkeit: Öffentlich
      *
