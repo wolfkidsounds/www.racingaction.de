@@ -1,1 +1,43 @@
 @import './common/bootstrap.scss'; // Bootstrap
+
+$header_height: 100px;
+
+#header {
+    background: #000;
+    position: fixed; 
+    width: 100vw;
+    height: $header_height;
+    top: 0;
+    left: 0;
+}
+
+$footer_height: 200px;
+
+#footer {
+    background:#000;
+    position:fixed;
+    width:100vw;
+    height: $footer_height;
+    bottom:0;
+    left:0;
+
+}
+
+$sidebar-left_width: 250px;
+$sidebar-left_height:calc(100vh - $header_height - $footer_height);
+#sidebar-left {
+    background: grey;
+    position:fixed;
+    width:$sidebar-left_width;
+    height:$sidebar-left_height;
+    top: $header_height;
+    left: 0;
+}
+
+#content {
+    position: fixed;
+    width: calc(100vh - $sidebar-left_width);
+    height:$sidebar-left_height;
+    top:$header_height;
+    left:$sidebar-left_width;
+}
