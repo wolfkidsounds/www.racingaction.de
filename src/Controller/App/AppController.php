@@ -15,11 +15,8 @@ class AppController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-
-        $user->getEmail(); // get = bekommen (den wert);
-        $user->setEmail('eric@kartoffel.de'); // set = wert setzen
         
-        return $this->render('app/app/index.html.twig', [
+        return $this->render('app/demo/index.html.twig', [
             'controller_name' => 'AppController',
         ]);
     }
