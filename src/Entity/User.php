@@ -32,6 +32,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Nickname = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Organizer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +111,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->Nickname;
+    }
+
+    public function setNickname(string $Nickname): static
+    {
+        $this->Nickname = $Nickname;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?string
+    {
+        return $this->Organizer;
+    }
+
+    public function setOrganizer(string $Organizer): static
+    {
+        $this->Organizer = $Organizer;
+
+        return $this;
     }
 }

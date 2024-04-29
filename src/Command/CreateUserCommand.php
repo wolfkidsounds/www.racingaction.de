@@ -35,6 +35,7 @@ class CreateUserCommand extends Command
             ->setDescription('Creates users and stores them in the database')
             // commands can optionally define arguments and/or options (mandatory and optional)
             // see https://symfony.com/doc/current/components/console/console_arguments.html
+            ->addArgument('nickname', InputArgument::OPTIONAL, 'The nickname of the new user')
             ->addArgument('email', InputArgument::OPTIONAL, 'The email of the new user')
             ->addArgument('password', InputArgument::OPTIONAL, 'The plain password of the new user')
         ;
@@ -48,11 +49,13 @@ class CreateUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $nickname = $input->getArgument('nickname');
         $email = $input->getArgument('email');
         $plainPassword = $input->getArgument('password');
         $role = 'ROLE_ADMIN';
 
         $user = new User();
+        $user->setNickname($nickname);
         $user->setEmail($email);
         $user->setRoles([$role]);
 
