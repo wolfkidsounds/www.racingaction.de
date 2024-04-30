@@ -22,22 +22,3 @@ $footer_height: 200px;
     left:0;
 
 }
-
-$sidebar-left_width: 250px;
-$sidebar-left_height:calc(100vh - $header_height - $footer_height);
-#sidebar-left {
-    background: grey;
-    position:fixed;
-    width:$sidebar-left_width;
-    height:$sidebar-left_height;
-    top: $header_height;
-    left: 0;
-}
-
-#content {
-    position: fixed;
-    width: calc(100vh - $sidebar-left_width);
-    height:$sidebar-left_height;
-    top:$header_height;
-    left:$sidebar-left_width;
-}
