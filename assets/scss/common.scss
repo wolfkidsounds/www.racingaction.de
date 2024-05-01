@@ -1,7 +1,7 @@
-@import './common/bootstrap.scss'; // Bootstrap
+/* common.scss */
 
-$header_height: 100px;
-$footer_height: 200px;
+@import './common/bootstrap.scss'; // Bootstrap
+@import './_/variables'; // Variablen
 
 #header {
     background: #000;
@@ -13,11 +13,10 @@ $footer_height: 200px;
 }
 
 #footer {
-    background:#000;
-    position:fixed;
-    width:100vw;
+    background: #000;
+    position: fixed;
+    width: 100vw;
     height: $footer_height;
-    bottom:0;
-    left:0;
-
+    bottom: 0;
+    left: 0;
 }
