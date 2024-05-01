@@ -1,0 +1,17 @@
+{#  
+    Verwende diese Datei für Admin Seiten
+    {% extends 'admin/base.html.twig' %}
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('admin') }}{% endblock %}
+{% block javascripts %}{{ encore_entry_script_tags('admin') }}{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" data-turbo="false">
+        <div id="header" class="border-bottom">{{ include('admin/_/_header.html.twig') }}</div>
+        <div id="sidebar" class="border-end">{{ include('admin/_/_sidebar.html.twig') }}</div>
+        <div id="content" class="p-3">{% block body %}{% endblock %}</div>
+    </div>
+{% endblock %}
