@@ -14,4 +14,3 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 // Gemeinsame Inhalte
 import './js/common.js'; // JavaScript
-import './scss/common.scss'; // SASS/CSS
