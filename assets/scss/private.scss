@@ -1,5 +1,9 @@
+// importieren von common.scss damit die variablen dieser datei auch hier verfügbar sind.
+@import './common.scss';
+
 $sidebar-left_width: 250px;
-$sidebar-left_height:calc(100vh - $footer_height);
+$sidebar-left_height: calc(100vh - $footer_height);
+
 #sidebar-left {
     background: grey;
     position:fixed;
