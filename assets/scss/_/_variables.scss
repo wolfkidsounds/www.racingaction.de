@@ -1,0 +1,8 @@
+/* _variables.scss */
+
+$header_height: 100px;
+$footer_height: 200px;
+$sidebar-left_width: 250px;
+$sidebar-right_width: 250px;
+$sidebar-left_height: calc(100vh - $footer_height);
+$sidebar-right_height: calc(100vh - $footer_height);
