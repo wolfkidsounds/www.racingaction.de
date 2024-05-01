@@ -1,6 +1,7 @@
 @import './common/bootstrap.scss'; // Bootstrap
 
 $header_height: 100px;
+$footer_height: 200px;
 
 #header {
     background: #000;
@@ -10,8 +11,6 @@ $header_height: 100px;
     top: 0;
     left: 0;
 }
-
-$footer_height: 200px;
 
 #footer {
     background:#000;
