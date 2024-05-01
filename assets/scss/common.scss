@@ -4,7 +4,7 @@
 @import './_/variables'; // Variablen
 
 #header {
-    background: #000;
+    background: $background_dark_transparent;
     position: fixed; 
     width: 100vw;
     height: $header_height;
@@ -13,7 +13,7 @@
 }
 
 #footer {
-    background: #000;
+    background: $background_dark_transparent;
     position: fixed;
     width: 100vw;
     height: $footer_height;
