@@ -28,7 +28,7 @@ Encore
      */
     .addEntry('public', './assets/public.js') // für öffentliche seiten
     .addEntry('private', './assets/private.js') // für private seiten
-    // 'app' wird hier nicht mehr verwendet
+    .addEntry('admin', './assets/admin.js') // für private seiten
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
