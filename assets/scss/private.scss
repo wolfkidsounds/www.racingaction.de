@@ -4,7 +4,7 @@
 @import './common.scss';
 
 #sidebar-left {
-    background: grey;
+    background: $background_dark_transparent;
     position: fixed;
     width: $sidebar-left_width;
     height: $sidebar-left_height;
