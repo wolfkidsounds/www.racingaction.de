@@ -11,7 +11,7 @@
         <div id="header">{{ include('_partial/_header.html.twig') }}</div>
         <div id="sidebar-left">{{ include('_partial/_left-sidebar.html.twig') }}</div>
         <div id="sidebar-right">{{ include('_partial/_right-sidebar.html.twig') }}</div>
-        <div id="content">{% block body %}{% endblock %}</div>
+        <div id="content" data-sidebar-left-state="open">{% block body %}{% endblock %}</div>
         <div id="footer">{{ include('_partial/_footer.html.twig') }}</div>
     </div>
 {% endblock %}
