@@ -6,7 +6,9 @@
     {# TODO: Kalender einbauen :D #}
 
     <div class="container">
-        Hallo 
+        {% if app.user %}
+            <div class="">Hey, {{ app.user.nickname }}</div>
+        {% endif %}
         <div class="border rounded p-3 shadow">
             <div class="mb-3">Zwischengespeicherte Seiten (MaintenanceController)</div>
             <a href="{{ path('work_coming-soon') }}" class="btn btn-outline-secondary" target="_blank" >Coming Soon</a>
