@@ -35,9 +35,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $Nickname = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Organizer = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -121,18 +118,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNickname(string $Nickname): static
     {
         $this->Nickname = $Nickname;
-
-        return $this;
-    }
-
-    public function getOrganizer(): ?string
-    {
-        return $this->Organizer;
-    }
-
-    public function setOrganizer(string $Organizer): static
-    {
-        $this->Organizer = $Organizer;
 
         return $this;
     }
