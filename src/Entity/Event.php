@@ -24,7 +24,7 @@ class Event
     private ?\DateTimeInterface $dateTimeEnd = null;
 
     #[ORM\Column]
-    private ?bool $isOpenEnd = null;
+    private ?bool $isOpenEnd = false;
 
     public function getId(): ?int
     {
