@@ -10,6 +10,7 @@
     height: $header_height;
     top: 0;
     left: 0;
+    z-index:-1;
 }
 
 #footer {
@@ -19,4 +20,16 @@
     height: $footer_height;
     bottom: 0;
     left: 0;
+    z-index:-1;
+}
+
+$zindex-offcanvas: 100;
+
+#offcanvas {
+    z-index:$zindex-offcanvas;
+}
+
+#content {
+    margin-top: $header_height;
+    z-index:0;
 }

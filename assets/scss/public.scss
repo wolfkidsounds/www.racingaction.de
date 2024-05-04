@@ -3,10 +3,3 @@
 // importieren von common.scss damit die variablen dieser datei auch hier verfügbar sind.
 @import './common.scss';
 
-#content {
-    position: fixed;
-    width: 100vw;
-    height: $sidebar-left_height;
-    top: $header_height;
-    left:0;
-}
