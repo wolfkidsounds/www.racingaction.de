@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Repository\UserRepository;
+use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, EventRepository $eventRepository): Response
     {
         return $this->render('admin/pages/index.html.twig', [
+            'page_title' => 'Dashboard',
             'users' => $userRepository->findAll(),
+            'events' => $eventRepository->findAll(),
         ]);
     }
 }
