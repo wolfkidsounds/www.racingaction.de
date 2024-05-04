@@ -20,4 +20,28 @@ class AppController extends AbstractController
             'controller_name' => 'AppController',
         ]);
     }
+
+    #[Route('/event', name: 'event')]
+    public function event(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        
+        return $this->render('app/demo/event.html.twig', [
+            'controller_name' => 'AppController',
+        ]);
+    }
+
+    #[Route('/arbeiten', name: 'arbeiten')]
+    public function arbeiten(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        
+        return $this->render('app/demo/arbeiten.html.twig', [
+            'controller_name' => 'AppController',
+        ]);
+    }
+
 }
+
