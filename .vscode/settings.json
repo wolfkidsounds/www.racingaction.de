@@ -12,4 +12,5 @@
     "php-cs-fixer.formatHtml": true,
     "php-cs-fixer.onsave": true,
     "php-cs-fixer.config": ".php-cs-fixer.dist.php",
+    "better-comments.highlightPlainText": true,
 }
