@@ -8,6 +8,7 @@ import './bootstrap.js';
 // Node.js JavaScript Module
 import '@popperjs/core';
 import 'bootstrap';
+import '@fullcalendar/bootstrap5';
 
 // Node.js CSS Module
 import '@fortawesome/fontawesome-free/css/all.css';
