@@ -150,4 +150,19 @@ class IndexController extends AbstractController
     {
         return $this->render('pages/about.html.twig');
     }
+
+    /**
+     * About
+     * 
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * Status: Template
+     *
+     * @return Response
+     */
+    #[Route('/imprint', name: 'imprint')]
+    public function imprint(): Response
+    {
+        return $this->render('pages/imprint.html.twig');
+    }
 }
