@@ -1,20 +1,41 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}{{ parent() }} | Admin{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/www.racingaction.de/src/Controller/Admin/AdminController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/www.racingaction.de/templates/admin/admin/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-body-emphasis">Registrierte Nutzer</h4>
+                <div class="text-bg-primary fs-2 p-3 rounded-circle">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            
+            <p>Es sind Aktuell {{ users|length }} Nutzer registriert.</p>
+            <a href="#" class="icon-link">Neuer Nutzer</a>
+        </div>
+        <div class="feature col">
+          <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
+          </div>
+          <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="icon-link">
+            Call to action
+            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+          </a>
+        </div>
+        <div class="feature col">
+          <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+          </div>
+          <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="icon-link">
+            Call to action
+            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+          </a>
+        </div>
+      </div>
 {% endblock %}
