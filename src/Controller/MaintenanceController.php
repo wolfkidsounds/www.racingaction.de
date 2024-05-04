@@ -12,7 +12,7 @@ class MaintenanceController extends AbstractController
     #[Route('/maintenance', name: 'maintenance')]
     public function maintenance(): Response
     {
-        return $this->render('public/maintenance/maintenance.html.twig', [
+        return $this->render('pages/maintenance/maintenance.html.twig', [
             'controller_name' => 'MaintenanceController',
         ]);
     }
@@ -20,7 +20,7 @@ class MaintenanceController extends AbstractController
     #[Route('/coming-soon', name: 'coming-soon')]
     public function coming_soon(): Response
     {
-        return $this->render('public/maintenance/coming-soon.html.twig', [
+        return $this->render('pages/maintenance/coming-soon.html.twig', [
             'controller_name' => 'MaintenanceController',
         ]);
     }
