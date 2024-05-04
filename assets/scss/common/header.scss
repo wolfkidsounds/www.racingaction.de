@@ -1,0 +1,11 @@
+#header {
+    background: $background_dark_transparent;
+    position: fixed;
+    width: 100vw;
+    height: $header_height;
+    top: 0;
+    left: 0;
+    backdrop-filter: $backdrop_filter;
+    -webkit-backdrop-filter: $backdrop_filter;
+    z-index:1;
+}
