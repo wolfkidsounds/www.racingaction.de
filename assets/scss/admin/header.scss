@@ -6,3 +6,7 @@
     height: $header_height;
     width:100vw;
 }
+
+#header .nav-link:hover {
+    background: rgba(0,0,0,.1);
+}
