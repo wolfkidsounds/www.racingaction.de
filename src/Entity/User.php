@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NICKNAME', fields: ['Nickname'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NICKNAME', fields: ['nickname'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Nickname = null;
+    private ?string $nickname = null;
 
     public function getId(): ?int
     {
@@ -112,12 +112,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getNickname(): ?string
     {
-        return $this->Nickname;
+        return $this->nickname;
     }
 
-    public function setNickname(string $Nickname): static
+    public function setNickname(string $nickname): static
     {
-        $this->Nickname = $Nickname;
+        $this->nickname = $nickname;
 
         return $this;
     }
