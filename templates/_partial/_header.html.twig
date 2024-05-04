@@ -1,8 +1,6 @@
 <header class="container h-100 d-flex align-items-center justify-content-between px-3 border-bottom">
     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas"><i class="fa-solid fa-bars"></i></button>
 
-    {{ include('_partial/_offcanvas.html.twig') }}
-
     <div class="">
         <a href="{{ path('public_index') }}" class="d-inline-flex link-body-emphasis text-decoration-none">
             {# <img src="{{ asset('images/logo.png') }}" height="32" /> #}
@@ -22,11 +20,11 @@
                 {% endif  %}
                 
                 <li><hr class="dropdown-divider"></li>
-                <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item">Logout</a></li>
+                <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item text-danger">Logout</a></li>
                 
             {% else %}
                 <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item">Login</a></li>
-                <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item">Register</a></li>
+                <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item pe-none opacity-25">Register</a></li>
             {% endif %}
             
         </ul>
