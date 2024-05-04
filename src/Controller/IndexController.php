@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,18 +17,17 @@ class IndexController extends AbstractController
      * Besucher können hier einen Kalender sehen (?)
      * 
      * Sichtbarkeit: Öffentlich
-     * Status: Template
+     * TODO
      *
      * @return Response
      */
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(EventRepository $repository): Response
     {
-        // $events = $repository->findAll();
+        $events = $repository->findAll();
 
-        //TODO: Kalender in das Template schicken
         return $this->render('pages/index.html.twig', [
-            // 'events' => $events,
+            'events' => $events,
         ]);
     }
 
@@ -36,7 +36,7 @@ class IndexController extends AbstractController
      * 
      * Anzahl: Mehrere (Übersicht)
      * Sichtbarkeit: Öffentlich
-     * Status: Template
+     * TODO
      *
      * @return Response
      */
@@ -55,7 +55,7 @@ class IndexController extends AbstractController
      * 
      * Anzahl: Mehrere (Übersicht)
      * Sichtbarkeit: Öffentlich
-     * Status: Template
+     * TODO
      *
      * @return Response
      */
@@ -74,7 +74,7 @@ class IndexController extends AbstractController
      * 
      * Anzahl: Mehrere (Übersicht)
      * Sichtbarkeit: Öffentlich
-     * Status: Template
+     * TODO
      *
      * @return Response
      */
@@ -97,7 +97,7 @@ class IndexController extends AbstractController
      * 
      * Anzahl: Mehrere (Übersicht)
      * Sichtbarkeit: Öffentlich
-     * Status: TODO:
+     * TODO
      *
      * @return Response
      */
@@ -119,7 +119,7 @@ class IndexController extends AbstractController
      * Event (Übersicht?)
      * 
      * Sichtbarkeit: Öffentlich
-     * Status: TODO:
+     * TODO
      *
      * @return Response
      */
@@ -141,7 +141,7 @@ class IndexController extends AbstractController
      * 
      * Anzahl: /
      * Sichtbarkeit: Öffentlich
-     * Status: Template
+     * TODO
      *
      * @return Response
      */
@@ -152,11 +152,10 @@ class IndexController extends AbstractController
     }
 
     /**
-     * About
+     * Impressum
      * 
      * Anzahl: /
      * Sichtbarkeit: Öffentlich
-     * Status: Template
      *
      * @return Response
      */
@@ -164,5 +163,20 @@ class IndexController extends AbstractController
     public function imprint(): Response
     {
         return $this->render('pages/imprint.html.twig');
+    }
+
+    /**
+     * Datenschutz
+     * 
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * TODO
+     *
+     * @return Response
+     */
+    #[Route('/privacy', name: 'privacy')]
+    public function privacy(): Response
+    {
+        return $this->render('pages/privacy.html.twig');
     }
 }
