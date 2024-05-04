@@ -26,7 +26,7 @@ class IndexController extends AbstractController
         // $events = $repository->findAll();
 
         //TODO: Kalender in das Template schicken
-        return $this->render('public/index.html.twig', [
+        return $this->render('pages/index.html.twig', [
             // 'events' => $events,
         ]);
     }
@@ -45,7 +45,7 @@ class IndexController extends AbstractController
     {
         //TODO: $tracks = $repository->findAll();
 
-        return $this->render('public/tracks.html.twig', [
+        return $this->render('pages/tracks.html.twig', [
             // 'tracks' => $tracks,
         ]);
     }
@@ -64,7 +64,7 @@ class IndexController extends AbstractController
     {
         // $organizers = $repository->findAll();
 
-        return $this->render('public/organizers.html.twig', [
+        return $this->render('pages/organizers.html.twig', [
             // 'organizers' => $organizers,
         ]);
     }
@@ -83,7 +83,7 @@ class IndexController extends AbstractController
     {
         // $brands = $repository->findAll();
 
-        return $this->render('public/brands.html.twig', [
+        return $this->render('pages/brands.html.twig', [
             // 'brands' => $brands,
         ]);
     }
@@ -105,12 +105,12 @@ class IndexController extends AbstractController
     public function rider(): Response
     {
         //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
-        // entsprechends template wählen (public/rider.html.twig)?
+        // entsprechends template wählen (pages/rider.html.twig)?
         // einzahl oder mehrzahl? (riders -> viele)
 
         // $riders = $repository->findBy('Status', RiderStatus::PUBLIC);
 
-        return $this->render('seiten/user/rider/index.html.twig', [
+        return $this->render('pages/user/rider/index.html.twig', [
             // 'riders' => $riders,
         ]);
     }
@@ -127,11 +127,11 @@ class IndexController extends AbstractController
     public function event(): Response
     {
         //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
-        // entsprechends template wählen (public/event.html.twig)?
+        // entsprechends template wählen (pages/event.html.twig)?
         // einzahl oder mehrzahl? (evnts -> viele)
 
         // $events = $repository->findBy('Status', EventStatus::PUBLIC);
-        return $this->render('seiten/calendar/event/index.html.twig', [
+        return $this->render('pages/calendar/event/index.html.twig', [
             // 'events' => $events,
         ]);
     }
@@ -148,6 +148,6 @@ class IndexController extends AbstractController
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
-        return $this->render('public/about.html.twig');
+        return $this->render('pages/about.html.twig');
     }
 }
