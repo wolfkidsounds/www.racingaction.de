@@ -3,25 +3,7 @@
 @import './common/bootstrap.scss'; // Bootstrap
 @import './_/variables'; // Variablen
 
-#header {
-    background: $background_dark_transparent;
-    position: fixed; 
-    width: 100vw;
-    height: $header_height;
-    top: 0;
-    left: 0;
-}
-
-#footer {
-    background: $background_dark_transparent;
-    position: fixed;
-    width: 100vw;
-    height: $footer_height;
-    bottom: 0;
-    left: 0;
-    z-index:-1;
-}
-
-#content {
-    margin-top: $header_height;
-}
+@import './common/header.scss';
+@import './common/offcanvas.scss';
+@import './common/content.scss';
+@import './common/footer.scss';
