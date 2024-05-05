@@ -1,5 +1,4 @@
 {
-    "symfony-vscode.consolePath": "/bin/console",
     "files.autoSave": "onWindowChange",
     "workbench.colorTheme": "Theme",
     "workbench.preferredDarkColorTheme": "Theme",
@@ -13,4 +12,5 @@
     "php-cs-fixer.onsave": true,
     "php-cs-fixer.config": ".php-cs-fixer.dist.php",
     "better-comments.highlightPlainText": true,
+    "symfony-vscode.phpExecutablePath": "C:\\php\\php.exe",
 }
