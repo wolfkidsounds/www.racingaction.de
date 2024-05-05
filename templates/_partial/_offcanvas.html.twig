@@ -4,6 +4,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
+
+        {# Bezieht sich auf Öffentliche Seiten #}
         <ul class="nav flex-column">
             <li><a href="{{ path('app_index') }}" class="nav-link px-2">Home</a></li>
             <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">Tracks</a></li>
@@ -12,10 +14,12 @@
             <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">About</a></li>
         </ul>
         <hr>
+
+        {# Bezieht sich auf "Private"" Seiten #}
         {% if app.user %}
             <ul class="nav flex-column">
                 <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">Mein Profil</a></li>
-                <li><a href="{{ path('app_events_index') }}" class="nav-link px-2 pe-none opacity-25">Meine Events</a></li>
+                <li><a href="{{ path('app_events_index') }}" class="nav-link px-2">Meine Events</a></li>
                 <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">Meine Veranstalter</a></li>
                 <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">Meine Firmen</a></li>
                 <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2 pe-none opacity-25">Einstellungen</a></li>
