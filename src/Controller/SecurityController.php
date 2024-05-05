@@ -10,6 +10,18 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/', name:'auth_')]
 class SecurityController extends AbstractController
 {
+    /**
+     * Login
+     * 
+     * Auf dieser Seite können sich nutzer anmelden.
+     * Wenn das Formular dieser Route abgeschickt wird,
+     * wird es von der Firewall abgefangen.
+     * 
+     * Route: auth_login
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route(path: '/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -25,6 +37,16 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * Logout
+     * 
+     * Diese Route wird direkt von der Firewall abgefangen.
+     * Der Nutzer wird direkt ausgelogged.
+     * 
+     * Route: auth_logout
+     *
+     * @return void
+     */
     #[Route(path: '/logout', name: 'logout')]
     public function logout(): void
     {
