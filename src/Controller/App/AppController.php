@@ -10,6 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/app', name:'app_')] // prefix für alle folgenden routen
 class AppController extends AbstractController
 {
+    /**
+     * Index (Dashboard)
+     * 
+     * Das ist die Startseite, die man sieht wenn man die App 'Öffnet'
+     * Man könnte auch sagen "Home"
+     * 
+     * ? Route: app_index
+     *
+     * @return Response
+     */
     #[Route('/', name: 'index')]
     public function index(): Response
     {
@@ -21,6 +31,11 @@ class AppController extends AbstractController
         ]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return Response
+     */
     #[Route('/arbeiten', name: 'arbeiten')]
     public function arbeiten(): Response
     {
