@@ -16,7 +16,9 @@ class IndexController extends AbstractController
      * Diese Seite ist die erste, die man sieht.
      * Besucher können hier einen Kalender sehen (?)
      * 
-     * Sichtbarkeit: Öffentlich
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_index
+     * 
      * TODO
      *
      * @return Response
@@ -34,8 +36,10 @@ class IndexController extends AbstractController
     /**
      * Tracks
      * 
-     * Anzahl: Mehrere (Übersicht)
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: Mehrere
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_tracks
+     * 
      * TODO
      *
      * @return Response
@@ -53,8 +57,10 @@ class IndexController extends AbstractController
     /**
      * Organizer
      * 
-     * Anzahl: Mehrere (Übersicht)
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: Mehrere
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_organizers
+     * 
      * TODO
      *
      * @return Response
@@ -72,8 +78,10 @@ class IndexController extends AbstractController
     /**
      * Brands
      * 
-     * Anzahl: Mehrere (Übersicht)
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: Mehrere
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_brands
+     * 
      * TODO
      *
      * @return Response
@@ -95,8 +103,12 @@ class IndexController extends AbstractController
      * Wenn Rider (privat) ausgewählt, 
      * dann wird er in der Liste mit "FAHRER" angezeigt
      * 
-     * Anzahl: Mehrere (Übersicht)
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: Mehrere
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_rider
+     * 
+     * ! aktuell 'singular' route
+     * 
      * TODO
      *
      * @return Response
@@ -116,9 +128,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Event (Übersicht?)
+     * Events (Übersicht?)
      * 
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: Mehrere
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_events
+     * 
      * TODO
      *
      * @return Response
@@ -139,8 +154,10 @@ class IndexController extends AbstractController
     /**
      * About
      * 
-     * Anzahl: /
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: /
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_about
+     * 
      * TODO
      *
      * @return Response
@@ -154,8 +171,9 @@ class IndexController extends AbstractController
     /**
      * Impressum
      * 
-     * Anzahl: /
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: /
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_imprint
      *
      * @return Response
      */
@@ -168,8 +186,10 @@ class IndexController extends AbstractController
     /**
      * Datenschutz
      * 
-     * Anzahl: /
-     * Sichtbarkeit: Öffentlich
+     * ? Anzahl: /
+     * ? Sichtbarkeit: Öffentlich
+     * ? Route: public_privacy
+     * 
      * TODO
      *
      * @return Response
