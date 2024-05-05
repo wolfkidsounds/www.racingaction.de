@@ -38,7 +38,7 @@
                 {# CSRF Token #}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <button class="btn btn-outline-primary" type="submit">Login</button>
+                <button path="app_index" class="btn btn-outline-primary" type="submit">Login</button>
             </form>
         {% endif  %}
 
