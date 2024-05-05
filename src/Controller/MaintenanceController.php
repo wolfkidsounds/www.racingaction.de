@@ -9,19 +9,35 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/', name:'work_')]
 class MaintenanceController extends AbstractController
 {
+    /**
+     * Maintenance
+     * 
+     * Diese Seite kann benutzt werden um den Status 
+     * "Wir arbeiten gerade an der Seite" anzuzeigen.
+     *
+     * Route: work_maintenance
+     * 
+     * @return Response
+     */
     #[Route('/maintenance', name: 'maintenance')]
     public function maintenance(): Response
     {
-        return $this->render('pages/maintenance/maintenance.html.twig', [
-            'controller_name' => 'MaintenanceController',
-        ]);
+        return $this->render('pages/maintenance/maintenance.html.twig');
     }
 
+    /**
+     * Coming Soon
+     * 
+     * Diese Seite kann benutzt werden um den Status
+     * "Wir sind bald erreichbar" anzuzeigen.
+     * 
+     * Route: work_maintenance
+     *
+     * @return Response
+     */
     #[Route('/coming-soon', name: 'coming-soon')]
     public function coming_soon(): Response
     {
-        return $this->render('pages/maintenance/coming-soon.html.twig', [
-            'controller_name' => 'MaintenanceController',
-        ]);
+        return $this->render('pages/maintenance/coming-soon.html.twig');
     }
 }
