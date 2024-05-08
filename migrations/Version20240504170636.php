@@ -14,7 +14,7 @@ final class Version20240504170636 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Benutzer, Event, Messenger Tabellen';
     }
 
     public function up(Schema $schema): void
