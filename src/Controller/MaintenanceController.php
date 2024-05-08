@@ -6,18 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/', name:'work_')]
+#[Route('/', name: 'work_')]
 class MaintenanceController extends AbstractController
 {
     /**
-     * Maintenance
-     * 
-     * Diese Seite kann benutzt werden um den Status 
+     * Maintenance.
+     *
+     * Diese Seite kann benutzt werden um den Status
      * "Wir arbeiten gerade an der Seite" anzuzeigen.
      *
      * Route: work_maintenance
-     * 
-     * @return Response
      */
     #[Route('/maintenance', name: 'maintenance')]
     public function maintenance(): Response
@@ -26,14 +24,12 @@ class MaintenanceController extends AbstractController
     }
 
     /**
-     * Coming Soon
-     * 
+     * Coming Soon.
+     *
      * Diese Seite kann benutzt werden um den Status
      * "Wir sind bald erreichbar" anzuzeigen.
-     * 
-     * Route: work_maintenance
      *
-     * @return Response
+     * Route: work_maintenance
      */
     #[Route('/coming-soon', name: 'coming-soon')]
     public function coming_soon(): Response

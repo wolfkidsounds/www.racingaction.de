@@ -1,4 +1,6 @@
-<?php // src/Controller/IndexController.php
+<?php
+
+// src/Controller/IndexController.php
 
 namespace App\Controller;
 
@@ -7,21 +9,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/', name:'public_')]
+#[Route('/', name: 'public_')]
 class IndexController extends AbstractController
 {
     /**
-     * Übersichts-Seite (Frontpage)
-     * 
+     * Übersichts-Seite (Frontpage).
+     *
      * Diese Seite ist die erste, die man sieht.
      * Besucher können hier einen Kalender sehen (?)
-     * 
+     *
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_index
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/', name: 'index')]
     public function index(EventRepository $repository): Response
@@ -34,20 +34,18 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Tracks
-     * 
+     * Tracks.
+     *
      * ? Anzahl: Mehrere
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_tracks
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/tracks', name: 'tracks')]
     public function tracks(): Response
     {
-        //TODO: $tracks = $repository->findAll();
+        // TODO: $tracks = $repository->findAll();
 
         return $this->render('pages/tracks.html.twig', [
             // 'tracks' => $tracks,
@@ -55,15 +53,13 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Organizer
-     * 
+     * Organizer.
+     *
      * ? Anzahl: Mehrere
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_organizers
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/organizers', name: 'organizers')]
     public function organizers(): Response
@@ -76,15 +72,13 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Brands
-     * 
+     * Brands.
+     *
      * ? Anzahl: Mehrere
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_brands
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/brands', name: 'brands')]
     public function brands(): Response
@@ -97,26 +91,24 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Rider (Übersicht?) 
-     * 
+     * Rider (Übersicht?).
+     *
      * JJ: Ja, Daten nach Öffentlichkeitsstatus.
-     * Wenn Rider (privat) ausgewählt, 
+     * Wenn Rider (privat) ausgewählt,
      * dann wird er in der Liste mit "FAHRER" angezeigt
-     * 
+     *
      * ? Anzahl: Mehrere
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_rider
-     * 
-     * ! aktuell 'singular' route
-     * 
-     * TODO
      *
-     * @return Response
+     * ! aktuell 'singular' route
+     *
+     * TODO
      */
     #[Route('/rider', name: 'rider')]
     public function rider(): Response
     {
-        //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
+        // TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
         // entsprechends template wählen (pages/rider.html.twig)?
         // einzahl oder mehrzahl? (riders -> viele)
 
@@ -128,20 +120,18 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Events (Übersicht?)
-     * 
+     * Events (Übersicht?).
+     *
      * ? Anzahl: Mehrere
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_events
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/events', name: 'events')]
     public function event(): Response
     {
-        //TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
+        // TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
         // entsprechends template wählen (pages/event.html.twig)?
         // einzahl oder mehrzahl? (evnts -> viele)
 
@@ -152,15 +142,13 @@ class IndexController extends AbstractController
     }
 
     /**
-     * About
-     * 
+     * About.
+     *
      * ? Anzahl: /
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_about
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/about', name: 'about')]
     public function about(): Response
@@ -169,13 +157,11 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Impressum
-     * 
+     * Impressum.
+     *
      * ? Anzahl: /
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_imprint
-     *
-     * @return Response
      */
     #[Route('/imprint', name: 'imprint')]
     public function imprint(): Response
@@ -184,15 +170,13 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Datenschutz
-     * 
+     * Datenschutz.
+     *
      * ? Anzahl: /
      * ? Sichtbarkeit: Öffentlich
      * ? Route: public_privacy
-     * 
-     * TODO
      *
-     * @return Response
+     * TODO
      */
     #[Route('/privacy', name: 'privacy')]
     public function privacy(): Response

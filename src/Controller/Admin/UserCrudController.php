@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/users', name:'admin_users_')]
+#[Route('/admin/users', name: 'admin_users_')]
 class UserCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -48,7 +48,7 @@ class UserCrudController extends AbstractController
     public function read(User $user): Response
     {
         return $this->render('admin/pages/users/read.html.twig', [
-            'page_title' => 'Show: ' . $user->getNickname(),
+            'page_title' => 'Show: '.$user->getNickname(),
             'user' => $user,
         ]);
     }

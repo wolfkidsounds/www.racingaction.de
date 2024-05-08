@@ -1,4 +1,6 @@
-<?php // src/Entity/Event.php
+<?php
+
+// src/Entity/Event.php
 
 namespace App\Entity;
 

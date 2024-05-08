@@ -7,20 +7,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-#[Route('/', name:'auth_')]
+#[Route('/', name: 'auth_')]
 class SecurityController extends AbstractController
 {
     /**
-     * Login
-     * 
+     * Login.
+     *
      * Auf dieser Seite können sich nutzer anmelden.
      * Wenn das Formular dieser Route abgeschickt wird,
      * wird es von der Firewall abgefangen.
-     * 
-     * Route: auth_login
      *
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
+     * Route: auth_login
      */
     #[Route(path: '/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -38,18 +35,16 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * Logout
-     * 
+     * Logout.
+     *
      * Diese Route wird direkt von der Firewall abgefangen.
      * Der Nutzer wird direkt ausgelogged.
-     * 
-     * Route: auth_logout
      *
-     * @return void
+     * Route: auth_logout
      */
     #[Route(path: '/logout', name: 'logout')]
     public function logout(): void
     {
-        //throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        // throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

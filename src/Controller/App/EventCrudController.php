@@ -1,4 +1,6 @@
-<?php // src/Controller/App/EventCrudController.php
+<?php
+
+// src/Controller/App/EventCrudController.php
 
 namespace App\Controller\App;
 
@@ -11,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/app/events', name:'app_events_')]
+#[Route('/app/events', name: 'app_events_')]
 class EventCrudController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]

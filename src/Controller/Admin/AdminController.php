@@ -1,12 +1,14 @@
-<?php // src/Controller/Admin/AdminController.php
+<?php
+
+// src/Controller/Admin/AdminController.php
 
 namespace App\Controller\Admin;
 
-use App\Repository\UserRepository;
 use App\Repository\EventRepository;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
