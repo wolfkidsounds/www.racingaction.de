@@ -37,7 +37,7 @@ class UserCrudController extends AbstractController
             return $this->redirectToRoute('admin_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/pages/users/new.html.twig', [
+        return $this->render('admin/pages/users/create.html.twig', [
             'page_title' => 'Create User',
             'user' => $user,
             'form' => $form,
@@ -47,7 +47,7 @@ class UserCrudController extends AbstractController
     #[Route('/read/{id}', name: 'read', methods: ['GET'])]
     public function read(User $user): Response
     {
-        return $this->render('admin/pages/users/show.html.twig', [
+        return $this->render('admin/pages/users/read.html.twig', [
             'page_title' => 'Show: ' . $user->getNickname(),
             'user' => $user,
         ]);
@@ -65,7 +65,7 @@ class UserCrudController extends AbstractController
             return $this->redirectToRoute('admin_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/pages/users/edit.html.twig', [
+        return $this->render('admin/pages/users/update.html.twig', [
             'page_title' => 'Update User',
             'user' => $user,
             'form' => $form,
