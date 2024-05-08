@@ -1,27 +1,48 @@
 {% extends 'base.html.twig' %}
 
     {% block body %}
-        <p>Krowdrace</p>
-        <p>Rennserie</p>
-        <p>Google Adresse</p>
-        <p>Datum Uhrzeit Start</p>
-        <p>Datum Uhrzeit Ende</p>
-        <p>Datum Uhrzeit Anfahrt</p>
-        <p>Datum Uhrzeit Abfahrt</p>
-        <p>Klasseneinteilung</p>
-        <p>Hinweise/Besonderheiten</p>
-        <p>link webseite</p>
-        <p>link Instagram</p>
-        <p>link Facebook</p>
 
-        {# <a> href=" {{event.facebook}}"
-                <h4><i class="fa-brands fa-facebook me-2"></i></h4>
-            </a>
+        {# 
+            Vorschlag zur "Entity-Beschreibung"
+
+            Tabelle mit Spalten:            
+            Name    Type    Relation (optional)
+
+            Name (Field Name): Name der Eigenschaft (Property)
+            Type (Field Type): Typ der Eigenschaft (zB. 'string', 'text', 'bool') -> symfony console make:entity
+            Relation (Zugehörigkeit): Wie ist diese Entity, mit einer anderen Verknüpft
+
+                Beispiele:
+                -Name-            -Type-        -Relation-    
+                Teilnehmer        relation      User->id      (Ein Event hat    viele   Teilnehmer)
+                Organisator       relation      User->id      (Ein Event hat    einen   Organisator)
+                FacebookUrl       string        /             /
+                InstagramUrl      string        /             /
+        #}
+
+        <p>Krowdrace</p> {# event.??? #}
+        <p>Rennserie</p> {# event.??? #}
+        <p>Google Adresse</p> {# event.mapsUrl #}
+        <p>Datum Uhrzeit Start</p> {# event.begin (?) #}
+        <p>Datum Uhrzeit Ende</p> {# event.end (?) #}
+        <p>Datum Uhrzeit Anfahrt</p> {# event.beginRace (?) #}
+        <p>Datum Uhrzeit Abfahrt</p> {# event.endRace (?) #}
+        <p>Klasseneinteilung</p> {# event.??? #}
+        <p>Hinweise/Besonderheiten</p> {# event.notes #}
+        <p>link webseite</p> {# event.website #}
+        <p>link Instagram</p> {# event.instagram #}
+        <p>link Facebook</p> {# event.facebook #}
+
+        {# 
+          <a> href=" {{event.facebook}}"
+            <h4><i class="fa-brands fa-facebook me-2"></i></h4>
+          </a>
         #}
 
     {% endblock %}
 
-{% block modal %}<!-- Button trigger modal -->
+{% block modal %}
+    <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Anmelden
     </button>
@@ -53,4 +74,5 @@
           </div>
         </div>
       </div>
-    </div>{% endblock %}
+    </div>
+{% endblock %}
