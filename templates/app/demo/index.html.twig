@@ -4,15 +4,16 @@
 
     {% block body %}
     <div>
-        <h1>Willkommen bei der Racing Action - Demoversion!</h1>
-        <br>
-        <br>
-        Danke, dass du die App testest und mir so dabei hilfst, eine Vollversion für alle Flatties zu entwickeln!
-        Ich freue mich schon auf dein Feedback.
-        <ul>
+        <head>
+            <title>Willkommen bei der Racing Action - Demoversion!
+            </title>
+        </head>
+        
+        <body>
+            <h5>Danke, dass du die App testest und mir so dabei hilfst, eine Vollversion für alle Flatties zu entwickeln! Ich freue mich schon auf dein Feedback.</h5>
             <br>
-            <li>Klicke auf meine Events. Dort wirst du auf deine gespeicherten Events geleitet. In diesem Falle zum Krowdrace in Wolfslake</li>
-        </ul>
+            <p>Klicke auf meine Events. Dort wirst du auf deine gespeicherten Events geleitet. In diesem Falle zum Krowdrace in Wolfslake</p>
+        </body>
     </div>
 
     <div id="calendar" class="" {{ stimulus_controller('calendar') }}></div>
