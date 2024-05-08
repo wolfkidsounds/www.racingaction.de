@@ -72,7 +72,7 @@ class Event
         return $this->isOpenEnd;
     }
 
-    public function setOpenEnd(bool $isOpenEnd): static
+    public function setIsOpenEnd(bool $isOpenEnd): static
     {
         $this->isOpenEnd = $isOpenEnd;
 
