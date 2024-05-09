@@ -37,11 +37,14 @@
     {{ include('app/demo/events/_delete_form.html.twig') }}
 
 
-{# FRAGE: macht es Sinn, die Rennergebnisse auch noch mit in die erste Tabelle "Fahrer" einzufügen?
-zweite Frage: könnte man für die Veranstalter eine Art durchlaufprogramm schreiben?
-Ich stelle mir das ungefähr so vor:
-    - Seite mit einem großen Button "starte Renntag" weitergeleitet an 
-    - Seite "Überprüfe Liste der Fahrer" Auflistung aller angemeldeter Fahrer, nochmal durchsschauen, Lizenzen checken, Fahrer ergänzen/löschen/anpassen, Button "starte Heat 1" weitergeleitet an
+{# 
+    Frage: macht es Sinn, die Rennergebnisse auch noch mit in die erste Tabelle "Fahrer" einzufügen?
+    ANTWORT: Vielleicht sollte Rennergebnisse eine eigene Tabelle sein?
+
+    Frage: könnte man für die Veranstalter eine Art durchlaufprogramm schreiben?
+        Ich stelle mir das ungefähr so vor:
+        - Seite mit einem großen Button "starte Renntag" weitergeleitet an 
+        - Seite "Überprüfe Liste der Fahrer" Auflistung aller angemeldeter Fahrer, nochmal durchsschauen, Lizenzen checken, Fahrer ergänzen/löschen/anpassen, Button "starte Heat 1" weitergeleitet an
        
     !!Fahrer ergänzen wird noch eine wichtige angelegenheit, da ja nicht immer alle auf meiner Seite angemeldet sein werden!!
    
@@ -71,6 +74,12 @@ Ich stelle mir das ungefähr so vor:
         sondern im Wechsel mit den Heats anderer Klassen gefahren werden.
         Die Daten müssen also sowieso zwischengespeichert werden und mindestens über den Tag, bzw ein Jahr wäre richtig geil,
         abrufbar sein.
+
+    Kurzantwort: Ja das ist möglich und ein sogenannte Programmatischer Ablauf.
+    Zum Zwischenspeichern haben wir mehrere möglichkeiten und entscheiden sich nach der Anforderung.
+    Möglichkeit 1: Jede Etappe in eine seperate tabelle (finde ich nicht soooo cool, hat aber vorteile!)
+    Möglichkeit 2: Eine Tabelle die den gesamten Rennablauf "dokumentiert" als eine art event-logger, ein event wäre "user x hat rennen y um zeit gestartet" aus diesen Infos generieren wir dann entsprechende werte für die app.
+    Möglichkeit 3: (Finde ich am besten, ist aber am kompliziertesten in der Umsetzung) Komponenten basiert arbeiten. Eine Komponente kann einen "State" also Zustand haben. Nehmen wir die Komponente "Rennen" kann diese einen Zustand "gestartet, beendet, im gange" bekommen, dieser kann in echtzeit geupdatet werden, wird aber nur in der aktuellen nutzer session gespeichert. -> Könnte man aber in der Datenbank als eine json hinterlegen, die man dann wieder einlest wenn die session fortgesetzt wird.
 #}
 
 {# NÄCHSTE FRAGE:
@@ -80,15 +89,27 @@ Ich stelle mir das ungefähr so vor:
     Kann man auch hier einfach unter das angezeigte Event einen Auswahlbutton anheften, 
     in der man die Klasse auswählen soll und dann darunter nur die Tabellen der ausgewählten Klasse zu sehen sind?
     --> if-schleife nur anzeigen, wenn oben wahr ?? muss dann aber jeder Klasse eine id geben oder? na mal sehen....
+
+    Antwort: Wir können mit einem Accordion oder einem NavTab auch die klassen in kleine Tabs sortieren?
+    Wonach Filtert/Sucht man denn Kategorisch am meisten?
 #}
     <h1> Klasse </h1>
     <br>
     <h4>Fahrer</h4>
 
-    {# muss bestimmt noch an den Anfang gesetzt werden, oder? 
-    aber ich hätte gerne die Anzeige des Events selbst anders als die Tabellen hier unten....
-    geht das wieder mit so einer If-schleife? oder kann ich das auch noch separat umstylen, 
-    indem ich direkt in die Tabelle meine Sonderwünsche eintrage?#}
+    {# 
+        Frage: muss bestimmt noch an den Anfang gesetzt werden, oder? 
+        aber ich hätte gerne die Anzeige des Events selbst anders als die Tabellen hier unten....
+        geht das wieder mit so einer If-schleife? oder kann ich das auch noch separat umstylen, 
+        indem ich direkt in die Tabelle meine Sonderwünsche eintrage?
+
+        Antwort: Styles am besten immer in einer scss datei einpflegen und mit css-klassen arbeiten.
+        Möchtest du also deine tabelle ändern könntest du dir die klasse 'base-table' ausdenken. Oder einfach die bereits existierende klasse 'table' überschreiben.
+        Ich empfehle dir dazu unter assets/ eine neue scss datei anzulegen und diese einfach 'table.scss' zu bennenen. (assets/scss/common/table.scss) -> Nicht vergessen diese auch zu importieren in der (assets/scss/common.scss) Datei.
+
+        Bin mir noch etwas unsicher was genau du mit einer if-schleife realisieren möchtest? Schau auch gern bei bootstrap nach, da sind auch einige gute beispiele für tabellen.
+    #}
+
     <style> 
         table, th, td {
             border:1px solid black;
@@ -97,14 +118,21 @@ Ich stelle mir das ungefähr so vor:
         }
     </style>
 
-    {# Liste der anmgemeldeten Fahrer aus der Datenbank.
-    jetzt wirds KOMPLIZIERT! :D 
-    - Fahrer werden mit der Startnummer_Nickname (NR/NICK) angezeigt
-    - vor dem ersten Heat nach Startnummer sortiert
-    - nach jedem gefahrenem Heat nach "aktuellem Punktestand"
-    - "aktueller Punktestand" ist die Summe der gefahrenen Heats
-    - Spalte 1 "Rang" bleibt immer gleich: Zahlenfolge ganzer Zahlen, so sieht man gleich, wer gerade vorne ist im Ranking um die Startpositionen
-    - Tabellen-Reihen sind abhängig von der Anzahl der angemeldeten Fahrer #}
+    {# 
+        Frage: Liste der anmgemeldeten Fahrer aus der Datenbank.
+        jetzt wirds KOMPLIZIERT! :D 
+        - Fahrer werden mit der Startnummer_Nickname (NR/NICK) angezeigt
+        - vor dem ersten Heat nach Startnummer sortiert
+        - nach jedem gefahrenem Heat nach "aktuellem Punktestand"
+        - "aktueller Punktestand" ist die Summe der gefahrenen Heats
+        - Spalte 1 "Rang" bleibt immer gleich: Zahlenfolge ganzer Zahlen, so sieht man gleich, wer gerade vorne ist im Ranking um die Startpositionen
+        - Tabellen-Reihen sind abhängig von der Anzahl der angemeldeten Fahrer 
+
+        Antwort: Denk dran, für alles was gespeichert wird, muss irgendwo ein Eintrag in irgendeiner Tabelle sein.
+        Hier müssen wir als noch mal knobeln, wie wir das in einer Tabelle oder mehreren verküpften tabellen speichern.
+        Eventuell macht auch hier die zuhilfenahme einer Komponente sinn (immer wenn sich sehr ähnlicher code wiederholt, schreiben wir eine Komponente)
+
+    #}
 
     <table class="table">
             <tr>
@@ -277,8 +305,14 @@ Ich stelle mir das ungefähr so vor:
             </tr>
     </table>
 
-    {# in die folgenden Tabellen muss per Zufallsgenerator die Platzverteilung erfolgen.
-    jeder Fahrer startet unabhöngig von allen anderen Fahrern einmal aus je einer Reihe, Platz egal #}
+    {# 
+        in die folgenden Tabellen muss per Zufallsgenerator die Platzverteilung erfolgen.
+        jeder Fahrer startet unabhöngig von allen anderen Fahrern einmal aus je einer Reihe, Platz egal 
+
+        Bitte versuchen Anzeige Logik und Ersteller Logik (Programm-Logik) voneinander zu trennen von Controller bis Template.
+        Soll heißen -> Der Event-Ersteller bekommt eine andere Logik als der Betrachter. Nur in Ausnahmefällen mischen.
+    #}
+
     <table class="table">
             <tr>
                 <th>Heat 1</th>
@@ -312,3 +346,39 @@ Ich stelle mir das ungefähr so vor:
 
 
 {% endblock %}
+
+{# 
+    Vorschlag zur "Entity-Beschreibung"
+
+    Tabelle mit Spalten:            
+    Name    Type    Relation (optional)
+
+    Name (Field Name): Name der Eigenschaft (Property)
+    Type (Field Type): Typ der Eigenschaft (zB. 'string', 'text', 'bool') -> symfony console make:entity
+    Relation (Zugehörigkeit): Wie ist diese Entity, mit einer anderen Verknüpft
+
+        Beispiele für Event:
+        -Name-                  -Type-      -Relation-    
+        Name                    string      /
+        Ersteller/Organisator   relation    User(id) | EIN Event hat EINEN Ersteller
+        Datum/Begin             date-time   /
+        Datum/Ende              date-time   /
+        Teilnehmer              relation    User(id) | EIN Event hat MEHRERE Teilnehmer
+        Rennen                  relation    Race(id) | EIN Event hat MEHRERE Rennen
+
+        Beispiele für Rennen:
+        -Name-                  -Type-      -Relation-    
+        Name                    string      /
+        Typ                     enum(?)     (?)
+        Ersteller/Organisator   relation    User(id) | EIN Rennen hat EINEN Ersteller
+        Teilnehmer              relation    User(id) | EIN Rennnen hat MEHRERE Teilnehmer
+
+        Beispiele für RennPositionen:
+        -Name-                  -Type-      -Relation-
+        Rennen                  relation    Race(id) | EINE Rennposition hat EIN Rennen
+        Fahrer                  relation    User(id) | EINE Rennposition hat EINEN Fahrer
+        Position                int         /
+
+        Somit können wir für Rennen X nach Positionen in der Datenbank suchen und uns diese Ausgeben lassen.
+        Genauso können wir Rennen seperat anzeigen und Teilnehmer sind getrennt von den Rennen.    
+#}
