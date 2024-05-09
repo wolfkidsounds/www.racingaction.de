@@ -9,3 +9,7 @@
     -webkit-backdrop-filter: $backdrop_filter;
     z-index:1;
 }
+
+//* Ich hätte gerne, dass der Footer nicht auf der Seite fixiert ist. 
+//* Der Header soll so bleiben, 
+//* der Footer taucht nur unten auf, wenn der Content zu klein ist oder wenn man ganz nach unten gescrollt hat.
