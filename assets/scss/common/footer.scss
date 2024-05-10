@@ -1,5 +1,6 @@
 #footer {
     background: $background_dark_transparent;
+    position: fixed;
     width: 100vw;
     height: $footer_height;
     bottom: 0;
@@ -10,4 +11,3 @@
     color: $text_color;
 }
 
-li, button, a {color: $text_color}
