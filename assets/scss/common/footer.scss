@@ -1,6 +1,5 @@
 #footer {
     background: $background_dark_transparent;
-    position: fixed;
     width: 100vw;
     height: $footer_height;
     bottom: 0;
@@ -8,8 +7,7 @@
     backdrop-filter: $backdrop_filter;
     -webkit-backdrop-filter: $backdrop_filter;
     z-index:1;
+    color: $text_color;
 }
 
-//* Ich hätte gerne, dass der Footer nicht auf der Seite fixiert ist. 
-//* Der Header soll so bleiben, 
-//* der Footer taucht nur unten auf, wenn der Content zu klein ist oder wenn man ganz nach unten gescrollt hat.
+li, button, a {color: $text_color}
