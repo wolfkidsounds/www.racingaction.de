@@ -1,3 +1,14 @@
 #offcanvas .nav-link:hover {
-    background:rgba(0,0,0,.1);
+    background: $background_color;
+    color: $text_color;
+}
+
+#offcanvas-header {
+    background: $background_color;
+    color: #b3ffff;
+}
+
+#offcanvas-body {
+    background: $background_dark_transparent;
+    color: $text_color;
 }
