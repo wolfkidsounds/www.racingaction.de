@@ -1,10 +1,12 @@
 @echo off
 
-::installiert composer pakete
-call composer install
+::installiert composer pakete und bringt sie auf den neusten stand
+call composer install --no-interaction
+::call composer update --no-interaction
 
-::installiert node pakete
-call npm install
+::installiert node pakete und bringt sie auf den neusten stand
+call npm install --no-interaction
+::call npm update --no-interaction
 
-:: database migrations
+:: datenbank-migrationen
 call php bin/console --no-interaction doctrine:migrations:migrate
