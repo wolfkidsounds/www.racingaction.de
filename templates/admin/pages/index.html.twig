@@ -21,6 +21,17 @@
             icon: 'fas fa-plus',
             path: path('admin_events_create'),
         },
+    },
+
+    item_3: {
+        name: 'Fahrer',
+        icon: 'fas fa-users',
+        text: 'Es sind Aktuell ' ~ events|length ~ ' Fahrer registriert.',
+        action: {
+            name: 'Neuer Fahrer',
+            icon: 'fas fa-plus',
+            path: path('admin_events_create'),
+        },
     }
 } %}
 
@@ -30,6 +41,7 @@
 
             {{ component('Admin:Card', {
                 item:item ,
+                style: 'secondary',
             }) }}
 
             

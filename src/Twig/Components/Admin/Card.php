@@ -17,4 +17,6 @@ final class Card
      * @var array|null
      */
     public ?array $item = [];
+
+    public ?string $style = 'primary';
 }

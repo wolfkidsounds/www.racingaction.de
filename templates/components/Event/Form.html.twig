@@ -1,0 +1,24 @@
+<div{{ attributes }}>
+    <!-- component html -->
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name</label> #}
+        <input id="name" type="text" class="form-control" data-model="norender|name" placeholder="Name">
+    </div>
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name</label> #}
+        <input id="type" type="text" class="form-control" data-model="norender|type" placeholder="Name">
+    </div>
+    <div class="mb-3">
+        <select class="form-select" data-model="norender|type">
+            <option selected>Veranstaltungstyp</option>
+            <option value="Rennen">Rennen</option>
+            <option value="Rennserie">Rennserie</option>
+            <option value="Freies Training">Freies Training</option>
+            <option value="Schulung">Schulung</option>
+            <option value="Trainingscamp">Trainingscamp</option>
+            <option value="Sonstiges">Sonstiges</option>
+        </select>
+    </div>
+
+    <button data-action="live#action" data-live-action-param="save" class="btn btn-outline-primary">Speichern</button>
+</div>

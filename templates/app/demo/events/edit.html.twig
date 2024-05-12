@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Edit Event</h1>
 
+    {{ component('Event:Form', {
+        isEditing: true,
+        name: event.name,
+        type: event.type,
+    }) }}
+
     {{ include('app/demo/events/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_events_index') }}">back to list</a>
