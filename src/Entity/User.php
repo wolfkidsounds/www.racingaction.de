@@ -43,6 +43,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $userType = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $linkUrl = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $sport = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +156,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUserType(string $userType): static
     {
         $this->userType = $userType;
+
+        return $this;
+    }
+
+    public function getLinkUrl(): ?string
+    {
+        return $this->linkUrl;
+    }
+
+    public function setLinkUrl(?string $linkUrl): static
+    {
+        $this->linkUrl = $linkUrl;
+
+        return $this;
+    }
+
+    public function getSport(): ?string
+    {
+        return $this->sport;
+    }
+
+    public function setSport(string $sport): static
+    {
+        $this->sport = $sport;
 
         return $this;
     }
