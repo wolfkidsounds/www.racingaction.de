@@ -5,6 +5,11 @@
 {% block body %}
     <h1>Event</h1>
 
+    {{ component('Event:Form', {
+        event:event,
+    }) }}
+
+   
     <table class="table">
         <tbody>
             <tr>
@@ -29,6 +34,7 @@
             </tr>
         </tbody>
     </table>
+</div>
 
     <a href="{{ path('app_events_index') }}">back to list</a>
 
@@ -132,7 +138,7 @@
 
     #}
 
-    <table class="table">
+    {# <table class="table">
             <tr>
                 <th>Rang</th>
                 <th>Fahrer</th>
@@ -314,6 +320,7 @@
         Die Eingaben der Event-Ersteller werden lediglich in die Tabellen auf der show Seite übertragen....wahrscheinlich dann eintippen--> Datenbank --> show seite, oder?
     #}
 
+    {#
     <table class="table">
             <tr>
                 <th>Heat 1</th>
@@ -344,6 +351,7 @@
                 <td>Name</td>
             </tr>
     </table>
+    #}
 
 
 {% endblock %}
