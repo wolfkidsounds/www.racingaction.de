@@ -19,54 +19,35 @@ class EventCrudController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(EventRepository $eventRepository): Response
     {
-        return $this->render('app/demo/events/index.html.twig', [
+        return $this->render('app/pages/events/index.html.twig', [
+            'title' => 'Meine Events',
             'events' => $eventRepository->findAll(),
         ]);
     }
 
     #[Route('/create', name: 'create', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(): Response
     {
-        $event = new Event();
-        $form = $this->createForm(EventFormType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('app/demo/events/new.html.twig', [
-            'event' => $event,
-            'form' => $form,
+        return $this->render('app/pages/events/create.html.twig', [
+            'title' => 'Event erstellen',
         ]);
     }
 
     #[Route('/read/{id}', name: 'read', methods: ['GET'])]
-    public function show(Event $event): Response
+    public function read(Event $event): Response
     {
-        return $this->render('app/demo/events/show.html.twig', [
+        return $this->render('app/pages/events/read.html.twig', [
+            'title' => 'Event Anzeigen',
             'event' => $event,
         ]);
     }
 
     #[Route('/update/{id}', name: 'update', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager): Response
+    public function update(Event $event): Response
     {
-        $form = $this->createForm(EventFormType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('app/demo/events/edit.html.twig', [
+        return $this->render('app/pages/events/edit.html.twig', [
+            'title' => 'Event Updaten',
             'event' => $event,
-            'form' => $form,
         ]);
     }
 
