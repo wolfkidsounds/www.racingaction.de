@@ -18,8 +18,8 @@ class IndexController extends AbstractController
      * Diese Seite ist die erste, die man sieht.
      * Besucher können hier einen Kalender sehen (?)
      *
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_index
+     * Sichtbarkeit: Öffentlich
+     * Route: public_index
      *
      * TODO
      */
@@ -28,7 +28,7 @@ class IndexController extends AbstractController
     {
         $events = $repository->findAll();
 
-        return $this->render('pages/index.html.twig', [
+        return $this->render('public/pages/index.html.twig', [
             'events' => $events,
         ]);
     }
@@ -36,9 +36,9 @@ class IndexController extends AbstractController
     /**
      * Tracks.
      *
-     * ? Anzahl: Mehrere
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_tracks
+     * Anzahl: Mehrere
+     * Sichtbarkeit: Öffentlich
+     * Route: public_tracks
      *
      * TODO
      */
@@ -47,7 +47,7 @@ class IndexController extends AbstractController
     {
         // TODO: $tracks = $repository->findAll();
 
-        return $this->render('pages/tracks.html.twig', [
+        return $this->render('public/pages/tracks.html.twig', [
             // 'tracks' => $tracks,
         ]);
     }
@@ -55,9 +55,9 @@ class IndexController extends AbstractController
     /**
      * Organizer.
      *
-     * ? Anzahl: Mehrere
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_organizers
+     * Anzahl: Mehrere
+     * Sichtbarkeit: Öffentlich
+     * Route: public_organizers
      *
      * TODO
      */
@@ -66,7 +66,7 @@ class IndexController extends AbstractController
     {
         // $organizers = $repository->findAll();
 
-        return $this->render('pages/organizers.html.twig', [
+        return $this->render('public/pages/organizers.html.twig', [
             // 'organizers' => $organizers,
         ]);
     }
@@ -74,9 +74,9 @@ class IndexController extends AbstractController
     /**
      * Brands.
      *
-     * ? Anzahl: Mehrere
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_brands
+     * Anzahl: Mehrere
+     * Sichtbarkeit: Öffentlich
+     * Route: public_brands
      *
      * TODO
      */
@@ -85,7 +85,7 @@ class IndexController extends AbstractController
     {
         // $brands = $repository->findAll();
 
-        return $this->render('pages/brands.html.twig', [
+        return $this->render('public/pages/brands.html.twig', [
             // 'brands' => $brands,
         ]);
     }
@@ -97,11 +97,11 @@ class IndexController extends AbstractController
      * Wenn Rider (privat) ausgewählt,
      * dann wird er in der Liste mit "FAHRER" angezeigt
      *
-     * ? Anzahl: Mehrere
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_rider
+     * Anzahl: Mehrere
+     * Sichtbarkeit: Öffentlich
+     * Route: public_rider
      *
-     * ! aktuell 'singular' route
+     * aktuell 'singular' route
      *
      * TODO
      */
@@ -109,12 +109,12 @@ class IndexController extends AbstractController
     public function rider(): Response
     {
         // TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
-        // entsprechends template wählen (pages/rider.html.twig)?
+        // entsprechends template wählen (public/pages/rider.html.twig)?
         // einzahl oder mehrzahl? (riders -> viele)
 
         // $riders = $repository->findBy('Status', RiderStatus::PUBLIC);
 
-        return $this->render('pages/user/rider/index.html.twig', [
+        return $this->render('public/pages/user/rider/index.html.twig', [
             // 'riders' => $riders,
         ]);
     }
@@ -122,9 +122,9 @@ class IndexController extends AbstractController
     /**
      * Events (Übersicht?).
      *
-     * ? Anzahl: Mehrere
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_events
+     * Anzahl: Mehrere
+     * Sichtbarkeit: Öffentlich
+     * Route: public_events
      *
      * TODO
      */
@@ -132,11 +132,11 @@ class IndexController extends AbstractController
     public function event(): Response
     {
         // TODO: Bestimmen ob das eine Private oder Öffentliche Seite ist?
-        // entsprechends template wählen (pages/event.html.twig)?
+        // entsprechends template wählen (public/pages/event.html.twig)?
         // einzahl oder mehrzahl? (evnts -> viele)
 
         // $events = $repository->findBy('Status', EventStatus::PUBLIC);
-        return $this->render('pages/calendar/event/index.html.twig', [
+        return $this->render('public/pages/calendar/event/index.html.twig', [
             // 'events' => $events,
         ]);
     }
@@ -144,43 +144,59 @@ class IndexController extends AbstractController
     /**
      * About.
      *
-     * ? Anzahl: /
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_about
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * Route: public_about
      *
      * TODO
      */
     #[Route('/about', name: 'about')]
     public function about(): Response
     {
-        return $this->render('pages/about.html.twig');
+        return $this->render('public/pages/about.html.twig');
     }
 
     /**
      * Impressum.
      *
-     * ? Anzahl: /
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_imprint
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * Route: public_imprint
      */
     #[Route('/imprint', name: 'imprint')]
     public function imprint(): Response
     {
-        return $this->render('pages/imprint.html.twig');
+        return $this->render('public/pages/imprint.html.twig');
     }
 
     /**
      * Datenschutz.
      *
-     * ? Anzahl: /
-     * ? Sichtbarkeit: Öffentlich
-     * ? Route: public_privacy
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * Route: public_privacy
      *
-     * TODO
+     * TODO:
      */
     #[Route('/privacy', name: 'privacy')]
     public function privacy(): Response
     {
-        return $this->render('pages/privacy.html.twig');
+        return $this->render('public/pages/privacy.html.twig');
+    }
+
+    /**
+     * Arbeiten
+     * 
+     * Eine Temporäre Seite auf der gezeigt wird, dass die Inhalte aktuell noch nicht verfügbar sind.
+     * 
+     * Anzahl: /
+     * Sichtbarkeit: Öffentlich
+     * Route: public_arbeiten
+     * 
+     */
+    #[Route('/arbeiten', name: 'arbeiten')]
+    public function arbeiten(): Response
+    {
+        return $this->render('public/pages/arbeiten.html.twig');
     }
 }
