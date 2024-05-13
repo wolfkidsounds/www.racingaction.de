@@ -21,7 +21,10 @@
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin_index') }}" role="button" class="dropdown-item">Admin</a></li>
+                    <li><hr class="dropdown-divider"></li>
                 {% endif %}
+                <li><a href="{{ path('public_arbeiten') }}" role="button" class="dropdown-item">Mein Profil</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" role="button" class="dropdown-item">Einstellungen</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item text-danger">Logout</a></li>
             {% else %}
@@ -30,5 +33,5 @@
             {% endif %}
         </ul>
     </div>
-    
+
 </header>
