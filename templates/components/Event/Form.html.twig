@@ -1,12 +1,13 @@
 <div{{ attributes }}>
     <!-- component html -->
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="name" type="text" class="form-control" data-model="norender|name" placeholder="Name">
+        <label for="name" class="form-label">Name des Events</label> 
+        <input id="name" type="text" class="form-control" data-model="norender|name" placeholder="Pflichtfeld">
     </div>
     <div class="mb-3">
+        <label for="type" class="form-label">Typ des Events</label> 
         <select class="form-select" data-model="norender|type">
-            <option selected>Veranstaltungstyp</option>
+            <option selected>Pflichtfeld</option>
             <option value="Rennen">Rennen</option>
             <option value="Rennserie">Rennserie</option>
             <option value="Freies Training">Freies Training</option>
@@ -16,55 +17,55 @@
         </select>
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="location" type="text" class="form-control" data-model="norender|location" placeholder="Ort">
+        <label for="location" class="form-label">Wo findet das Event statt?</label> 
+        <input id="location" type="text" class="form-control" data-model="norender|location" placeholder="Pflichtfeld">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateStart" type="date" class="form-control" data-model="norender|dateStart" placeholder="Datum Anfang">
+        <label for="dateStart" class="form-label">Wann findet euer Event statt?</label> 
+        <input id="dateStart" type="date" class="form-control" data-model="norender|dateStart" placeholder="Pflichtfeld">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateEnd" type="text" class="form-control" data-model="norender|dateEnd" placeholder="Datum Ende">
+        <label for="dateEnd" class="form-label">Wann endet euer Event?</label> 
+        <input id="dateEnd" type="date" class="form-control" data-model="norender|dateEnd" placeholder="Pflichtfeld">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
+        <label for="priceVisitor" class="form-label">Wieviel Eintritt kostet dein Event für Zuschauer?</label> 
         <input id="priceVisitor" type="text" class="form-control" data-model="norender|priceVisitor" placeholder="Preis für Zuschauer">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
+        <label for="priceRider" class="form-label">Wieviel kostet es für die teilnehmenden Fahrer?</label> 
         <input id="priceRider" type="text" class="form-control" data-model="norender|priceRider" placeholder="Preis für Fahrer">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateTimeStartVisitor" type="text" class="form-control" data-model="norender|dateTimeStartVisitor" placeholder="Wann sind Besucher willkommen?">
+        <label for="dateTimeStartVisitor" class="form-label">Ab wann sind Zuschauer willkommen?</label> 
+        <input id="dateTimeStartVisitor" type="datetime" class="form-control" data-model="norender|dateTimeStartVisitor" placeholder="Wann sind Besucher willkommen?">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateTimeArriving" type="text" class="form-control" data-model="norender|dateTimeArriving" placeholder="Wann dürfen Fahrer anreisen?">
+        <label for="dateTimeArriving" class="form-label">Wann dürfen die teilnehmenden Fahrer anreisen?</label> 
+        <input id="dateTimeArriving" type="datetime" class="form-control" data-model="norender|dateTimeArriving" placeholder="Wann dürfen Fahrer anreisen?">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateTimeRidersbreefing" type="text" class="form-control" data-model="norender|dateTimeRidersbreefing" placeholder="Wann ist Fahrerbesprechung?">
+        <label for="dateTimeRidersbreefing" class="form-label">Wann ist die Fahrerbesprechung geplant?</label> 
+        <input id="dateTimeRidersbreefing" type="datetime" class="form-control" data-model="norender|dateTimeRidersbreefing" placeholder="Wann ist Fahrerbesprechung?">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="dateTimeLeaving" type="text" class="form-control" data-model="norender|dateTimeLeaving" placeholder="Wann müssen Fahrer abreisen?">
+        <label for="dateTimeLeaving" class="form-label">Wann müssen die teilnehmenden Fahrer abreisen?</label> 
+        <input id="dateTimeLeaving" type="dateTime" class="form-control" data-model="norender|dateTimeLeaving" placeholder="Wann müssen Fahrer abreisen?">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="classes" type="text" class="form-control" data-model="norender|name" placeholder="Welche Klassen sind erlaubt?">
+        <label for="classes" class="form-label">Welche Klassen sind erlaubt? Schreibe die erlaubten Klassen zur besseren Übersicht bitte untereinander in das Feld.</label> 
+        <input id="classes" type="text" class="form-control" data-model="norender|name" placeholder="Alle Klassen">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
-        <input id="registration" type="text" class="form-control" data-model="norender|registration" placeholder="Anmeldung">
+        <label for="registration" class="form-label">Teile interessierten Fahrern mit, wo sie sich anmelden sollen und welche Informationen ihr von ihnen vorab haben möchtet. (Zum Beispiel: Nachname, Vorname, Startnummer, Motorradmarke, Kubikanzahl des Motors, Klasse)</label> 
+        <input id="registration" type="text" class="form-control" data-model="norender|registration" placeholder="Pflichtfeld">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
+        <label for="linkUrl" class="form-label">Hier kannst du Links zu deiner Webseite oder Social Media einfügen.</label> 
         <input id="linkUrl" type="url" class="form-control" data-model="norender|linkUrl" placeholder="Links">
     </div>
     <div class="mb-3">
-        {# <label for="name" class="form-label">Name</label> #}
+        <label for="description" class="form-label">Teile Interessierten mit, was sie unbedingt noch über dein Event wissen sollten.</label> 
         <input id="description" type="text" class="form-control" data-model="norender|description" placeholder="Hinweise/Besonderheiten">
     </div>
 
