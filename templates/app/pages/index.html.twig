@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'app/base.html.twig' %}
 
-{% block title %}Racing Action - Demoversion{% endblock %}
-
-    {% block body %}
+{% block body %}
     <div>
         <h2 > Racing Action wann und wo? </h2>
         <br>
@@ -12,4 +10,4 @@
     </div>
 
     <div id="calendar" class="" {{ stimulus_controller('calendar') }}></div>
-    {% endblock %}
+{% endblock %}

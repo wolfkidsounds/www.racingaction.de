@@ -1,15 +1,6 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Event{% endblock %}
+{% extends 'app/base.html.twig' %}
 
 {% block body %}
-    <h1>Event</h1>
-
-    {{ component('Event:Form', {
-        event:event,
-    }) }}
-
-   
     <table class="table">
         <tbody>
             <tr>
@@ -35,12 +26,13 @@
         </tbody>
     </table>
 </div>
+{% endblock %}
 
+{% block toolbar %}
     <a href="{{ path('app_events_index') }}">back to list</a>
-
     <a href="{{ path('app_events_update', {'id': event.id}) }}">edit</a>
-
-    {{ include('app/demo/events/_delete_form.html.twig') }}
+    {{ include('app/pages/events/_delete_form.html.twig') }}
+{% endblock %}
 
 
 {# 

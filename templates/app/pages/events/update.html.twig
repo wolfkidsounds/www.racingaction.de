@@ -1,0 +1,14 @@
+{% extends 'app/base.html.twig' %}
+
+{% block body %}
+    {{ component('Event:Form', {
+        isEditing: true,
+        name: event.name,
+        type: event.type,
+    }) }}
+{% endblock %}
+
+{% block toolbar %}
+    <a href="{{ path('app_events_index') }}">back to list</a>
+    {{ include('app/pages/events/_delete_form.html.twig') }}
+{% endblock %}

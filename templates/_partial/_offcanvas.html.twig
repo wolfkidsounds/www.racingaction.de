@@ -4,25 +4,28 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
+        {% if app.user %}
+            <div class="p-3">{{ app.user.nickname }}</div>
+        {% endif %}
 
-        {# Bezieht sich auf Öffentliche Seiten #}
+        {# Alle Seiten #}
         <ul class="nav flex-column">
             <li><a href="{{ path('public_index') }}" class="nav-link px-2">Home</a></li>
-            <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Tracks</a></li>
-            <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Veranstalter</a></li>
-            <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Firmen</a></li>
+            <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Tracks</a></li>
+            <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Veranstalter</a></li>
+            <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Firmen</a></li>
             <li><a href="{{ path('public_about') }}" class="nav-link px-2">About</a></li>
         </ul>
         <hr>
 
-        {# Bezieht sich auf "Private"" Seiten #}
+        {# App Seiten #}
         {% if app.user %}
             <ul class="nav flex-column">
-                <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Mein Profil</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Mein Profil</a></li>
                 <li><a href="{{ path('app_events_index') }}" class="nav-link px-2">Meine Events</a></li>
-                <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Meine Veranstalter</a></li>
-                <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Meine Firmen</a></li>
-                <li><a href="{{ path('app_arbeiten') }}" class="nav-link px-2">Einstellungen</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Meine Veranstalter</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Meine Firmen</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Einstellungen</a></li>
             </ul>
         {% endif %}
     </div>
