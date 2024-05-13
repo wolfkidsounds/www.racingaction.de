@@ -2,4 +2,5 @@
     margin-top: $header_height;
     z-index:0;
     color: $text_color;
+    padding-bottom: calc($footer_height + 1rem) !important;
 }
