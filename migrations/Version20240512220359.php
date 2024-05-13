@@ -14,7 +14,7 @@ final class Version20240512220359 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Neue Props für User, Neuer Index für User';
     }
 
     public function up(Schema $schema): void
