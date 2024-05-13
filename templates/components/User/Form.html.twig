@@ -1,3 +1,40 @@
 <div{{ attributes }}>
     <!-- component html -->
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name des Events</label> #}
+        <input id="email" type="text" class="form-control" data-model="norender|email" placeholder="Email">
+    </div>
+    <div class="mb-3">
+        {# <label for="userType" class="form-label"></label> #}
+        <select class="form-select" data-model="norender|type">
+            <option selected>Bist du Fahrer oder Veranstalter?</option>
+            <option value="Rider">Fahrer</option>
+            <option value="Organizer">Veranstalter/Verein/Club</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name des Events</label> #}
+        <input id="nickname" type="text" class="form-control" data-model="norender|nickname" placeholder="Nickname">
+    </div>
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name des Events</label> #}
+        <input id="nationality" type="text" class="form-control" data-model="norender|nationality" placeholder="Nationalität">
+    </div>
+
+    //* Hier muss das auswahlfeld mehrfach belegt werden können. D.h., man kann sowohl FT, als auch Speedway-Fahrer sein.
+    //* Außerdem soll der Punkt "Sonstiges" mit einem string-Feld belegt werden, in welchem man weitere Sportarten eingeben kann.
+    //* Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
+    <div class="mb-3">
+        <label for="sport" class="form-label"> Welche Motorsportarten übst du aus? Deine Sportart ist noch nicht dabei? Wenn du "Sonstige" anklickst, kannst du weitere ergänzen. </label>
+        <select class="form-select" data-model="norender|sport">
+            <option selected>Sportart</option>
+            <option value="FlatTrack">Flat Track</option>
+            <option value="Speedway">Speedway</option>
+            <option value="Sonstige">Sonstige</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        {# <label for="name" class="form-label">Name des Events</label> #}
+        <input id="password" type="text" class="form-control" data-model="norender|password" placeholder="Passwort">
+    </div>
 </div>
