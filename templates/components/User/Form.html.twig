@@ -21,11 +21,12 @@
         <input id="nationality" type="text" class="form-control" data-model="norender|nationality" placeholder="Nationalität">
     </div>
 
-    //* Hier muss das auswahlfeld mehrfach belegt werden können. D.h., man kann sowohl FT, als auch Speedway-Fahrer sein.
-    //* Außerdem soll der Punkt "Sonstiges" mit einem string-Feld belegt werden, in welchem man weitere Sportarten eingeben kann.
-    //* Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
-    <div class="mb-3">
-        <label for="sport" class="form-label"> Welche Motorsportarten übst du aus? Deine Sportart ist noch nicht dabei? Wenn du "Sonstige" anklickst, kannst du weitere ergänzen. </label>
+    {# Hier muss das auswahlfeld mehrfach belegt werden können. D.h., man kann sowohl FT, als auch Speedway-Fahrer sein.
+     Außerdem soll der Punkt "Sonstiges" mit einem string-Feld belegt werden, in welchem man weitere Sportarten eingeben kann.
+     Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
+    #}
+     <div class="mb-3">
+        <label for="sport" class="form-label"> Deine Sportart ist noch nicht dabei? Wenn du "Sonstige" anklickst, kannst du weitere ergänzen. </label>
         <select class="form-select" data-model="norender|sport">
             <option selected>Sportart</option>
             <option value="FlatTrack">Flat Track</option>
@@ -37,4 +38,5 @@
         {# <label for="name" class="form-label">Name des Events</label> #}
         <input id="password" type="text" class="form-control" data-model="norender|password" placeholder="Passwort">
     </div>
+    <button type="submit" class="btn">jetzt registrieren</button>
 </div>
