@@ -1,5 +1,13 @@
 <div{{ attributes }}>
     <!-- component html -->
+    <h6>Pflichtangaben:</h6>
+    <br>
+    <div class="mb-3">
+        <label for="nickname" class="form-label">Wir empfehlen deinen Namen und deine Startnummer als Nickname; Zum Beispel: Tammy.Alfons110. 
+            Du kannst aber einen Nicknamen frei wählen, der dir gefällt. Bitte verzichte dabei auf anstößige, sexuelle, rassistische oder andere Wörter, 
+            die jemand als beleidigend empfinden könnte!</label>
+        <input id="nickname" type="text" class="form-control" data-model="norender|nickname" placeholder="Nickname">
+    </div>
     <div class="mb-3">
         {# <label for="name" class="form-label">Name des Events</label> #}
         <input id="email" type="text" class="form-control" data-model="norender|email" placeholder="Email">
@@ -12,31 +20,34 @@
             <option value="Organizer">Veranstalter/Verein/Club</option>
         </select>
     </div>
+    {# Hier muss das auswahlfeld mehrfach belegt werden können. D.h., man kann sowohl FT, als auch Speedway-Fahrer sein.
+     Außerdem soll der Punkt "Sonstiges" mit einem string-Feld belegt werden, in welchem man weitere Sportarten eingeben kann.
+     Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
+    #}
+    <div class="mb-3">
+        <label for="sport" class="form-label"> Wähle deine Sportart/Sprtarten aus!  </label>
+        <select class="form-select" data-model="norender|sport" multiple="multiple">
+            <option type="checkbox" class="form-check-input" value="FlatTrack"> Flat Track </option>
+            <option type="checkbox" class="form-check-input" value="Speedway"> Speedway </option>
+            <option type="checkbox" class="form-check-input" value="Supermoto"> Supermoto </option>
+            <option type="checkbox" class="form-check-input" value="Motocross"> Motocross </option>
+            <option type="checkbox" class="form-check-input" value="Enduro"> Enduro </option>
+            <option type="checkbox" class="form-check-input" value="Sonstige"> Sonstige </option>
+        </select>
+    </div>
+    <p> Aktuell ist die Seite nur für Veranstaltungen im Bereich Flat Track und Speedway ausgebaut. Wir arbeiten daran, dass auch andere Sportarten hier präsent werden. Durch die Information über deine weiteren Sportarten, können wir am Besten sehen, mit welcher Sportart wir uns als nächstes beschäftigen sollten. Danke dir für deine Angaben!</p>
     <div class="mb-3">
         {# <label for="name" class="form-label">Name des Events</label> #}
-        <input id="nickname" type="text" class="form-control" data-model="norender|nickname" placeholder="Nickname">
+        <input id="password" type="text" class="form-control" data-model="norender|password" placeholder="Passwort">
     </div>
+    <br>
+    <h6> Freiwillige Angaben: <h6>
+    <br>
     <div class="mb-3">
         {# <label for="name" class="form-label">Name des Events</label> #}
         <input id="nationality" type="text" class="form-control" data-model="norender|nationality" placeholder="Nationalität">
     </div>
 
-    {# Hier muss das auswahlfeld mehrfach belegt werden können. D.h., man kann sowohl FT, als auch Speedway-Fahrer sein.
-     Außerdem soll der Punkt "Sonstiges" mit einem string-Feld belegt werden, in welchem man weitere Sportarten eingeben kann.
-     Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
-    #}
-     <div class="mb-3">
-        <label for="sport" class="form-label"> Deine Sportart ist noch nicht dabei? Wenn du "Sonstige" anklickst, kannst du weitere ergänzen. </label>
-        <select class="form-select" data-model="norender|sport">
-            <option selected>Sportart</option>
-            <option value="FlatTrack">Flat Track</option>
-            <option value="Speedway">Speedway</option>
-            <option value="Sonstige">Sonstige</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        {# <label for="name" class="form-label">Name des Events</label> #}
-        <input id="password" type="text" class="form-control" data-model="norender|password" placeholder="Passwort">
-    </div>
+    
     <button type="submit" class="btn">jetzt registrieren</button>
 </div>
