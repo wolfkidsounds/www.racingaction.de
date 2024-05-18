@@ -18,8 +18,9 @@
         {# App Seiten #}
         {% if app.user %}
             <ul class="nav flex-column">
-                <li><a href="{{ path('app_index') }}" class="nav-link px-2">Dashboard</a></li>
+                <li><a href="{{ path('app_index') }}" class="nav-link px-2">Meine Startseite</a></li>
                 <li><a href="{{ path('app_events_index') }}" class="nav-link px-2">Meine Events</a></li>
+                <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Meine Tracks</a></li>
                 <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Meine Veranstalter</a></li>
                 <li><a href="{{ path('public_arbeiten') }}" class="nav-link px-2">Meine Firmen</a></li>
             </ul>
