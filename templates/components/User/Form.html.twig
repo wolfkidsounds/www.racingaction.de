@@ -2,10 +2,20 @@
     <!-- component html -->
     <h6>Pflichtangaben:</h6>
     <br>
-    <div class="mb-3">
+    <div class="input-group mb-3" {{ stimulus_controller('popover') }}>
+        <span
+                class="input-group-text" 
+                data-bs-toggle="popover" 
+                data-popover-content=">Wir empfehlen deinen Namen und deine Startnummer als Nickname; Zum Beispel: Tammy.Alfons110. 
+                Du kannst aber einen Nicknamen frei wählen, der dir gefällt. Bitte verzichte dabei auf anstößige, sexuelle, rassistische oder andere Wörter, 
+                die jemand als beleidigend empfinden könnte!">
+                <i class="fas fa-info-circle"></i>
+        </span>
+        {# 
         <label for="nickname" class="form-label">Wir empfehlen deinen Namen und deine Startnummer als Nickname; Zum Beispel: Tammy.Alfons110. 
             Du kannst aber einen Nicknamen frei wählen, der dir gefällt. Bitte verzichte dabei auf anstößige, sexuelle, rassistische oder andere Wörter, 
             die jemand als beleidigend empfinden könnte!</label>
+        #}
         <input id="nickname" type="text" class="form-control" data-model="norender|nickname" placeholder="Nickname">
     </div>
     <div class="mb-3">
@@ -25,8 +35,8 @@
      Im Prinzip für mich dann auch Marktforschung, welches die nächste Sportart wird, um die wir uns kümmern dürfen :P :D
     #}
     <div class="mb-3">
-        <label for="sport" class="form-label"> Wähle deine Sportart/Sprtarten aus!  </label>
-        <select class="form-select" data-model="norender|sport" multiple="multiple">
+        <label for="sport" class="form-label"> Wähle deine Sportart/Sportarten aus!  </label>
+        <select class="form-select" data-model="norender|sport" multiple="multiple" placeholder="Bitte wählen" {{ stimulus_controller('symfony/ux-autocomplete/autocomplete') }}>
             <option type="checkbox" class="form-check-input" value="FlatTrack"> Flat Track </option>
             <option type="checkbox" class="form-check-input" value="Speedway"> Speedway </option>
             <option type="checkbox" class="form-check-input" value="Supermoto"> Supermoto </option>

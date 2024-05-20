@@ -1,38 +1,40 @@
 {% extends 'app/base.html.twig' %}
 
+{% block toolbar %}
+    <a href="{{ path('app_events_index') }}">back to list</a>
+    <a href="{{ path('app_events_update', {'id': event.id}) }}">edit</a>
+    {{ include('app/pages/events/_delete_form.html.twig') }}
+{% endblock %}
+
 {% block body %}
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ event.name }}</td>
             </tr>
             <tr>
                 <th>DateTimeBegin</th>
-                <td>{{ event.dateTimeBegin ? event.dateTimeBegin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.dateStart|date('Y-m-d') }}</td>
             </tr>
             <tr>
                 <th>DateTimeEnd</th>
-                <td>{{ event.dateTimeEnd ? event.dateTimeEnd|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsOpenEnd</th>
-                <td>{{ event.isOpenEnd ? 'Yes' : 'No' }}</td>
+                <td>{{ event.dateEnd|date('Y-m-d')}}</td>
             </tr>
         </tbody>
     </table>
-</div>
-{% endblock %}
 
-{% block toolbar %}
-    <a href="{{ path('app_events_index') }}">back to list</a>
-    <a href="{{ path('app_events_update', {'id': event.id}) }}">edit</a>
-    {{ include('app/pages/events/_delete_form.html.twig') }}
-{% endblock %}
+    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format:'apple', id: event.id }) }}" download>Download ICS</a>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format: 'google', id: event.id }) }}" download>Download Google Calender</a>
+
+    <ul>
+    {% for link in event.linkUrl %}
+        <li><a class="rounded-circle" href="{{ link }}"><img src="https://www.google.com/s2/favicons?domain={{ link }}&sz=64"></a></li>
+    {% endfor  %}
+    </ul>
+
+
+
 
 
 {# 
@@ -346,7 +348,7 @@
     #}
 
 
-{% endblock %}
+
 
 {# 
     Vorschlag zur "Entity-Beschreibung"
@@ -383,3 +385,5 @@
         Somit können wir für Rennen X nach Positionen in der Datenbank suchen und uns diese Ausgeben lassen.
         Genauso können wir Rennen seperat anzeigen und Teilnehmer sind getrennt von den Rennen.    
 #}
+
+{% endblock %}

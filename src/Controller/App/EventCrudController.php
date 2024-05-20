@@ -5,13 +5,15 @@
 namespace App\Controller\App;
 
 use App\Entity\Event;
+use Spatie\CalendarLinks\Link;
 use App\Form\App\EventFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/app/events', name: 'app_events_')]
 class EventCrudController extends AbstractController
@@ -51,6 +53,20 @@ class EventCrudController extends AbstractController
         ]);
     }
 
+    #[Route('/export/{format}/{id}', name: 'export', methods: ['GET', 'POST'])]
+    public function export(?string $format, Event $event): Response
+    {
+        $link = new Link($event->getName(), $event->getDateStart(), $event->getDateEnd());
+        $link->address($event->getLocation());
+        //$link->description($event->getDescription());
+
+        if ($format == 'apple') {
+            return $this->file($link->ics([], ['format' => 'file']));
+        }
+
+        return $this->file($link->google());
+    }
+
     #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Event $event, EntityManagerInterface $entityManager): Response
     {
@@ -61,4 +77,5 @@ class EventCrudController extends AbstractController
 
         return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

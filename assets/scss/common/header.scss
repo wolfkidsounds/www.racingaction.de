@@ -10,3 +10,15 @@
     z-index:1;
     color: $text_color;
 }
+
+[data-bs-theme="dark"] {
+    #header {
+        color: $text_color;
+    }
+}
+
+[data-bs-theme="light"] {
+    #header {
+        color: $text_color;
+    }
+}
