@@ -89,6 +89,13 @@ final class Form extends AbstractController
         $event->setLocation($this->location);
         $event->setDateStart($this->dateStart);
         $event->setDateEnd($this->dateEnd);
+        $event->setPriceVisitor($this->priceVisitor);
+        $event->setPriceRider($this->priceRider);
+        $event->setDateTimeStartVisitor($this->dateTimeStartVisitor);
+        $event->setDateTimeArriving($this->dateTimeArriving);
+        $event->setDateTimeRidersbreefing($this->dateTimeRidersbreefing);
+        $event->setDateTimeLeaving($this->dateTimeLeaving);
+        $event->setClasses($this->classes);
         $event->setRegistration($this->registration);
         $event->setDescription($this->description); // Objekt mit infos füllen
         $event->setLinkUrl(json_encode([
