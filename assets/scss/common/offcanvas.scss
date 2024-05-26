@@ -1,14 +1,36 @@
-#offcanvas .nav-link:hover {
-    background: $background_color;
-    color: $text_color;
+#offcanvas .nav-link {
+    transition: all .2s ease-in-out;
 }
 
-#offcanvas-header {
-    background: $background_color;
-    color: #b3ffff;
+[data-bs-theme="dark"] {
+    #offcanvas .nav-link:hover {
+        background: $transparent-light-005;
+        color: $text_color-dark;
+    }
+
+    #offcanvas-header {
+        background: $background_color-dark;
+        color: #b3ffff;
+    }
+
+    #offcanvas-body {
+        background: $transparent-dark-005;
+        color: $text_color-dark;
+    }
 }
 
-#offcanvas-body {
-    background: $background_dark_transparent;
-    color: $text_color;
+[data-bs-theme="light"] {
+    #offcanvas .nav-link:hover {
+        background: $transparent-light-005;
+    }
+
+    #offcanvas-header {
+        background: $background_color-light;
+        color: #b3ffff;
+    }
+
+    #offcanvas-body {
+        background: $transparent-light-005;
+        color: $text_color-light;
+    }
 }
