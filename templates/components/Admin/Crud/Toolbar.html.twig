@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-end align-items-center gap-2" {{ attributes }}>
+    {% if this.create %}
+        <a href="{{ path(this.path ~ 'create') }}" class="btn btn-sm btn-outline-primary">Create</a>
+    {% endif %}
+
+    {% if this.back %}
+        <a href="{{ path(this.path ~ 'index') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-arrow-left"></i></a>
+    {% endif %}
+
+    {% if this.update %}
+        <a href="{{ path(this.path ~ 'update', {'id': this.entity.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
+    {% endif %}
+
+    {% if this.delete %}
+        <form   method="post" 
+                action="{{ path(this.path ~ 'delete', {'id': entity.id}) }}" 
+                onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">
+            <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+        </form>
+    {% endif %}
+</div>
