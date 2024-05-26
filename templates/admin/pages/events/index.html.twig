@@ -1,39 +1,67 @@
 {% extends 'admin/base.html.twig' %}
 
+{% block toolbar %}
+    {{ component('Admin:Crud:Toolbar', {
+        path: 'admin_events_',
+        create: true,
+    })  }}
+{% endblock %}
+    
+
 {% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>DateTimeBegin</th>
-                <th>DateTimeEnd</th>
-                <th>IsOpenEnd</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for event in events %}
-            <tr>
-                <td>{{ event.id }}</td>
-                <td>{{ event.name }}</td>
-                <td>{{ event.dateTimeBegin ? event.dateTimeBegin|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.dateTimeEnd ? event.dateTimeEnd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.isOpenEnd ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('admin_events_read', {'id': event.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_events_update', {'id': event.id}) }}"class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    
+    {{ component('Admin:Crud:Index', {
+        path: 'admin_events_',
+        entities: events,
+        selector: false,
+
+        actions: {
+            read: true,
+            update: true,
+        },
+
+        properties: {
+            id: 'ID',
+            name: 'Name',
+            dateBegin: 'Begin',
+            dateEnd: 'End',
+        },
+    }) }}
+    
 {% endblock %}
 
-{% block toolbar %}
-    <a href="{{ path('admin_events_create') }}" class="btn btn-sm btn-outline-primary">Create Event</a>
-{% endblock %}
+{# 
+    {% block body %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>DateTimeBegin</th>
+                    <th>DateTimeEnd</th>
+                    <th>IsOpenEnd</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.dateTimeBegin ? event.dateTimeBegin|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ event.dateTimeEnd ? event.dateTimeEnd|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ event.isOpenEnd ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('admin_events_read', {'id': event.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                        <a href="{{ path('admin_events_update', {'id': event.id}) }}"class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+#}
