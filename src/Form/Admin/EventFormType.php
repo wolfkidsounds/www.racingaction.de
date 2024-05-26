@@ -32,8 +32,12 @@ class EventFormType extends AbstractType
                 ],
             ])
             ->add('location', TextType::class)
-            ->add('dateStart', DateType::class)
-            ->add('dateEnd', DateType::class)
+            ->add('dateStart', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('dateEnd', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('priceVisitor', NumberType::class)
             ->add('priceRider', NumberType::class)
             ->add('priceVisitor', NumberType::class)
