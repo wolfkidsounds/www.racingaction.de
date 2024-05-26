@@ -23,4 +23,12 @@ class UserCrudController extends AbstractController
             'title' => 'Dein Profil',
         ]);
     }
+
+    #[Route('/settings', name: 'settings', methods: ['GET'])]
+    public function settings(): Response
+    {
+        return $this->render('app/pages/user/settings.html.twig', [
+            'title' => 'Einstellungen',
+        ]);
+    }
 }
