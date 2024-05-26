@@ -20,8 +20,11 @@ class EventFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                'required' => true,
+            ])
             ->add('type', ChoiceType::class, [
+                'required' => true,
                 'choices' => [
                     'race' => 'Rennen',
                     'race-series' => 'Rennserie',
@@ -31,11 +34,15 @@ class EventFormType extends AbstractType
                     'other' => 'Sonstiges',
                 ],
             ])
-            ->add('location', TextType::class)
+            ->add('location', TextType::class, [
+                'required' => true,
+            ])
             ->add('dateStart', DateType::class, [
+                'required' => true,
                 'widget' => 'single_text',
             ])
             ->add('dateEnd', DateType::class, [
+                'required' => true,
                 'widget' => 'single_text',
             ])
             ->add('priceVisitor', NumberType::class)
@@ -54,7 +61,9 @@ class EventFormType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('classes', TextType::class)
-            ->add('registration', TextType::class)
+            ->add('registration', TextType::class, [
+                'required' => true,
+            ])
             ->add('links', CollectionType::class)
             ->add('description', TextType::class)
         ;
