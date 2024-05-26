@@ -16,48 +16,135 @@ class Event
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * Name des Events
+     *
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * Typ des Rennens
+     * 
+     * TODO: Enum?
+     * 
+     * Werte:
+     * - Rennen
+     * - Rennserie
+     * - Freies Training
+     * - Schulung
+     * - Trainingscamp
+     * - Sonstiges
+     *
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    /**
+     * Ort des Events
+     *
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
+    /**
+     * Beginn des Events
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateStart = null;
 
+    /**
+     * Ende des Events
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateEnd = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $priceVisitor = null;
+    /**
+     * Preis für Zuschauer
+     *
+     * @var float|null
+     */
+    #[ORM\Column(nullable: true)]
+    private ?float $priceVisitor = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $priceRider = null;
+    /**
+     * Preis für Fahrer
+     *
+     * @var float|null
+     */
+    #[ORM\Column(nullable: true)]
+    private ?float $priceRider = null;
 
+    /**
+     * Beginn für Zuschauer
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateTimeStartVisitor = null;
 
+    /**
+     * Fahrer anreise
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeArriving = null;
+    private ?\DateTimeInterface $dateTimeArrival = null;
 
+    /**
+     * Beginn der Fahrerbesprechung
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateTimeRidersBreefing = null;
 
+    /**
+     * Fahrer abreise
+     *
+     * @var \DateTimeInterface|null
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeLeaving = null;
+    private ?\DateTimeInterface $dateTimeDeparture = null;
 
+    /**
+     * Erlaubte Klassen
+     * 
+     * TODO: Enum?
+     *
+     * @var string|null
+     */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $classes = null;
 
+    /**
+     * Anmelde-Informationen
+     *
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $registration = null;
 
+    /**
+     * Liste mit Links
+     *
+     * @var array|null
+     */
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $linkUrl = null;
+    private ?array $links = null;
 
+    /**
+     * Beschreibung des Events
+     *
+     * @var string|null
+     */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -162,14 +249,14 @@ class Event
         return $this;
     }
 
-    public function getDateTimeArriving(): ?\DateTimeInterface
+    public function getDateTimeArrival(): ?\DateTimeInterface
     {
-        return $this->dateTimeArriving;
+        return $this->dateTimeArrival;
     }
 
-    public function setDateTimeArriving(?\DateTimeInterface $dateTimeArriving): static
+    public function setDateTimeArrival(?\DateTimeInterface $dateTimeArrival): static
     {
-        $this->dateTimeArriving = $dateTimeArriving;
+        $this->dateTimeArrival = $dateTimeArrival;
 
         return $this;
     }
@@ -186,14 +273,14 @@ class Event
         return $this;
     }
 
-    public function getDateTimeLeaving(): ?\DateTimeInterface
+    public function getDateTimeDeparture(): ?\DateTimeInterface
     {
-        return $this->dateTimeLeaving;
+        return $this->dateTimeDeparture;
     }
 
-    public function setDateTimeLeaving(?\DateTimeInterface $dateTimeLeaving): static
+    public function setDateTimeDeparture(?\DateTimeInterface $dateTimeDeparture): static
     {
-        $this->dateTimeLeaving = $dateTimeLeaving;
+        $this->dateTimeDeparture = $dateTimeDeparture;
 
         return $this;
     }
@@ -222,14 +309,14 @@ class Event
         return $this;
     }
 
-    public function getLinkUrl(): ?string
+    public function getlinks(): ?array
     {
-        return $this->linkUrl;
+        return $this->links;
     }
 
-    public function setLinkUrl(?string $linkUrl): static
+    public function setlinks(?array $links): static
     {
-        $this->linkUrl = $linkUrl;
+        $this->links = $links;
 
         return $this;
     }
