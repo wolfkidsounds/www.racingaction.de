@@ -5,10 +5,15 @@ namespace App\Form\Admin;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 class EventFormType extends AbstractType
 {
@@ -16,16 +21,38 @@ class EventFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('dateTimeBegin', DateTimeType::class, [
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'race' => 'Rennen',
+                    'race-series' => 'Rennserie',
+                    'practice' => 'Freies Training',
+                    'course' => 'Schulung',
+                    'training' => 'Trainingscamp',
+                    'other' => 'Sonstiges',
+                ],
+            ])
+            ->add('location', TextType::class)
+            ->add('dateStart', DateType::class)
+            ->add('dateEnd', DateType::class)
+            ->add('priceVisitor', NumberType::class)
+            ->add('priceRider', NumberType::class)
+            ->add('priceVisitor', NumberType::class)
+            ->add('dateTimeStartVisitor', DateTimeType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('dateTimeEnd', DateTimeType::class, [
-                'required' => false,
+            ->add('dateTimeArrival', DateTimeType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('isOpenEnd', CheckboxType::class, [
-                'required' => false,
+            ->add('dateTimeRidersBreefing', DateTimeType::class, [
+                'widget' => 'single_text',
             ])
+            ->add('dateTimeDeparture', DateTimeType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('classes', TextType::class)
+            ->add('registration', TextType::class)
+            ->add('links', CollectionType::class)
+            ->add('description', TextType::class)
         ;
     }
 
