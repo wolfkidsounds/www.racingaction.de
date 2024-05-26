@@ -1,9 +1,10 @@
 /* common.scss */
 
-@import './common/bootstrap.scss'; // Bootstrap
 @import './_/variables'; // Variablen
 
 @import './common/header.scss';
 @import './common/offcanvas.scss';
 @import './common/content.scss';
 @import './common/footer.scss';
+
+@import './common/bootstrap.scss'; // Bootstrap
