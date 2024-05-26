@@ -91,11 +91,11 @@ final class Form extends AbstractController
         $event->setDateEnd($this->dateEnd);
         $event->setRegistration($this->registration);
         $event->setDescription($this->description); // Objekt mit infos füllen
-        $event->setLinkUrl(json_encode([
+        $event->setLinkUrl([
             $this->linkUrl1, 
             $this->linkUrl2, 
             $this->linkUrl3,
-        ]));
+        ]);
 
         $em->persist($event); // Befehl zum Speichern
         $em->flush(); // Alle Befehle Ausführen
