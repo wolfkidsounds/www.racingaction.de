@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" dir="ltr" data-bs-theme="dark">
+<html lang="de" dir="ltr" data-bs-theme="auto">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,7 @@
     <body>
         {% block main %}
             <div class="container-fluid">
+                <div class="popover" {{ stimulus_controller('popover') }}></div>
 
                 {# Header #}
                 <div id="header">{% block main_header %}{{ include('_partial/_header.html.twig') }}{% endblock %}</div>
