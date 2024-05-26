@@ -25,6 +25,7 @@ class EventFormType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'required' => true,
+                'autocomplete' => true,
                 'choices' => [
                     'race' => 'Rennen',
                     'race-series' => 'Rennserie',
@@ -45,27 +46,43 @@ class EventFormType extends AbstractType
                 'required' => true,
                 'widget' => 'single_text',
             ])
-            ->add('priceVisitor', NumberType::class)
-            ->add('priceRider', NumberType::class)
-            ->add('priceVisitor', NumberType::class)
+            ->add('priceVisitor', NumberType::class, [
+                'required' => false,
+            ])
+            ->add('priceRider', NumberType::class, [
+                'required' => false,
+            ])
+            ->add('priceVisitor', NumberType::class, [
+                'required' => false,
+            ])
             ->add('dateTimeStartVisitor', DateTimeType::class, [
+                'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('dateTimeArrival', DateTimeType::class, [
+                'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('dateTimeRidersBreefing', DateTimeType::class, [
+                'required' => false,
                 'widget' => 'single_text',
             ])
             ->add('dateTimeDeparture', DateTimeType::class, [
+                'required' => false,
                 'widget' => 'single_text',
             ])
-            ->add('classes', TextType::class)
+            ->add('classes', TextType::class, [
+                'required' => false,
+            ])
             ->add('registration', TextType::class, [
                 'required' => true,
             ])
-            ->add('links', CollectionType::class)
-            ->add('description', TextType::class)
+            ->add('links', CollectionType::class, [
+                'required' => false,
+            ])
+            ->add('description', TextType::class, [
+                'required' => false,
+            ])
         ;
     }
 
