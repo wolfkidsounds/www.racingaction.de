@@ -1,34 +1,25 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Nickname</th>
-                <td>{{ user.nickname }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {{ component('Admin:Crud:Read', {
+        path: 'admin_users_',
+        entity: user,
+
+        properties: {
+            id: 'ID',
+            nickname: 'Nickname',
+            email: 'E-Mail',
+            roles: 'Roles',
+        },
+    }) }}
 {% endblock %}
 
 {% block toolbar %}
-    <a href="{{ path('admin_users_index') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-arrow-left"></i></a>
-    <a href="{{ path('admin_users_update', {'id': user.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
-    {{ include('admin/pages/users/_delete_form.html.twig') }}
+    {{ component('Admin:Crud:Toolbar', {
+        path: 'admin_users_',
+        entity: user,
+        back: true,
+        update: true,
+        delete: true,
+    })  }}
 {% endblock %}
