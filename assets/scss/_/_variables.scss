@@ -1,9 +1,12 @@
 /* _variables.scss */
+@import './_colors.scss'; // Farben
+@import './_focus.scss'; // Fokus
 
 $header_height: 70px;
 $footer_height: 70px;
-
-$background_dark_transparent: rgba(0, 51, 51, 0.5);
 $backdrop_filter: blur(10px);
-$text_color: #e6ffff;
-$background_color: #001a1a;
+
+$text_color-dark: #e6ffff;
+$text_color-light: $dark;
+$background_color-dark: #001a1a;
+$background_color-light: #001a1a;
