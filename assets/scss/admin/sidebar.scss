@@ -1,5 +1,4 @@
 #sidebar {
-    background: $background_dark_transparent;
     position: fixed;
     left: 0;
     top: $header_height;
@@ -7,6 +6,26 @@
     width: $sidebar_width;
 }
 
-#sidebar .nav-link:hover {
-    background: rgba(0,0,0,.1);
+#sidebar .nav-link {
+    transition: background .2s ease-in-out;
+}
+
+[data-bs-theme="dark"] {
+    #sidebar {
+        background: $transparent-dark-005;
+    }
+    
+    #sidebar .nav-link:hover {
+        background: $transparent-dark-005;
+    }
+}
+
+[data-bs-theme="light"] {
+    #sidebar {
+        background: $transparent-light-005;
+    }
+    
+    #sidebar .nav-link:hover {
+        background: $transparent-light-005;
+    }
 }
