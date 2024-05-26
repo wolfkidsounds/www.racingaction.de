@@ -1,6 +1,17 @@
 #content {
     margin-top: $header_height;
     z-index:0;
-    color: $text_color;
     padding-bottom: calc($footer_height + 1rem) !important;
+}
+
+[data-bs-theme="dark"] {
+    #content {
+        color: $text_color-dark;
+    }
+}
+
+[data-bs-theme="light"] {
+    #content {
+        color: $text_color-light;
+    }
 }
