@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" dir="ltr" data-bs-theme="auto">
+<html lang="{{ app.user.locale|default('en') }}" dir="ltr" data-bs-theme="{{ app.user.theme|default('dark') }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
