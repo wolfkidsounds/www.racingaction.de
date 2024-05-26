@@ -5,6 +5,7 @@
 namespace App\Controller\App;
 
 use App\Entity\Event;
+use Spatie\CalendarLinks\Generators\Ics;
 use Spatie\CalendarLinks\Link;
 use App\Form\App\EventFormType;
 use App\Repository\EventRepository;
@@ -58,10 +59,31 @@ class EventCrudController extends AbstractController
     {
         $link = new Link($event->getName(), $event->getDateStart(), $event->getDateEnd());
         $link->address($event->getLocation());
-        //$link->description($event->getDescription());
+        $link->description($event->getDescription());
 
-        if ($format == 'apple') {
-            return $this->file($link->ics([], ['format' => 'file']));
+        if ($format = 'google') {
+            return $this->redirect($link->google());
+        }
+
+        if ($format = 'yahoo') {
+            return $this->redirect($link->yahoo());
+        }
+
+        if ($format = 'outlook') {
+            return $this->redirect($link->webOutlook());
+        }
+
+        if ($format = 'office') {
+            return $this->redirect($link->webOffice());
+        }
+
+        if ($format == 'ics') {
+            $ics = $link->ics([], ['format' => 'file']);
+
+            $response = new Response($ics);
+            $response->headers->set('Content-Type', 'text/calendar');
+            $response->headers->set('Content-Disposition', 'attachment; filename="event.ics"');
+            return $response;
         }
 
         return $this->file($link->google());
