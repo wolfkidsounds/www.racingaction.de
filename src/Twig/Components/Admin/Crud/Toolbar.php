@@ -2,15 +2,12 @@
 
 namespace App\Twig\Components\Admin\Crud;
 
+use App\Twig\Traits\DefaultCrudToolbarTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
 final class Toolbar
 {
-    public ?string $path;
+    use DefaultCrudToolbarTrait;
     public $entity = null;
-    public ?bool $back = false;
-    public ?bool $create = false;
-    public ?bool $update = false;
-    public ?bool $delete = false;
 }
