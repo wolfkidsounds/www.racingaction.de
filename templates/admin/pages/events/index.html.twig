@@ -21,10 +21,25 @@
         },
 
         properties: {
-            id: 'ID',
-            name: 'Name',
-            dateStart: 'Begin',
-            dateEnd: 'End',
+            id: {
+                type: 'integerField',
+                name: 'ID',
+            },
+
+            name: {
+                type: 'stringField',
+                name: 'Name',
+            },
+
+            dateStart: {
+                type: 'dateField',
+                name: 'Begin',
+            },
+
+            dateEnd: {
+                type: 'dateField',
+                name: 'End',
+            },
         },
     }) }}
     
