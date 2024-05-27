@@ -13,22 +13,22 @@
                 <div class="mb-3">
                     <label class="form-label">Select Theme</label>
                     <div class="input-group">
-                        <select class="form-select">
+                        <select class="form-select" data-model="theme">
                             <option value="light">Light</option>
                             <option value="dark">Dark</option>
                         </select>
-                        <button class="btn btn-outline-secondary" type="button">Save</button>
+                        <button class="btn btn-outline-secondary" type="button" data-action="live#action" data-action-parameter="saveTheme">Save</button>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Select Language</label>
                     <div class="input-group">
-                        <select class="form-select">
+                        <select class="form-select" data-model="locale">
                             <option value="de">Deutsch</option>
                             <option value="en">English</option>
                         </select>
-                        <button class="btn btn-outline-secondary" type="button">Save</button>
+                        <button class="btn btn-outline-secondary" type="button" data-action="live#action" data-action-parameter="saveLocale">Save</button>
                     </div>
                 </div>
                 
