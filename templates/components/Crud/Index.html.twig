@@ -1,0 +1,61 @@
+<div class="" {{ attributes }}>
+    <table class="table">
+        <thead>
+            <tr>
+                {% if this.selector %}
+                    <th>#</th>
+                {% endif %}
+
+                {% for key, item in this.properties %}
+                    <th>{{ item.name }}</th>
+                {% endfor %}
+
+                {% if this.actions %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in this.entities %}
+            <tr>
+                {% if this.selector %}
+                    <td><input type="checkbox" class="form-check" /></td>
+                {% endif %}
+
+                {% for key, item in this.properties %}
+                    {% set value = attribute(entity, key) %}
+                    <td>
+                        {{ component('Crud:Fields:' ~ item.type, {
+                            entity: entity,
+                            key: key,
+                            value: value,
+                        }) }}
+                    </td>
+                {% endfor %}
+
+                {% if this.actions %}
+                    <td>
+                        {% if actions.read %}
+                            <a href="{{ path( this.path ~ 'read', {'id': entity.id}) }}" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-eye"></i>
+                                Ansehen
+                            </a>
+                        {% endif %}
+
+                        {% if actions.update %}
+                            <a href="{{ path( this.path ~ 'update', {'id': entity.id}) }}"class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-pen"></i>
+                                Bearbeiten
+                            </a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="{{ this.properties|length }}">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
