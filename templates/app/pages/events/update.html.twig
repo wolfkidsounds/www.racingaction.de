@@ -1,14 +1,17 @@
 {% extends 'app/base.html.twig' %}
 
+{% block toolbar %}
+    {{ component('Crud:Toolbar', {
+        path: 'app_events_',
+        entity: event,
+        back: true,
+        delete: true,
+    })  }}
+{% endblock %}
+
 {% block body %}
     {{ component('Event:Form', {
         isEditing: true,
-        name: event.name,
-        type: event.type,
+        entity: event,
     }) }}
-{% endblock %}
-
-{% block toolbar %}
-    <a href="{{ path('app_events_index') }}">back to list</a>
-    {{ include('app/pages/events/_delete_form.html.twig') }}
 {% endblock %}
