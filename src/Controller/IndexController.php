@@ -4,24 +4,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Repository\EventRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/', name: 'public_')]
 class IndexController extends AbstractController
 {
     /**
      * Übersichts-Seite (Frontpage).
-     *
-     * Diese Seite ist die erste, die man sieht.
-     * Besucher können hier einen Kalender sehen (?)
-     *
-     * Sichtbarkeit: Öffentlich
-     * Route: public_index
-     *
-     * TODO
      */
     #[Route('/', name: 'index')]
     public function index(EventRepository $repository): Response
@@ -30,6 +23,22 @@ class IndexController extends AbstractController
 
         return $this->render('public/pages/index.html.twig', [
             'events' => $events,
+        ]);
+    }
+
+    /**
+     * Zeige einzelnes Event
+     * 
+     * Anzahl: Singular
+     * Sichtbarkeit: Öffentlich
+     * Route: public_events_read
+     * 
+     */
+    #[Route('/events/{id}', name: 'events_read')]
+    public function events_read(int $id, EventRepository $repository): Response
+    {
+        return $this->render('public/pages/events/read.html.twig', [
+            'event' => $repository->findOneBy(['id' => $id]),
         ]);
     }
 
