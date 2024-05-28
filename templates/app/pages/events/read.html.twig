@@ -1,389 +1,394 @@
 {% extends 'app/base.html.twig' %}
 
 {% block toolbar %}
-    <a href="{{ path('app_events_index') }}">back to list</a>
-    <a href="{{ path('app_events_update', {'id': event.id}) }}">edit</a>
-    {{ include('app/pages/events/_delete_form.html.twig') }}
+    {{ component('Crud:Toolbar', {
+        entity: event,
+        path: 'app_events_',
+        update: true,
+        delete: true,
+        showPublic: true,
+    })  }}
 {% endblock %}
 
 {% block body %}
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ event.name }}</td>
-            </tr>
-            <tr>
-                <th>DateTimeBegin</th>
-                <td>{{ event.dateStart|date('Y-m-d') }}</td>
-            </tr>
-            <tr>
-                <th>DateTimeEnd</th>
-                <td>{{ event.dateEnd|date('Y-m-d')}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format:'apple', id: event.id }) }}" download>Download ICS</a>
-    <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format: 'google', id: event.id }) }}" download>Download Google Calender</a>
-
-    <ul>
-    {% for link in event.linkUrl %}
-        <li><a class="rounded-circle" href="{{ link }}"><img src="https://www.google.com/s2/favicons?domain={{ link }}&sz=64"></a></li>
-    {% endfor  %}
-    </ul>
-
-
-
-
-
-{# 
-    Frage: macht es Sinn, die Rennergebnisse auch noch mit in die erste Tabelle "Fahrer" einzufügen?
-    ANTWORT: Vielleicht sollte Rennergebnisse eine eigene Tabelle sein?
-
-    Frage: könnte man für die Veranstalter eine Art durchlaufprogramm schreiben?
-        Ich stelle mir das ungefähr so vor:
-        - Seite mit einem großen Button "starte Renntag" weitergeleitet an 
-        - Seite "Überprüfe Liste der Fahrer" Auflistung aller angemeldeter Fahrer, nochmal durchsschauen, Lizenzen checken, Fahrer ergänzen/löschen/anpassen, Button "starte Heat 1" weitergeleitet an
-       
-    !!Fahrer ergänzen wird noch eine wichtige angelegenheit, da ja nicht immer alle auf meiner Seite angemeldet sein werden!!
-   
-    - Seite "Renntag" mit allen Klassen als Buttons aufgelistet. Durch anklicken eines Buttons wird man in die entsprechenende Klasse weitergeleitet an
-        welche Klassen gelistet werden müssen, enthält die Datenbank, da beim Erstellen eines Events der Veranstalter selbst festgelegt hat, welche Klassen gefahren werden sollen
-        auf diese Seite wird man nach Durchlauf eines Heats oder eines Rennens automatisch zurückgeleitet, sodass man immer wieder seine Klasse auswählen muss.
-        Ist in einer Klasse Heat 1 schon gefahren worden, wird man autpmatisch zu Heat 2 geleitet usw.
-
-        - Seite "Heat 1", teilnehmende Fahrer als Button aufgelistet, wenn in Reallife die Fahrer durch das Ziel Fahren, kann in der App durch anklicken in der richtigen Reihenfolge die Platzierung festgelegt werden
-        Reallife: Fahrer fahren durch Ziel: 247_Herbert, 33_Olaf, 87_Luise
-        App:    alle Fahrer sind als Button vor mir gelistet, sortiert nach Startnummer zur erleichterten Übersicht
-                Herbert fährt zuerst übers Ziel, also wird er zuerst angeklickt
-                sobald er angeklickt wurde, wird er unter den "Fahrerbuttons" in die chronologische Liste eingefügt mit (Platzierung,NR/NICK,Punkte)
-                usw.
-        unter der Liste ist dann wieder ein großer Button "Reihenfolge bestätigen" weitergeleitet an Seite "Renntag"
-        
-        - Seite "Heat 2".....(gleiche wie "Heat 1")
-        - Seite "Heat 3".....(gleiche wie "Heat 1")
-        - Seite "Rennen" Fahrer nochmal aufgelistet zum nochmaligen Abgleich in der Rangfolge und Punktestand (Tabelle "Fahrer" aus app/events/show.html.twig)
-        ich hätte gerne, dass man auch hier alle Daten notfalls noch abändern kann, was die Reihenfolge betrifft. 
-        Für Fehler haftet dann der Veranstalter, aber es gibt manchmal nach Rennen noch Änderungen durch 
-        Disqualifizierung, Verletzungen oder Moped will nicht mehr.
-
-        !!es ist wichtig, dass man den Prozess immer unterbrechen kann, 
-        also nach Fahren des ersten Heats in eine andere Klasse wechseln kann, 
-        da die Heats und das Rennen nicht direkt nacheinander, 
-        sondern im Wechsel mit den Heats anderer Klassen gefahren werden.
-        Die Daten müssen also sowieso zwischengespeichert werden und mindestens über den Tag, bzw ein Jahr wäre richtig geil,
-        abrufbar sein.
-
-    Kurzantwort: Ja das ist möglich und ein sogenannte Programmatischer Ablauf.
-    Zum Zwischenspeichern haben wir mehrere möglichkeiten und entscheiden sich nach der Anforderung.
-    Möglichkeit 1: Jede Etappe in eine seperate tabelle (finde ich nicht soooo cool, hat aber vorteile!)
-    Möglichkeit 2: Eine Tabelle die den gesamten Rennablauf "dokumentiert" als eine art event-logger, ein event wäre "user x hat rennen y um zeit gestartet" aus diesen Infos generieren wir dann entsprechende werte für die app.
-    Möglichkeit 3: (Finde ich am besten, ist aber am kompliziertesten in der Umsetzung) Komponenten basiert arbeiten. Eine Komponente kann einen "State" also Zustand haben. Nehmen wir die Komponente "Rennen" kann diese einen Zustand "gestartet, beendet, im gange" bekommen, dieser kann in echtzeit geupdatet werden, wird aber nur in der aktuellen nutzer session gespeichert. -> Könnte man aber in der Datenbank als eine json hinterlegen, die man dann wieder einlest wenn die session fortgesetzt wird.
-#}
-
-{# NÄCHSTE FRAGE:
-    Wie schaffe ich eine bessere Übersicht? 
-    Wenn wir nun auf der Event_show.html.twig seite alle Klassen mit allen Tabellen auflisten, 
-    findet man doch schnell nicht mehr, wonach man sucht.
-    Kann man auch hier einfach unter das angezeigte Event einen Auswahlbutton anheften, 
-    in der man die Klasse auswählen soll und dann darunter nur die Tabellen der ausgewählten Klasse zu sehen sind?
-    --> if-schleife nur anzeigen, wenn oben wahr ?? muss dann aber jeder Klasse eine id geben oder? na mal sehen....
-
-    Antwort: Wir können mit einem Accordion oder einem NavTab auch die klassen in kleine Tabs sortieren?
-    Wonach Filtert/Sucht man denn Kategorisch am meisten?
-#}
-    <h1> Klasse </h1>
-    <br>
-    <h4>Fahrer</h4>
-
-    {# 
-        Frage: muss bestimmt noch an den Anfang gesetzt werden, oder? 
-        aber ich hätte gerne die Anzeige des Events selbst anders als die Tabellen hier unten....
-        geht das wieder mit so einer If-schleife? oder kann ich das auch noch separat umstylen, 
-        indem ich direkt in die Tabelle meine Sonderwünsche eintrage?
-
-        Antwort: Styles am besten immer in einer scss datei einpflegen und mit css-klassen arbeiten.
-        Möchtest du also deine tabelle ändern könntest du dir die klasse 'base-table' ausdenken. Oder einfach die bereits existierende klasse 'table' überschreiben.
-        Ich empfehle dir dazu unter assets/ eine neue scss datei anzulegen und diese einfach 'table.scss' zu bennenen. (assets/scss/common/table.scss) -> Nicht vergessen diese auch zu importieren in der (assets/scss/common.scss) Datei.
-
-        Bin mir noch etwas unsicher was genau du mit einer if-schleife realisieren möchtest? Schau auch gern bei bootstrap nach, da sind auch einige gute beispiele für tabellen.
-    #}
-
-    <style> 
-        table, th, td {
-            border:2px solid teal;
-        }
-    </style>
-
-    {# 
-        Frage: Liste der anmgemeldeten Fahrer aus der Datenbank.
-        jetzt wirds KOMPLIZIERT! :D 
-        - Fahrer werden mit der Startnummer_Nickname (NR/NICK) angezeigt
-        - vor dem ersten Heat nach Startnummer sortiert
-        - nach jedem gefahrenem Heat nach "aktuellem Punktestand"
-        - "aktueller Punktestand" ist die Summe der gefahrenen Heats
-        - Spalte 1 "Rang" bleibt immer gleich: Zahlenfolge ganzer Zahlen, so sieht man gleich, wer gerade vorne ist im Ranking um die Startpositionen
-        - Tabellen-Reihen sind abhängig von der Anzahl der angemeldeten Fahrer 
-
-        Antwort: Denk dran, für alles was gespeichert wird, muss irgendwo ein Eintrag in irgendeiner Tabelle sein.
-        Hier müssen wir als noch mal knobeln, wie wir das in einer Tabelle oder mehreren verküpften tabellen speichern.
-        Eventuell macht auch hier die zuhilfenahme einer Komponente sinn (immer wenn sich sehr ähnlicher code wiederholt, schreiben wir eine Komponente)
-
-    #}
-
-    {# <table class="table">
-            <tr>
-                <th>Rang</th>
-                <th>Fahrer</th>
-                <th>Punktestand Heats</th>
-                <th>Punkte Heat 1</th>
-                <th>Punkte Heat 2</th>
-                <th>Punkte Heat 3</th>
-            </tr>         
-            <tr>
-                <td>1</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>NR/NICK</td>
-                <td>H1+H2+H3</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-                <td>Punkte</td>
-            </tr>
-    </table>
-    
-    <br>
-    
-    <table class="table">
-            <tr>
-                <th>Heat 1</th>
-                <th>Platz 1</th>
-                <th>Platz 2</th>
-                <th>Platz 3</th>
-                <th>Platz 4</th>
-            </tr>
-            <tr>
-                <td><strong>Reihe 1</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 2</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 3</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-    </table>
-
-    <table class="table">
-            <tr>
-                <th>Heat 1</th>
-                <th>Platz 1</th>
-                <th>Platz 2</th>
-                <th>Platz 3</th>
-                <th>Platz 4</th>
-            </tr>
-            <tr>
-                <td><strong>Reihe 1</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 2</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 3</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-    </table>
-
-    {# 
-        in die folgenden Tabellen muss per Zufallsgenerator die Platzverteilung erfolgen.
-        jeder Fahrer startet unabhöngig von allen anderen Fahrern einmal aus je einer Reihe, Platz egal 
-
-        Bitte versuchen Anzeige Logik und Ersteller Logik (Programm-Logik) voneinander zu trennen von Controller bis Template.
-        Soll heißen -> Der Event-Ersteller bekommt eine andere Logik als der Betrachter. Nur in Ausnahmefällen mischen.
-
-        Ja, in meinem Kopf ist das durch das "Ablaufprogramm" nenne ich es jetzt einfach mal, das ich oben beschrieben habe, schon passiert oder wird passieren.
-        Die Eingaben der Event-Ersteller werden lediglich in die Tabellen auf der show Seite übertragen....wahrscheinlich dann eintippen--> Datenbank --> show seite, oder?
-    #}
-
-    {#
-    <table class="table">
-            <tr>
-                <th>Heat 1</th>
-                <th>Platz 1</th>
-                <th>Platz 2</th>
-                <th>Platz 3</th>
-                <th>Platz 4</th>
-            </tr>
-            <tr>
-                <td><strong>Reihe 1</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 2</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-            <tr>
-                <td><strong>Reihe 3</strong></td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-                <td>Name</td>
-            </tr>
-    </table>
-    #}
-
-
-
-
-{# 
-    Vorschlag zur "Entity-Beschreibung"
-
-    Tabelle mit Spalten:            
-    Name    Type    Relation (optional)
-
-    Name (Field Name): Name der Eigenschaft (Property)
-    Type (Field Type): Typ der Eigenschaft (zB. 'string', 'text', 'bool') -> symfony console make:entity
-    Relation (Zugehörigkeit): Wie ist diese Entity, mit einer anderen Verknüpft
-
-        Beispiele für Event:
-        -Name-                  -Type-      -Relation-    
-        Name                    string      /
-        Ersteller/Organisator   relation    User(id) | EIN Event hat EINEN Ersteller
-        Datum/Begin             date-time   /
-        Datum/Ende              date-time   /
-        Teilnehmer              relation    User(id) | EIN Event hat MEHRERE Teilnehmer
-        Rennen                  relation    Race(id) | EIN Event hat MEHRERE Rennen
-
-        Beispiele für Rennen:
-        -Name-                  -Type-      -Relation-    
-        Name                    string      /
-        Typ                     enum(?)     (?)
-        Ersteller/Organisator   relation    User(id) | EIN Rennen hat EINEN Ersteller
-        Teilnehmer              relation    User(id) | EIN Rennnen hat MEHRERE Teilnehmer
-
-        Beispiele für RennPositionen:
-        -Name-                  -Type-      -Relation-
-        Rennen                  relation    Race(id) | EINE Rennposition hat EIN Rennen
-        Fahrer                  relation    User(id) | EINE Rennposition hat EINEN Fahrer
-        Position                int         /
-
-        Somit können wir für Rennen X nach Positionen in der Datenbank suchen und uns diese Ausgeben lassen.
-        Genauso können wir Rennen seperat anzeigen und Teilnehmer sind getrennt von den Rennen.    
-#}
-
+    {{ component('Event:Read', {
+        isCrud: true,
+        event: event,
+    }) }}
 {% endblock %}
+
+{# 
+
+    {% block body %}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ event.name }}</td>
+                </tr>
+                <tr>
+                    <th>DateTimeBegin</th>
+                    <td>{{ event.dateStart|date('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <th>DateTimeEnd</th>
+                    <td>{{ event.dateEnd|date('Y-m-d')}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format:'apple', id: event.id }) }}" download>Download ICS</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_events_export', { format: 'google', id: event.id }) }}" download>Download Google Calender</a>
+
+        <ul>
+        {% for link in event.linkUrl %}
+            <li><a class="rounded-circle" href="{{ link }}"><img src="https://www.google.com/s2/favicons?domain={{ link }}&sz=64"></a></li>
+        {% endfor  %}
+        </ul>
+
+
+
+
+
+
+        Frage: macht es Sinn, die Rennergebnisse auch noch mit in die erste Tabelle "Fahrer" einzufügen?
+        ANTWORT: Vielleicht sollte Rennergebnisse eine eigene Tabelle sein?
+
+        Frage: könnte man für die Veranstalter eine Art durchlaufprogramm schreiben?
+            Ich stelle mir das ungefähr so vor:
+            - Seite mit einem großen Button "starte Renntag" weitergeleitet an 
+            - Seite "Überprüfe Liste der Fahrer" Auflistung aller angemeldeter Fahrer, nochmal durchsschauen, Lizenzen checken, Fahrer ergänzen/löschen/anpassen, Button "starte Heat 1" weitergeleitet an
+        
+        !!Fahrer ergänzen wird noch eine wichtige angelegenheit, da ja nicht immer alle auf meiner Seite angemeldet sein werden!!
+    
+        - Seite "Renntag" mit allen Klassen als Buttons aufgelistet. Durch anklicken eines Buttons wird man in die entsprechenende Klasse weitergeleitet an
+            welche Klassen gelistet werden müssen, enthält die Datenbank, da beim Erstellen eines Events der Veranstalter selbst festgelegt hat, welche Klassen gefahren werden sollen
+            auf diese Seite wird man nach Durchlauf eines Heats oder eines Rennens automatisch zurückgeleitet, sodass man immer wieder seine Klasse auswählen muss.
+            Ist in einer Klasse Heat 1 schon gefahren worden, wird man autpmatisch zu Heat 2 geleitet usw.
+
+            - Seite "Heat 1", teilnehmende Fahrer als Button aufgelistet, wenn in Reallife die Fahrer durch das Ziel Fahren, kann in der App durch anklicken in der richtigen Reihenfolge die Platzierung festgelegt werden
+            Reallife: Fahrer fahren durch Ziel: 247_Herbert, 33_Olaf, 87_Luise
+            App:    alle Fahrer sind als Button vor mir gelistet, sortiert nach Startnummer zur erleichterten Übersicht
+                    Herbert fährt zuerst übers Ziel, also wird er zuerst angeklickt
+                    sobald er angeklickt wurde, wird er unter den "Fahrerbuttons" in die chronologische Liste eingefügt mit (Platzierung,NR/NICK,Punkte)
+                    usw.
+            unter der Liste ist dann wieder ein großer Button "Reihenfolge bestätigen" weitergeleitet an Seite "Renntag"
+            
+            - Seite "Heat 2".....(gleiche wie "Heat 1")
+            - Seite "Heat 3".....(gleiche wie "Heat 1")
+            - Seite "Rennen" Fahrer nochmal aufgelistet zum nochmaligen Abgleich in der Rangfolge und Punktestand (Tabelle "Fahrer" aus app/events/show.html.twig)
+            ich hätte gerne, dass man auch hier alle Daten notfalls noch abändern kann, was die Reihenfolge betrifft. 
+            Für Fehler haftet dann der Veranstalter, aber es gibt manchmal nach Rennen noch Änderungen durch 
+            Disqualifizierung, Verletzungen oder Moped will nicht mehr.
+
+            !!es ist wichtig, dass man den Prozess immer unterbrechen kann, 
+            also nach Fahren des ersten Heats in eine andere Klasse wechseln kann, 
+            da die Heats und das Rennen nicht direkt nacheinander, 
+            sondern im Wechsel mit den Heats anderer Klassen gefahren werden.
+            Die Daten müssen also sowieso zwischengespeichert werden und mindestens über den Tag, bzw ein Jahr wäre richtig geil,
+            abrufbar sein.
+
+        Kurzantwort: Ja das ist möglich und ein sogenannte Programmatischer Ablauf.
+        Zum Zwischenspeichern haben wir mehrere möglichkeiten und entscheiden sich nach der Anforderung.
+        Möglichkeit 1: Jede Etappe in eine seperate tabelle (finde ich nicht soooo cool, hat aber vorteile!)
+        Möglichkeit 2: Eine Tabelle die den gesamten Rennablauf "dokumentiert" als eine art event-logger, ein event wäre "user x hat rennen y um zeit gestartet" aus diesen Infos generieren wir dann entsprechende werte für die app.
+        Möglichkeit 3: (Finde ich am besten, ist aber am kompliziertesten in der Umsetzung) Komponenten basiert arbeiten. Eine Komponente kann einen "State" also Zustand haben. Nehmen wir die Komponente "Rennen" kann diese einen Zustand "gestartet, beendet, im gange" bekommen, dieser kann in echtzeit geupdatet werden, wird aber nur in der aktuellen nutzer session gespeichert. -> Könnte man aber in der Datenbank als eine json hinterlegen, die man dann wieder einlest wenn die session fortgesetzt wird.
+
+
+
+    NÄCHSTE FRAGE:
+        Wie schaffe ich eine bessere Übersicht? 
+        Wenn wir nun auf der Event_show.html.twig seite alle Klassen mit allen Tabellen auflisten, 
+        findet man doch schnell nicht mehr, wonach man sucht.
+        Kann man auch hier einfach unter das angezeigte Event einen Auswahlbutton anheften, 
+        in der man die Klasse auswählen soll und dann darunter nur die Tabellen der ausgewählten Klasse zu sehen sind?
+        --> if-schleife nur anzeigen, wenn oben wahr ?? muss dann aber jeder Klasse eine id geben oder? na mal sehen....
+
+        Antwort: Wir können mit einem Accordion oder einem NavTab auch die klassen in kleine Tabs sortieren?
+        Wonach Filtert/Sucht man denn Kategorisch am meisten?
+
+        <h1> Klasse </h1>
+        <br>
+        <h4>Fahrer</h4>
+
+
+            Frage: muss bestimmt noch an den Anfang gesetzt werden, oder? 
+            aber ich hätte gerne die Anzeige des Events selbst anders als die Tabellen hier unten....
+            geht das wieder mit so einer If-schleife? oder kann ich das auch noch separat umstylen, 
+            indem ich direkt in die Tabelle meine Sonderwünsche eintrage?
+
+            Antwort: Styles am besten immer in einer scss datei einpflegen und mit css-klassen arbeiten.
+            Möchtest du also deine tabelle ändern könntest du dir die klasse 'base-table' ausdenken. Oder einfach die bereits existierende klasse 'table' überschreiben.
+            Ich empfehle dir dazu unter assets/ eine neue scss datei anzulegen und diese einfach 'table.scss' zu bennenen. (assets/scss/common/table.scss) -> Nicht vergessen diese auch zu importieren in der (assets/scss/common.scss) Datei.
+
+            Bin mir noch etwas unsicher was genau du mit einer if-schleife realisieren möchtest? Schau auch gern bei bootstrap nach, da sind auch einige gute beispiele für tabellen.
+
+
+        <style> 
+            table, th, td {
+                border:2px solid teal;
+            }
+        </style>
+
+            Frage: Liste der anmgemeldeten Fahrer aus der Datenbank.
+            jetzt wirds KOMPLIZIERT! :D 
+            - Fahrer werden mit der Startnummer_Nickname (NR/NICK) angezeigt
+            - vor dem ersten Heat nach Startnummer sortiert
+            - nach jedem gefahrenem Heat nach "aktuellem Punktestand"
+            - "aktueller Punktestand" ist die Summe der gefahrenen Heats
+            - Spalte 1 "Rang" bleibt immer gleich: Zahlenfolge ganzer Zahlen, so sieht man gleich, wer gerade vorne ist im Ranking um die Startpositionen
+            - Tabellen-Reihen sind abhängig von der Anzahl der angemeldeten Fahrer 
+
+            Antwort: Denk dran, für alles was gespeichert wird, muss irgendwo ein Eintrag in irgendeiner Tabelle sein.
+            Hier müssen wir als noch mal knobeln, wie wir das in einer Tabelle oder mehreren verküpften tabellen speichern.
+            Eventuell macht auch hier die zuhilfenahme einer Komponente sinn (immer wenn sich sehr ähnlicher code wiederholt, schreiben wir eine Komponente)
+
+
+        <table class="table">
+                <tr>
+                    <th>Rang</th>
+                    <th>Fahrer</th>
+                    <th>Punktestand Heats</th>
+                    <th>Punkte Heat 1</th>
+                    <th>Punkte Heat 2</th>
+                    <th>Punkte Heat 3</th>
+                </tr>         
+                <tr>
+                    <td>1</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>NR/NICK</td>
+                    <td>H1+H2+H3</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                    <td>Punkte</td>
+                </tr>
+        </table>
+        
+        <br>
+        
+        <table class="table">
+                <tr>
+                    <th>Heat 1</th>
+                    <th>Platz 1</th>
+                    <th>Platz 2</th>
+                    <th>Platz 3</th>
+                    <th>Platz 4</th>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 1</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 2</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 3</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+        </table>
+
+        <table class="table">
+                <tr>
+                    <th>Heat 1</th>
+                    <th>Platz 1</th>
+                    <th>Platz 2</th>
+                    <th>Platz 3</th>
+                    <th>Platz 4</th>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 1</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 2</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 3</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+        </table>
+
+            in die folgenden Tabellen muss per Zufallsgenerator die Platzverteilung erfolgen.
+            jeder Fahrer startet unabhöngig von allen anderen Fahrern einmal aus je einer Reihe, Platz egal 
+
+            Bitte versuchen Anzeige Logik und Ersteller Logik (Programm-Logik) voneinander zu trennen von Controller bis Template.
+            Soll heißen -> Der Event-Ersteller bekommt eine andere Logik als der Betrachter. Nur in Ausnahmefällen mischen.
+
+            Ja, in meinem Kopf ist das durch das "Ablaufprogramm" nenne ich es jetzt einfach mal, das ich oben beschrieben habe, schon passiert oder wird passieren.
+            Die Eingaben der Event-Ersteller werden lediglich in die Tabellen auf der show Seite übertragen....wahrscheinlich dann eintippen--> Datenbank --> show seite, oder?
+
+        <table class="table">
+                <tr>
+                    <th>Heat 1</th>
+                    <th>Platz 1</th>
+                    <th>Platz 2</th>
+                    <th>Platz 3</th>
+                    <th>Platz 4</th>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 1</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 2</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+                <tr>
+                    <td><strong>Reihe 3</strong></td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                    <td>Name</td>
+                </tr>
+        </table>
+
+        Vorschlag zur "Entity-Beschreibung"
+
+        Tabelle mit Spalten:            
+        Name    Type    Relation (optional)
+
+        Name (Field Name): Name der Eigenschaft (Property)
+        Type (Field Type): Typ der Eigenschaft (zB. 'string', 'text', 'bool') -> symfony console make:entity
+        Relation (Zugehörigkeit): Wie ist diese Entity, mit einer anderen Verknüpft
+
+            Beispiele für Event:
+            -Name-                  -Type-      -Relation-    
+            Name                    string      /
+            Ersteller/Organisator   relation    User(id) | EIN Event hat EINEN Ersteller
+            Datum/Begin             date-time   /
+            Datum/Ende              date-time   /
+            Teilnehmer              relation    User(id) | EIN Event hat MEHRERE Teilnehmer
+            Rennen                  relation    Race(id) | EIN Event hat MEHRERE Rennen
+
+            Beispiele für Rennen:
+            -Name-                  -Type-      -Relation-    
+            Name                    string      /
+            Typ                     enum(?)     (?)
+            Ersteller/Organisator   relation    User(id) | EIN Rennen hat EINEN Ersteller
+            Teilnehmer              relation    User(id) | EIN Rennnen hat MEHRERE Teilnehmer
+
+            Beispiele für RennPositionen:
+            -Name-                  -Type-      -Relation-
+            Rennen                  relation    Race(id) | EINE Rennposition hat EIN Rennen
+            Fahrer                  relation    User(id) | EINE Rennposition hat EINEN Fahrer
+            Position                int         /
+
+            Somit können wir für Rennen X nach Positionen in der Datenbank suchen und uns diese Ausgeben lassen.
+            Genauso können wir Rennen seperat anzeigen und Teilnehmer sind getrennt von den Rennen.    
+
+    {% endblock %}
+
+#}
