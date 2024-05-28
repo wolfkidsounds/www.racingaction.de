@@ -91,7 +91,7 @@ final class Form extends AbstractController
         $event->setDateEnd($this->dateEnd);
         $event->setRegistration($this->registration);
         $event->setDescription($this->description); // Objekt mit infos füllen
-        $event->setLinkUrl([
+        $event->setLinks([
             $this->linkUrl1, 
             $this->linkUrl2, 
             $this->linkUrl3,
