@@ -19,6 +19,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/app/events', name: 'app_events_')]
 class EventCrudController extends AbstractController
 {
+    /**
+     * Alle Events (Index)
+     *
+     * @param EventRepository $eventRepository
+     * @return Response
+     */
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(EventRepository $eventRepository): Response
     {
@@ -28,6 +34,11 @@ class EventCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * Event erstellen (Create)
+     *
+     * @return Response
+     */
     #[Route('/create', name: 'create', methods: ['GET', 'POST'])]
     public function create(): Response
     {
@@ -36,6 +47,11 @@ class EventCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * Ein einzelnes Event ansehen (Read)
+     * 
+     * @return Response
+     */
     #[Route('/read/{id}', name: 'read', methods: ['GET'])]
     public function read(Event $event): Response
     {
@@ -45,6 +61,25 @@ class EventCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * Ein einzelnes Event ansehen (Read)
+     * 
+     * @return Response
+     */
+    #[Route('/read/{id}/public', name: 'read_public', methods: ['GET'])]
+    public function read_public(int $id): Response
+    {
+        return $this->redirectToRoute('public_events_read', [
+            'id' => $id,
+        ]);
+    }
+
+
+    /**
+     * Ein einzelnes Event Aktualisieren/Ändern (update)
+     * 
+     * @return Response
+     */
     #[Route('/update/{id}', name: 'update', methods: ['GET', 'POST'])]
     public function update(Event $event): Response
     {
@@ -54,6 +89,13 @@ class EventCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * Ein Event Exportieren
+     * 
+     * @param string $format -> Das Format in dem der Export zurück gegeben wird.
+     * @param Event $event -> Das Event, dass exportiert werden soll.
+     * @return Response
+     */
     #[Route('/export/{format}/{id}', name: 'export', methods: ['GET', 'POST'])]
     public function export(?string $format, Event $event): Response
     {
@@ -89,6 +131,11 @@ class EventCrudController extends AbstractController
         return $this->file($link->google());
     }
 
+    /**
+     * Ein Event löschen (delete)
+     * 
+     * @return Response
+     */
     #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Event $event, EntityManagerInterface $entityManager): Response
     {
