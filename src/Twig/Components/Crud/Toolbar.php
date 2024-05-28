@@ -10,4 +10,5 @@ final class Toolbar
 {
     use DefaultCrudToolbarTrait;
     public $entity = null;
+    public ?bool $showPublic = false;
 }
