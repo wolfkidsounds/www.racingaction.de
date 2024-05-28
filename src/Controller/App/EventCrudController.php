@@ -83,7 +83,7 @@ class EventCrudController extends AbstractController
     #[Route('/update/{id}', name: 'update', methods: ['GET', 'POST'])]
     public function update(Event $event): Response
     {
-        return $this->render('app/pages/events/edit.html.twig', [
+        return $this->render('app/pages/events/update.html.twig', [
             'title' => 'Event Updaten',
             'event' => $event,
         ]);
