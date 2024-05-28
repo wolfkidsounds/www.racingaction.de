@@ -1,9 +1,12 @@
 {% extends 'app/base.html.twig' %}
 
-{% block body %}
-    {{ component('Event:Form') }}
+{% block toolbar %}
+    {{ component('Crud:Toolbar', {
+        path: 'app_events_',
+        back: true,
+    })  }}
 {% endblock %}
 
-{% block toolbar %}
-    <a href="{{ path('app_events_index') }}">back to list</a>
+{% block body %}
+    {{ component('Event:Form') }}
 {% endblock %}
