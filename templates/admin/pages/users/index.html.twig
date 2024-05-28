@@ -21,10 +21,22 @@
         },
 
         properties: {
-            id: 'ID',
-            nickname: 'Nickname',
-            email: 'E-Mail',
-            roles: 'Roles',
+            id: {
+                type: 'integerField',
+                name: 'ID',
+            },
+            nickname: {
+                type: 'stringField',
+                name: 'Name',
+            },
+            email: {
+                type: 'stringField',
+                name: 'E-Mail',
+            },
+            roles: {
+                type: 'badgeField',
+                name: 'Roles',
+            },
         },
     }) }}
     
