@@ -19,6 +19,10 @@ final class Form extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(writable: true)]
+    public ?Event $event = null;
+    public $entity = null;
+
+    #[LiveProp(writable: true)]
     public ?string $name = null;
 
     #[LiveProp(writable: true)]
