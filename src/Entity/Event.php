@@ -309,12 +309,12 @@ class Event
         return $this;
     }
 
-    public function getlinks(): ?array
+    public function getLinks(): ?array
     {
         return $this->links;
     }
 
-    public function setlinks(?array $links): static
+    public function setLinks(?array $links): static
     {
         $this->links = $links;
 
