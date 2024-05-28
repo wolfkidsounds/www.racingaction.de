@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/app/user', name: 'app_user_')]
 class UserCrudController extends AbstractController
 {
+    /**
+     * Nutzer Profil
+     *
+     * @return Response
+     */
     #[Route('/profile', name: 'profile', methods: ['GET'])]
     public function profile(): Response
     {
@@ -24,6 +29,11 @@ class UserCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * Nutzer Einstellungen
+     *
+     * @return Response
+     */
     #[Route('/settings', name: 'settings', methods: ['GET'])]
     public function settings(): Response
     {
