@@ -8,6 +8,7 @@ use App\Entity\Event;
 use Spatie\CalendarLinks\Generators\Ics;
 use Spatie\CalendarLinks\Link;
 use App\Form\App\EventFormType;
+use App\Form\Event\CreateEventFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,9 +41,23 @@ class EventCrudController extends AbstractController
      * @return Response
      */
     #[Route('/create', name: 'create', methods: ['GET', 'POST'])]
-    public function create(): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
+        $event = new Event();
+        // TODO: $event->setOwner($this->getUser());
+
+        $form = $this->createForm(CreateEventFormType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($event);
+            $em->flush();
+            return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('app/pages/events/create.html.twig', [
+            'form' => $form,
+            'event' => $event,
             'title' => 'Event erstellen',
         ]);
     }
