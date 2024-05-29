@@ -19,7 +19,7 @@
 
             {# Location #}
             <li class="nav-item" role="presentation">
-                <button class="nav-link text-start w-100" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-tab-pane" type="button" role="tab" aria-controls="location-tab-pane" aria-selected="false">4. Location</button>
+                <button class="nav-link text-start w-100" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-tab-pane" type="button" role="tab" aria-controls="location-tab-pane" aria-selected="false" disabled>4. Location</button>
             </li>
 
             {# Visitor #}
@@ -47,7 +47,12 @@
     <div class="vr p-0" style="--bs-border-width: 1px;"></div>
 
     <div class="col">
-        {{ form_start(form) }}
+        {{ form_start(form, {
+            attr: {
+                'data-action': 'live#action:prevent',
+                'data-live-action-param': 'save'
+            }
+        }) }}
         <div class="tab-content" id="newEventTabContent">
 
             {# General #}
@@ -118,24 +123,7 @@
             {# Schedule #}
             <div class="tab-pane fade" id="schedule-tab-pane" role="tabpanel" aria-labelledby="schedule-tab" tabindex="0">
                 <h4 class="h4 mb-3">Schedule</h4>
-                {# {{ form_row(form.schedule, { 'attr': { 'data-model': 'norender|event.schedule' }}) }} #}
-                <button
-                    data-action="live#action"
-                    data-live-action-param="addSchedule"
-                    type="button"
-                    class="btn btn-outline-secondary"
-                >+ Add Schedule</button>
-                {% for key, scheduleForm in form.schedule %}
-                    <button
-                        data-action="live#action"
-                        data-live-action-param="removeSchedule"
-                        data-live-index-param="{{ key }}"
-                        type="button"
-                        class="btn btn-outline-secondary"
-                    >X</button>
-        
-                    {{ form_widget(commentForm) }}
-                {% endfor %}
+                {{ form_row(form.schedule, { 'attr': { 'data-model': 'norender|event.schedule' }}) }}
                 {# 
                     <div class="">+ Tag Hinzufügen</div>
                     <div class="">Neuer Tag | Name
@@ -245,30 +233,7 @@
             {# Contact #}
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
                 <h4 class="h4 mb-3">Contact</h4>
-                <div class="">
-                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                            data-action="live#action" data-live-action-param="addOrganizer">
-                        <span>
-                            <i class="fas fa-plus"></i>
-                            Organizer
-                        </span>
-                    </button>
-
-                    {% for organizer in form.organizers %}
-                        <div class="">
-                            {{ form_row(organizer.name) }}
-                            {{ form_row(organizer.email) }}
-                            {{ form_row(organizer.phone) }}
-                            {{ form_row(organizer.website) }}
-                            
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-live-action="removeOrganizer" data-live-arg-index="{{ key }}">
-                                <i class="fas fa-minus"></i>
-                                Remove Organizer
-                            </button>
-                        </div>
-                    {% endfor %}
-                </div>
-                {# {{ form_row(form.organizers, { 'attr': { 'data-model': 'norender|event.organizers' }}) }} #}
+                {{ form_row(form.organizers, { 'attr': { 'data-model': 'norender|event.organizers' }}) }}
                 {# 
                     <div class="">+ Organisator Hinzufügen
                         <div class="">Name des Organisators/Ansprechpartner</div>
@@ -298,8 +263,9 @@
                 {{ form_row(form.status, { 'attr': { 'data-model': 'norender|event.status' }}) }}
                 {# <div class="mb-3">Status (Entwurf, Öffentlich, Verschoben, Abgesagt)</div> #}
 
-                <button data-action="live#action" data-live-action-param="save" class="btn btn-outline-secondary">Speichern (Entwurf)</button>
-                <button data-action="live#action" data-live-action-param="save" class="btn btn-outline-primary">Veröffentlichen</button>
+                {# <button data-action="live#action" data-live-action-param="save" class="btn btn-outline-secondary">Speichern (Entwurf)</button> #}
+                {# <button type="submit" class="btn btn-outline-primary">Speichern</button> #}
+                {{ form_row(form.submit) }}
             </div>
         </div>
         {{ form_end(form) }}
