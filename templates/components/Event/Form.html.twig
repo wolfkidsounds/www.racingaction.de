@@ -14,7 +14,7 @@
 
             {# Schedule #}
             <li class="nav-item" role="presentation">
-                <button class="nav-link text-start w-100" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="false">3. Schedule</button>
+                <button class="nav-link text-start w-100" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="false" disabled>3. Schedule</button>
             </li>
 
             {# Location #}
@@ -52,6 +52,7 @@
 
             {# General #}
             <div class="tab-pane fade show active" id="general-tab-pane" role="tabpanel" aria-labelledby="general-tab" tabindex="0">
+                <h4 class="h4 mb-3">General</h4>
                 {{ form_row(form.name, { 'attr': { 'data-model': 'norender|event.name' }}) }}
                 {# 
                     <div class="mb-3">
@@ -88,6 +89,7 @@
 
             {# Date & Time #}
             <div class="tab-pane fade" id="dateTime-tab-pane" role="tabpanel" aria-labelledby="dateTime-tab" tabindex="0">
+                <h4 class="h4 mb-3">Date & Time</h4>
                 {{ form_row(form.dateStart, { 'attr': { 'data-model': 'norender|event.dateStart' }}) }}
                 {# 
                     <div class="mb-3">
@@ -115,7 +117,25 @@
 
             {# Schedule #}
             <div class="tab-pane fade" id="schedule-tab-pane" role="tabpanel" aria-labelledby="schedule-tab" tabindex="0">
-                {{ form_row(form.schedule, { 'attr': { 'data-model': 'norender|event.schedule' }}) }}
+                <h4 class="h4 mb-3">Schedule</h4>
+                {# {{ form_row(form.schedule, { 'attr': { 'data-model': 'norender|event.schedule' }}) }} #}
+                <button
+                    data-action="live#action"
+                    data-live-action-param="addSchedule"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                >+ Add Schedule</button>
+                {% for key, scheduleForm in form.schedule %}
+                    <button
+                        data-action="live#action"
+                        data-live-action-param="removeSchedule"
+                        data-live-index-param="{{ key }}"
+                        type="button"
+                        class="btn btn-outline-secondary"
+                    >X</button>
+        
+                    {{ form_widget(commentForm) }}
+                {% endfor %}
                 {# 
                     <div class="">+ Tag Hinzufügen</div>
                     <div class="">Neuer Tag | Name
@@ -126,7 +146,8 @@
             
             {# Location #}
             <div class="tab-pane fade" id="location-tab-pane" role="tabpanel" aria-labelledby="location-tab" tabindex="0">
-                {{ form_row(form.location, { 'attr': { 'data-model': 'norender|event.location' }}) }}
+                <h4 class="h4 mb-3">Location</h4>
+                {# {{ form_row(form.location, { 'attr': { 'data-model': 'norender|event.location' }}) }} #}
                 {# 
                     <div class="">Ort Name</div>
                     <div class="">Ort Link</div>
@@ -137,11 +158,21 @@
                         <input id="location" type="text" class="form-control" data-model="norender|location" placeholder="Pflichtfeld">
                     </div>
                 #}
+
+                {% for location in form.location %}
+                    <div class="location-form">
+                        {{ form_row(location.name) }}
+                        {{ form_row(location.address) }}
+                        {{ form_row(location.url) }}
+                        {{ form_row(location.description) }}
+                    </div>
+                {% endfor %}
                 
             </div>
 
             {# Visitor #}
             <div class="tab-pane fade" id="visitor-tab-pane" role="tabpanel" aria-labelledby="visitor-tab" tabindex="0">
+                <h4 class="h4 mb-3">Visitors</h4>
                 {{ form_row(form.visitorPrice, { 'attr': { 'data-model': 'norender|event.visitorPrice' }}) }}
                 {# 
                     <div class="mb-3">
@@ -161,6 +192,7 @@
 
             {# Rider #}
             <div class="tab-pane fade" id="rider-tab-pane" role="tabpanel" aria-labelledby="rider-tab" tabindex="0">
+                <h4 class="h4 mb-3">Riders</h4>
                 {{ form_row(form.riderClasses, { 'attr': { 'data-model': 'norender|event.riderClasses' }}) }}
                 {# 
                     <div class="mb-3">
@@ -212,7 +244,31 @@
 
             {# Contact #}
             <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-                {{ form_row(form.organizers, { 'attr': { 'data-model': 'norender|event.organizers' }}) }}
+                <h4 class="h4 mb-3">Contact</h4>
+                <div class="">
+                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                            data-action="live#action" data-live-action-param="addOrganizer">
+                        <span>
+                            <i class="fas fa-plus"></i>
+                            Organizer
+                        </span>
+                    </button>
+
+                    {% for key, organizer in formValues.organizers %}
+                        <div id="organizer_{{ key }}">
+                            {{ form_row(organizer.name) }}
+                            {{ form_row(organizer.email) }}
+                            {{ form_row(organizer.phone) }}
+                            {{ form_row(organizer.website) }}
+                            
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-live-action="removeOrganizer" data-live-arg-index="{{ key }}">
+                                <i class="fas fa-minus"></i>
+                                Remove Organizer
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+                {# {{ form_row(form.organizers, { 'attr': { 'data-model': 'norender|event.organizers' }}) }} #}
                 {# 
                     <div class="">+ Organisator Hinzufügen
                         <div class="">Name des Organisators/Ansprechpartner</div>
@@ -235,6 +291,7 @@
 
             {# Save #}
             <div class="tab-pane fade" id="save-tab-pane" role="tabpanel" aria-labelledby="save-tab" tabindex="0">
+                <h4 class="h4 mb-3">Status</h4>
                 {{ form_row(form.visibility, { 'attr': { 'data-model': 'norender|event.visibility' }}) }}
                 {# <div class="mb-3">Sichtbarkeit (Privat, Öffentlich, Nicht Gelistet)</div> #}
 
