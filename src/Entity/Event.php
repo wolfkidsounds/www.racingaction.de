@@ -43,14 +43,6 @@ class Event
     private ?string $type = null;
 
     /**
-     * Ort des Events
-     *
-     * @var string|null
-     */
-    #[ORM\Column(length: 255)]
-    private ?string $location = null;
-
-    /**
      * Beginn des Events
      *
      * @var \DateTimeInterface|null
@@ -132,6 +124,9 @@ class Event
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $riderRegistration = null;
 
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $location = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,18 +152,6 @@ class Event
     public function setType(string $type): static
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): static
-    {
-        $this->location = $location;
 
         return $this;
     }
@@ -409,6 +392,18 @@ class Event
     public function setOrganizers(array $organizers): static
     {
         $this->organizers = $organizers;
+
+        return $this;
+    }
+
+    public function getLocation(): array
+    {
+        return $this->location;
+    }
+
+    public function setLocation(array $location): static
+    {
+        $this->location = $location;
 
         return $this;
     }
