@@ -46,6 +46,17 @@ class EventCrudController extends AbstractController
         $event = new Event();
         // TODO: $event->setOwner($this->getUser());
 
+        if (empty($event->getLocation())) {
+            $event->setLocation([
+                [
+                    'name' => '', 
+                    'address' => '', 
+                    'url' => '', 
+                    'description' => '',
+                ]
+            ]);
+        }
+
         $form = $this->createForm(CreateEventFormType::class, $event);
         $form->handleRequest($request);
 
@@ -115,7 +126,8 @@ class EventCrudController extends AbstractController
     public function export(?string $format, Event $event): Response
     {
         $link = new Link($event->getName(), $event->getDateStart(), $event->getDateEnd());
-        $link->address($event->getLocation());
+        $location = $event->getLocation();
+        $link->address($location["address"]);
         $link->description($event->getDescription());
 
         if ($format = 'google') {
