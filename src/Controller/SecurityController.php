@@ -67,57 +67,6 @@ class SecurityController extends AbstractController
         // throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    /**
-     * Registrieren
-     * 
-     * Diese Route wird benutzt um einen neuen nutzer zu registrieren.
-     *
-     * @param Request $request
-     * @param UserPasswordHasherInterface $userPasswordHasher
-     * @param Security $security
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
-    {
-        return $this->redirectToRoute('public_index');
-
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('registration@racingaction.de', 'Racing Action'))
-                    ->to($user->getEmail())
-                    ->subject('Confirm Email Address')
-                    ->htmlTemplate('security/confirmation_email.html.twig')
-            );
-
-            noty()->success('Du hast dich erfolgreich registriert.');
-            noty()->warning('Bitter verifiziere deine Email Adresse.');
-            return $security->login($user, 'form_login', 'main');
-        }
-
-        return $this->render('security/register.html.twig', [
-            'registrationForm' => $form,
-        ]);
-    }
-
     #[Route('/verify/email', name: 'verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
@@ -162,16 +111,11 @@ class SecurityController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/register/{token}', name: 'register_token')]
-    public function registerWithToken(string $token, Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    #[Route('/register', name: 'register')]
+    public function registerWithToken(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
 
         //TODO: Abfrage ob Veranstalter -> Dann neue "VerifizierungsAnfrage" an Admin.
-        
-        if (! $this->isCsrfTokenValid('register', $token)) {
-            noty()->error('Dein Token ist ungültig. Bitte lass dir einen neuen Link zuschicken.');
-            return $this->redirectToRoute('public_index');
-        }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);

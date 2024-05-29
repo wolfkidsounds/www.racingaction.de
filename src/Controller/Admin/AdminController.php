@@ -13,6 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
 {
+    /**
+     * Admin Dashboard
+     *
+     * @param UserRepository $userRepository
+     * @param EventRepository $eventRepository
+     * @return Response
+     */
     #[Route('/', name: 'index')]
     public function index(UserRepository $userRepository, EventRepository $eventRepository): Response
     {

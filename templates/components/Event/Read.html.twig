@@ -1,0 +1,53 @@
+<div {{ attributes }}>
+    {# Title #}
+    <h1 class="mb-3">Event Title</h1>
+
+    {# Meta Information #}
+    <div class="d-flex justify-content-between gap-3 p-3 border rounded mb-3">
+        <div class="d-flex flex-column">
+            <small class="mb-1">Organizer</small>
+            <span><i class="fas fa-user"></i> Event Organizer</span>
+        </div>
+        <div class="d-flex flex-column">
+            <small class="mb-1">Date</small>
+            <span><i class="fas fa-calendar-days"></i> Event Date</span>
+        </div>
+        <div class="d-flex flex-column">
+            <small class="mb-1">Time</small>
+            <span><i class="fas fa-clock"></i> Event Time</span>
+        </div>
+        <div class="d-flex flex-column">
+            <small class="mb-1">Location</small>
+            <span>
+                <i class="fas fa-location-dot"></i>
+                <a href="#" class="">
+                    Location...
+                    <small><i class="fas fa-link ms-2"></i></small>
+                </a>
+            </span>
+        </div>
+        <div class="d-flex flex-column">
+            <small class="mb-1">Categories</small>
+            <div class="d-flex gap-2">
+                <a href="#" class="badge rounded bg-info"><i class="fas fa-tag me-1"></i>Category 1</a>
+                <a href="#" class="badge rounded bg-info"><i class="fas fa-tag me-1"></i>Category 2</a>
+                <a href="#" class="badge rounded bg-info"><i class="fas fa-tag me-1"></i>Category 3</a>
+            </div>
+        </div>
+    </div>
+
+    {# Description #}
+    <div class="p-3 mb-3">
+        <h3>Description</h3>
+        <div class="">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+    </div>
+
+    {# Export #}
+    <div class="d-flex justify-content-between gap-3 p-3 border rounded">
+        <a href="" class="btn btn-outline-secondary"><i class="fas fa-plus"></i> Google Calendar</a>
+        <a href="" class="btn btn-outline-secondary"><i class="fas fa-plus"></i> Yahoo Calendar</a>
+        <a href="" class="btn btn-outline-secondary"><i class="fas fa-plus"></i> Outlook Calendar</a>
+        <a href="" class="btn btn-outline-secondary"><i class="fas fa-plus"></i> Office Calendar</a>
+        <a href="" class="btn btn-outline-secondary"><i class="fas fa-plus"></i> iCal/iCs Export</a>
+    </div>
+</div>

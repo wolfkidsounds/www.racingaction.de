@@ -16,11 +16,29 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/app/user', name: 'app_user_')]
 class UserCrudController extends AbstractController
 {
+    /**
+     * Nutzer Profil
+     *
+     * @return Response
+     */
     #[Route('/profile', name: 'profile', methods: ['GET'])]
     public function profile(): Response
     {
         return $this->render('app/pages/user/profile.html.twig', [
             'title' => 'Dein Profil',
+        ]);
+    }
+
+    /**
+     * Nutzer Einstellungen
+     *
+     * @return Response
+     */
+    #[Route('/settings', name: 'settings', methods: ['GET'])]
+    public function settings(): Response
+    {
+        return $this->render('app/pages/user/settings.html.twig', [
+            'title' => 'Einstellungen',
         ]);
     }
 }

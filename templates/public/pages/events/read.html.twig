@@ -1,0 +1,7 @@
+{% extends 'public/base.html.twig' %}
+
+{% block body %}
+    {{ component('Event:Read', {
+        event: event,
+    }) }}
+{% endblock %}

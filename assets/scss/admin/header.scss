@@ -1,5 +1,4 @@
 #header {
-    background: $background_dark_transparent;
     position: fixed;
     top: 0;
     left: 0;
@@ -7,6 +6,26 @@
     width:100vw;
 }
 
-#header .nav-link:hover {
-    background: rgba(0,0,0,.1);
+#header .nav-link {
+    transition: background .2s ease-in-out;
+}
+
+[data-bs-theme="dark"] {
+    #header {
+        background: $transparent-dark-005;
+    }
+    
+    #header .nav-link:hover {
+        background: $transparent-dark-005;
+    }
+}
+
+[data-bs-theme="light"] {
+    #header {
+        background: $transparent-light-005;
+    }
+    
+    #header .nav-link:hover {
+        background: $transparent-light-005;
+    }
 }

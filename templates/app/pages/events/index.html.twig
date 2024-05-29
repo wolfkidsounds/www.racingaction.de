@@ -1,5 +1,51 @@
 {% extends 'app/base.html.twig' %}
 
+{% block toolbar %}
+    {{ component('Crud:Toolbar', {
+        path: 'app_events_',
+        create: true,
+    })  }}
+{% endblock %}
+    
+
+{% block body %}
+    
+    {{ component('Crud:Index', {
+        path: 'app_events_',
+        entities: events,
+        selector: false,
+
+        actions: {
+            read: true,
+            update: true,
+        },
+
+        properties: {
+            id: {
+                type: 'integerField',
+                name: 'ID',
+            },
+
+            name: {
+                type: 'stringField',
+                name: 'Name',
+            },
+
+            dateStart: {
+                type: 'dateField',
+                name: 'Begin',
+            },
+
+            dateEnd: {
+                type: 'dateField',
+                name: 'End',
+            },
+        },
+    }) }}
+    
+{% endblock %}
+
+{# 
 {% block body %}
     <table class="table">
         <thead>
@@ -36,3 +82,4 @@
 {% block toolbar %}
     <a href="{{ path('app_events_create') }}">Create new</a>
 {% endblock %}
+#}

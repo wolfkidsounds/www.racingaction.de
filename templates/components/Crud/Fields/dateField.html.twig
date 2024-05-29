@@ -1,0 +1,7 @@
+{% if this.value is iterable %}
+    {% for item in this.value %}
+        <span class="badge rounded bg-info me-2">{{ item ? item|date('d.m.Y') : '' }}</span>
+    {% endfor %}
+{% else %}
+    {{ this.value ? this.value|date('d.m.Y') : '' }}
+{% endif %}

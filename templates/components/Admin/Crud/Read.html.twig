@@ -1,0 +1,19 @@
+<div class="" {{ attributes }}>
+    <table class="table">
+        <tbody>
+            {% for key, name in this.properties %}
+                {% set value = attribute(entity, key) %}
+                <tr>
+                    <th>{{ name }}</th>
+                        <td>
+                        {% if value is iterable %}
+                            {{ value|join(', ') }}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,5 +1,4 @@
 #footer {
-    background: $background_dark_transparent;
     position: fixed;
     width: 100vw;
     height: $footer_height;
@@ -8,6 +7,18 @@
     backdrop-filter: $backdrop_filter;
     -webkit-backdrop-filter: $backdrop_filter;
     z-index:1;
-    color: $text_color;
 }
 
+[data-bs-theme="dark"] {
+    #footer {
+        background: $transparent-dark-005;
+        color: $text_color-dark;
+    }
+}
+
+[data-bs-theme="light"] {
+    #footer {
+        background: $transparent-light-005;
+        color: $text_color-light;
+    }
+}

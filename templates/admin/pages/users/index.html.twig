@@ -1,37 +1,43 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nickname</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.nickname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_users_read', {'id': user.id}) }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_users_update', {'id': user.id}) }}"class="btn btn-sm btn-outline-secondary"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock %}
-
 {% block toolbar %}
-    <a href="{{ path('admin_users_create') }}" class="btn btn-sm btn-outline-primary">Create User</a>
+    {{ component('Admin:Crud:Toolbar', {
+        path: 'admin_users_',
+        create: true,
+    })  }}
+{% endblock %}
+    
+
+{% block body %}
+    
+    {{ component('Admin:Crud:Index', {
+        path: 'admin_users_',
+        entities: users,
+        selector: false,
+
+        actions: {
+            read: true,
+            update: true,
+        },
+
+        properties: {
+            id: {
+                type: 'integerField',
+                name: 'ID',
+            },
+            nickname: {
+                type: 'stringField',
+                name: 'Name',
+            },
+            email: {
+                type: 'stringField',
+                name: 'E-Mail',
+            },
+            roles: {
+                type: 'badgeField',
+                name: 'Roles',
+            },
+        },
+    }) }}
+    
 {% endblock %}
