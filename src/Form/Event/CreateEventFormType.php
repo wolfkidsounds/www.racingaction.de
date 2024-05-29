@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -67,13 +68,12 @@ class CreateEventFormType extends AbstractType
 
             ->add('dateEnd', DateType::class, [
                 'label' => 'Event End',
-                'required' => true,
+                'required' => false,
                 'widget' => 'single_text',
             ])
 
             ->add('isAllDay', CheckboxType::class, [
                 'label' => 'All Day Event?',
-                'empty_data' => false,
                 'required' => false,
             ])
 
