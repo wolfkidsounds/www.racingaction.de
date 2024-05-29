@@ -67,64 +67,6 @@ class Event
     private ?\DateTimeInterface $dateEnd = null;
 
     /**
-     * Preis für Zuschauer
-     *
-     * @var float|null
-     */
-    #[ORM\Column(nullable: true)]
-    private ?float $priceVisitor = null;
-
-    /**
-     * Preis für Fahrer
-     *
-     * @var float|null
-     */
-    #[ORM\Column(nullable: true)]
-    private ?float $priceRider = null;
-
-    /**
-     * Beginn für Zuschauer
-     *
-     * @var \DateTimeInterface|null
-     */
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeStartVisitor = null;
-
-    /**
-     * Fahrer anreise
-     *
-     * @var \DateTimeInterface|null
-     */
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeArrival = null;
-
-    /**
-     * Beginn der Fahrerbesprechung
-     *
-     * @var \DateTimeInterface|null
-     */
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeRidersBreefing = null;
-
-    /**
-     * Fahrer abreise
-     *
-     * @var \DateTimeInterface|null
-     */
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateTimeDeparture = null;
-
-    /**
-     * Erlaubte Klassen
-     * 
-     * TODO: Enum?
-     *
-     * @var string|null
-     */
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classes = null;
-
-    /**
      * Anmelde-Informationen
      *
      * @var string|null
@@ -147,6 +89,48 @@ class Event
      */
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isAllDay = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $schedule = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $visitorPrice = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $visitorStart = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $riderClasses = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $riderPrice = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $riderStart = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $riderBreefing = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $riderEnd = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $organizers = [];
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $websites = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $visibility = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $riderRegistration = null;
 
     public function getId(): ?int
     {
@@ -213,90 +197,6 @@ class Event
         return $this;
     }
 
-    public function getPriceVisitor(): ?string
-    {
-        return $this->priceVisitor;
-    }
-
-    public function setPriceVisitor(string $priceVisitor): static
-    {
-        $this->priceVisitor = $priceVisitor;
-
-        return $this;
-    }
-
-    public function getPriceRider(): ?string
-    {
-        return $this->priceRider;
-    }
-
-    public function setPriceRider(string $priceRider): static
-    {
-        $this->priceRider = $priceRider;
-
-        return $this;
-    }
-
-    public function getDateTimeStartVisitor(): ?\DateTimeInterface
-    {
-        return $this->dateTimeStartVisitor;
-    }
-
-    public function setDateTimeStartVisitor(?\DateTimeInterface $dateTimeStartVisitor): static
-    {
-        $this->dateTimeStartVisitor = $dateTimeStartVisitor;
-
-        return $this;
-    }
-
-    public function getDateTimeArrival(): ?\DateTimeInterface
-    {
-        return $this->dateTimeArrival;
-    }
-
-    public function setDateTimeArrival(?\DateTimeInterface $dateTimeArrival): static
-    {
-        $this->dateTimeArrival = $dateTimeArrival;
-
-        return $this;
-    }
-
-    public function getDateTimeRidersBreefing(): ?\DateTimeInterface
-    {
-        return $this->dateTimeRidersBreefing;
-    }
-
-    public function setDateTimeRidersBreefing(?\DateTimeInterface $dateTimeRidersBreefing): static
-    {
-        $this->dateTimeRidersBreefing = $dateTimeRidersBreefing;
-
-        return $this;
-    }
-
-    public function getDateTimeDeparture(): ?\DateTimeInterface
-    {
-        return $this->dateTimeDeparture;
-    }
-
-    public function setDateTimeDeparture(?\DateTimeInterface $dateTimeDeparture): static
-    {
-        $this->dateTimeDeparture = $dateTimeDeparture;
-
-        return $this;
-    }
-
-    public function getClasses(): ?string
-    {
-        return $this->classes;
-    }
-
-    public function setClasses(?string $classes): static
-    {
-        $this->classes = $classes;
-
-        return $this;
-    }
-
     public function getRegistration(): ?string
     {
         return $this->registration;
@@ -329,6 +229,186 @@ class Event
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function isAllDay(): ?bool
+    {
+        return $this->isAllDay;
+    }
+
+    public function setAllDay(?bool $isAllDay): static
+    {
+        $this->isAllDay = $isAllDay;
+
+        return $this;
+    }
+
+    public function getSchedule(): ?array
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?array $schedule): static
+    {
+        $this->schedule = $schedule;
+
+        return $this;
+    }
+
+    public function getVisitorPrice(): ?float
+    {
+        return $this->visitorPrice;
+    }
+
+    public function setVisitorPrice(?float $visitorPrice): static
+    {
+        $this->visitorPrice = $visitorPrice;
+
+        return $this;
+    }
+
+    public function getVisitorStart(): ?\DateTimeInterface
+    {
+        return $this->visitorStart;
+    }
+
+    public function setVisitorStart(?\DateTimeInterface $visitorStart): static
+    {
+        $this->visitorStart = $visitorStart;
+
+        return $this;
+    }
+
+    public function getRiderClasses(): ?array
+    {
+        return $this->riderClasses;
+    }
+
+    public function setRiderClasses(?array $riderClasses): static
+    {
+        $this->riderClasses = $riderClasses;
+
+        return $this;
+    }
+
+    public function getRiderPrice(): ?float
+    {
+        return $this->riderPrice;
+    }
+
+    public function setRiderPrice(?float $riderPrice): static
+    {
+        $this->riderPrice = $riderPrice;
+
+        return $this;
+    }
+
+    public function getRiderStart(): ?\DateTimeInterface
+    {
+        return $this->riderStart;
+    }
+
+    public function setRiderStart(?\DateTimeInterface $riderStart): static
+    {
+        $this->riderStart = $riderStart;
+
+        return $this;
+    }
+
+    public function getRiderBreefing(): ?\DateTimeInterface
+    {
+        return $this->riderBreefing;
+    }
+
+    public function setRiderBreefing(?\DateTimeInterface $riderBreefing): static
+    {
+        $this->riderBreefing = $riderBreefing;
+
+        return $this;
+    }
+
+    public function getRiderEnd(): ?\DateTimeInterface
+    {
+        return $this->riderEnd;
+    }
+
+    public function setRiderEnd(?\DateTimeInterface $riderEnd): static
+    {
+        $this->riderEnd = $riderEnd;
+
+        return $this;
+    }
+
+    public function getOrganizer(): array
+    {
+        return $this->organizers;
+    }
+
+    public function setOrganizer(array $organizers): static
+    {
+        $this->organizers = $organizers;
+
+        return $this;
+    }
+
+    public function getWebsites(): ?array
+    {
+        return $this->websites;
+    }
+
+    public function setWebsites(?array $websites): static
+    {
+        $this->websites = $websites;
+
+        return $this;
+    }
+
+    public function getVisibility(): ?string
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(string $visibility): static
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getRiderRegistration(): ?string
+    {
+        return $this->riderRegistration;
+    }
+
+    public function setRiderRegistration(?string $riderRegistration): static
+    {
+        $this->riderRegistration = $riderRegistration;
+
+        return $this;
+    }
+
+    public function getOrganizers(): array
+    {
+        return $this->organizers;
+    }
+
+    public function setOrganizers(array $organizers): static
+    {
+        $this->organizers = $organizers;
 
         return $this;
     }
