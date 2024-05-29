@@ -3,12 +3,17 @@
 namespace App\Form\Event;
 
 use App\Entity\Event;
+use App\Enum\Event\Status;
+use App\Form\Event\LinkType;
+use App\Enum\Event\Visibility;
 use App\Form\Event\LocationType;
+use App\Form\Event\OrganizerType;
 use Symfony\Component\Form\AbstractType;
 use App\Form\Event\Schedule\ScheduleDayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -32,14 +37,14 @@ class CreateEventFormType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Event Type',
                 'required' => true,
-                'autocomplete' => true,
+                //'autocomplete' => true,
                 'choices' => [
-                    'race' => 'Rennen',
-                    'race-series' => 'Rennserie',
-                    'practice' => 'Freies Training',
-                    'course' => 'Schulung',
-                    'training' => 'Trainingscamp',
-                    'other' => 'Sonstiges',
+                    'Rennen' => 'race',
+                    'Rennserie' => 'series',
+                    'Freies Training' => 'training',
+                    'Schulung' => 'course',
+                    'Trainingscamp' => 'trainingscamp',
+                    'Sonstiges' => 'other'
                 ],
             ])
 
@@ -67,13 +72,13 @@ class CreateEventFormType extends AbstractType
             ])
 
             // Schedule
-            ->add('schedule', CollectionType::class, [
+            ->add('schedule', LiveCollectionType::class, [
                 'entry_type' => ScheduleDayType::class,
                 'required' => false,
             ])
 
             // Location
-            ->add('location', CollectionType::class, [
+            ->add('location', LiveCollectionType::class, [
                 'entry_type' => LocationType::class,
                 'required' => false,
             ])
@@ -88,6 +93,10 @@ class CreateEventFormType extends AbstractType
 
             // Rider
             ->add('riderClasses', TextType::class, [
+                'required' => false,
+            ])
+
+            ->add('riderRegistration', TextareaType::class, [
                 'required' => false,
             ])
             
@@ -111,17 +120,26 @@ class CreateEventFormType extends AbstractType
             ])
 
             // Contact
-            ->add('dateTimeDeparture', DateTimeType::class, [
-                'required' => false,
-                'widget' => 'single_text',
-            ])
-            ->add('registration', TextType::class, [
+            ->add('organizers', LiveCollectionType::class, [
+                'entry_type' => OrganizerType::class,
                 'required' => true,
             ])
-            ->add('links', CollectionType::class, [
+
+            ->add('websites', LiveCollectionType::class, [
+                'entry_type' => LinkType::class,
                 'required' => false,
             ])
             
+            // Status
+            ->add('visibility', EnumType::class, [
+                'class' => Visibility::class,
+                'required' => true,
+            ])
+
+            ->add('status', EnumType::class, [
+                'class' => Status::class,
+                'required' => true,
+            ])
         ;
     }
 
