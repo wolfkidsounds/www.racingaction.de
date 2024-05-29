@@ -5,11 +5,13 @@ namespace App\Twig\Components\Event;
 use DateTime;
 use App\Entity\Event;
 use DateTimeInterface;
+use App\Form\Event\OrganizerType;
 use Symfony\Component\Form\FormView;
 use App\Form\Event\CreateEventFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -43,19 +45,47 @@ final class Form extends AbstractController
     }
 
     #[LiveAction]
-    public function save(EntityManagerInterface $em)
+    public function addSchedule()
     {
-        // Submit the form! If validation fails, an exception is thrown
-        // and the component is automatically re-rendered with the errors
-        $this->submitForm();
+        // "formValues" represents the current data in the form
+        // this modifies the form to add an extra comment
+        // the result: another embedded form!
+        $this->formValues['schedule'][] = [];
+    }
 
-        /** @var Post $post */
-        $post = $this->getForm()->getData();
-        $em->persist($post);
-        $em->flush();
+    #[LiveAction]
+    public function removeSchedule(#[LiveArg] int $index)
+    {
+        unset($this->formValues['schedule'][$index]);
+    }
 
-        noty()->success('Saved successfully');
+    #[LiveAction]
+    public function addOrganizer()
+    {
+        // "formValues" represents the current data in the form
+        // this modifies the form to add an extra comment
+        // the result: another embedded form!
+        $this->formValues['organizers'][] = [];
+    }
 
-        return $this->redirectToRoute('app_events_index');
+    #[LiveAction]
+    public function removeOrganizer(#[LiveArg] int $index)
+    {
+        unset($this->formValues['organizers'][$index]);
+    }
+
+    #[LiveAction]
+    public function addWebsite()
+    {
+        // "formValues" represents the current data in the form
+        // this modifies the form to add an extra comment
+        // the result: another embedded form!
+        $this->formValues['websites'][] = [];
+    }
+
+    #[LiveAction]
+    public function removeWebsite(#[LiveArg] int $index)
+    {
+        unset($this->formValues['websites'][$index]);
     }
 }
