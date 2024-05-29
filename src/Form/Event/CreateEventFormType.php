@@ -72,14 +72,24 @@ class CreateEventFormType extends AbstractType
             ])
 
             // Schedule
-            ->add('schedule', LiveCollectionType::class, [
+            ->add('schedule', CollectionType::class, [
                 'entry_type' => ScheduleDayType::class,
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'by_reference' => false,
                 'required' => false,
             ])
 
             // Location
-            ->add('location', LiveCollectionType::class, [
+            ->add('location', CollectionType::class, [
                 'entry_type' => LocationType::class,
+                'label' => false,
+                'allow_add' => false,
+                'allow_delete' => false,
+                'delete_empty' => true,
+                'by_reference' => false,
                 'required' => false,
             ])
 
@@ -120,13 +130,21 @@ class CreateEventFormType extends AbstractType
             ])
 
             // Contact
-            ->add('organizers', LiveCollectionType::class, [
+            ->add('organizers', CollectionType::class, [
                 'entry_type' => OrganizerType::class,
-                'required' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'by_reference' => false,
+                'required' => false,
             ])
 
             ->add('websites', LiveCollectionType::class, [
                 'entry_type' => LinkType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'by_reference' => false,
                 'required' => false,
             ])
             
