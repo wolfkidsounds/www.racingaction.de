@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 class ScheduleDayType extends AbstractType
 {
@@ -21,8 +22,12 @@ class ScheduleDayType extends AbstractType
                 'required' => true,
             ])
 
-            ->add('slot', CollectionType::class, [
+            ->add('slot', LiveCollectionType::class, [
                 'entry_type' => ScheduleDayTimeSlotType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'by_reference' => false,
                 'required' => true,
             ])            
         ;
