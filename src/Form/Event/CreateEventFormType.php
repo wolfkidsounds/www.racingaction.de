@@ -2,6 +2,7 @@
 
 namespace App\Form\Event;
 
+use DateTime;
 use App\Entity\Event;
 use App\Enum\Event\Status;
 use App\Form\Event\LinkType;
@@ -31,11 +32,13 @@ class CreateEventFormType extends AbstractType
             // General
             ->add('name', TextType::class, [
                 'label' => 'Event Name',
+                'empty_data' => '',
                 'required' => true,
             ])
 
             ->add('type', ChoiceType::class, [
                 'label' => 'Event Type',
+                'empty_data' => 'Select Type',
                 'required' => true,
                 //'autocomplete' => true,
                 'choices' => [
@@ -50,12 +53,14 @@ class CreateEventFormType extends AbstractType
 
             ->add('description', TextareaType::class, [
                 'label' => 'Event Description',
+                'empty_data' => '',
                 'required' => false,
             ])
 
             // Date & Time
             ->add('dateStart', DateType::class, [
                 'label' => 'Event Begin',
+                'empty_data' => new DateTime('now'),
                 'required' => true,
                 'widget' => 'single_text',
             ])
@@ -68,6 +73,7 @@ class CreateEventFormType extends AbstractType
 
             ->add('isAllDay', CheckboxType::class, [
                 'label' => 'All Day Event?',
+                'empty_data' => false,
                 'required' => false,
             ])
 
