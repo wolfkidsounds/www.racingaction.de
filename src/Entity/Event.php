@@ -4,9 +4,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EventRepository;
+use App\Enum\Event\Status;
+use App\Enum\Event\Visibility;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventRepository;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -39,7 +41,7 @@ class Event
      *
      * @var string|null
      */
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
     /**
@@ -51,19 +53,11 @@ class Event
     private ?\DateTimeInterface $dateStart = null;
 
     /**
-     * Ende des Events
-     *
-     * @var \DateTimeInterface|null
-     */
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateEnd = null;
-
-    /**
      * Anmelde-Informationen
      *
      * @var string|null
      */
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $registration = null;
 
     /**
@@ -109,23 +103,26 @@ class Event
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $riderEnd = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $organizers = [];
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private ?array $websites = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $visibility = null;
+    #[ORM\Column(enumType: Visibility::class)]
+    private ?Visibility $visibility = Visibility::PRIVATE;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    #[ORM\Column(enumType: Status::class)]
+    private ?Status $status = Status::DRAFT;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $riderRegistration = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $location = [];
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateEnd = null;
 
     public function getId(): ?int
     {
@@ -164,18 +161,6 @@ class Event
     public function setDateStart(\DateTimeInterface $dateStart): static
     {
         $this->dateStart = $dateStart;
-
-        return $this;
-    }
-
-    public function getDateEnd(): ?\DateTimeInterface
-    {
-        return $this->dateEnd;
-    }
-
-    public function setDateEnd(\DateTimeInterface $dateEnd): static
-    {
-        $this->dateEnd = $dateEnd;
 
         return $this;
     }
@@ -221,7 +206,7 @@ class Event
         return $this->isAllDay;
     }
 
-    public function setAllDay(?bool $isAllDay): static
+    public function setIsAllDay(?bool $isAllDay): static
     {
         $this->isAllDay = $isAllDay;
 
@@ -348,30 +333,6 @@ class Event
         return $this;
     }
 
-    public function getVisibility(): ?string
-    {
-        return $this->visibility;
-    }
-
-    public function setVisibility(string $visibility): static
-    {
-        $this->visibility = $visibility;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getRiderRegistration(): ?string
     {
         return $this->riderRegistration;
@@ -404,6 +365,42 @@ class Event
     public function setLocation(array $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTimeInterface
+    {
+        return $this->dateEnd;
+    }
+
+    public function setDateEnd(?\DateTimeInterface $dateEnd): static
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    public function getVisibility(): ?Visibility
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(Visibility $visibility): static
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
