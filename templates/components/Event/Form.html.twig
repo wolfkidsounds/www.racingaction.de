@@ -254,8 +254,8 @@
                         </span>
                     </button>
 
-                    {% for key, organizer in formValues.organizers %}
-                        <div id="organizer_{{ key }}">
+                    {% for organizer in form.organizers %}
+                        <div class="">
                             {{ form_row(organizer.name) }}
                             {{ form_row(organizer.email) }}
                             {{ form_row(organizer.phone) }}
