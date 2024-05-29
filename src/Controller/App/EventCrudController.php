@@ -58,6 +58,7 @@ class EventCrudController extends AbstractController
         }
 
         $form = $this->createForm(CreateEventFormType::class, $event);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
