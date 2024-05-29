@@ -1,6 +1,6 @@
 {% if this.value is iterable %}
     {% for item in this.value %}
-        <span class="badge rounded-circle bg-info me-2">{{ item }}</span>
+        <span class="badge rounded-circle bg-info me-2">{{ item }}
     {% endfor %}
 {% else %}
     {{ this.value }}

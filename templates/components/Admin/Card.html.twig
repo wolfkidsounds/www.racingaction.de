@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <span>{{ item.text }}</span>
-            <a href="{{ item.action.path }}" class="btn btn-outline-{{ this.style }} btn-sm"><span><i class="{{ item.action.icon }} me-2"></i>{{ item.action.name }}</span></a>
+            {{ item.text }}
+            <a href="{{ item.action.path }}" class="btn btn-outline-{{ this.style }} btn-sm"><i class="{{ item.action.icon }} me-2"></i>{{ item.action.name }}</a>
         </div>
     </div>
 </div>

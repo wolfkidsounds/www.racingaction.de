@@ -21,16 +21,16 @@
             <ul class="dropdown-menu">
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('admin_index') }}" role="button" class="dropdown-item">Admin</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <p><a href="{{ path('admin_index') }}" role="button" class="dropdown-item">Admin</a></p>
+                        <p><hr class="dropdown-divider"></p>
                     {% endif %}
-                    <li><a href="{{ path('app_user_profile') }}" role="button" class="dropdown-item">Mein Profil</a></li>
-                    <li><a href="{{ path('app_user_settings') }}" role="button" class="dropdown-item">Einstellungen</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a href="{{ path('auth_logout') }}" role="button" class="dropdown-item text-danger">Logout</a></li>
+                    <p><a href="{{ path('app_user_profile') }}" role="button" class="dropdown-item">Mein Profil</a></p>
+                    <p><a href="{{ path('app_user_settings') }}" role="button" class="dropdown-item">Einstellungen</a></p>
+                    <p><hr class="dropdown-divider"></p>
+                    <p><a href="{{ path('auth_logout') }}" role="button" class="dropdown-item text-danger">Logout</a></p>
                 {% else %}
-                    <li><a href="{{ path('auth_login') }}" role="button" class="dropdown-item">Login</a></li>
-                    <li><a href="{{ path('auth_register') }}" role="button" class="dropdown-item">Register</a></li>
+                    <p><a href="{{ path('auth_login') }}" role="button" class="dropdown-item">Login</a></p>
+                    <p><a href="{{ path('auth_register') }}" role="button" class="dropdown-item">Register</a></p>
                 {% endif %}
             </ul>
         </div>
