@@ -8,5 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ component('Event:Form') }}
+    {{ component('Event:Form', {
+        initialFormData:event,
+    }) }}
 {% endblock %}
