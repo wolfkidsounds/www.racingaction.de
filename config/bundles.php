@@ -19,4 +19,5 @@ return [
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
     CalendarBundle\CalendarBundle::class => ['all' => true],
     Symfonycasts\SassBundle\SymfonycastsSassBundle::class => ['all' => true],
+    Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
 ];
