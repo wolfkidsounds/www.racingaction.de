@@ -21,7 +21,7 @@ return [
         'type' => 'css',
     ],
     '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
-        'version' => '3.34.0',
+        'version' => '3.36.1',
         'type' => 'css',
     ],
     'bootstrap' => [
@@ -67,66 +67,8 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
-    '@fullcalendar/core' => [
-        'version' => '6.1.20',
-    ],
-    'preact' => [
-        'version' => '10.28.2',
-    ],
-    'preact/compat' => [
-        'version' => '10.28.2',
-    ],
-    'preact/hooks' => [
-        'version' => '10.28.2',
-    ],
-    '@fullcalendar/daygrid' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/core/index.js' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/core/internal.js' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/core/preact.js' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/timegrid' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/daygrid/internal.js' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/list' => [
-        'version' => '6.1.20',
-    ],
-    '@fullcalendar/interaction' => [
-        'version' => '6.1.20',
-    ],
-    '@calendarjs/ce' => [
-        'version' => '1.0.6',
-    ],
-    'lemonadejs' => [
-        'version' => '5.3.3',
-    ],
-    '@calendarjs/ce/dist/style.css' => [
-        'version' => '1.0.6',
-        'type' => 'css',
-    ],
-    '@fullcalendar/bootstrap5' => [
-        'version' => '6.1.20',
-    ],
     '@schedule-x/calendar' => [
         'version' => '4.1.0',
-    ],
-    'preact/jsx-runtime' => [
-        'version' => '10.28.2',
-    ],
-    '@preact/signals' => [
-        'version' => '2.5.1',
-    ],
-    '@preact/signals-core' => [
-        'version' => '1.12.1',
     ],
     '@schedule-x/theme-default/dist/index.css' => [
         'version' => '4.1.0',
@@ -134,5 +76,9 @@ return [
     ],
     'temporal-polyfill/global' => [
         'version' => '0.3.0',
+    ],
+    '@fortawesome/fontawesome-free/css/all.css' => [
+        'version' => '7.1.0',
+        'type' => 'css',
     ],
 ];
