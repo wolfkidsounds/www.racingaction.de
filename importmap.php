@@ -16,6 +16,20 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    '@fortawesome/fontawesome-free/css/all.min.css' => [
+        'version' => '7.0.0',
+        'type' => 'css',
+    ],
+    '@tabler/icons-webfont/dist/tabler-icons.min.css' => [
+        'version' => '3.34.0',
+        'type' => 'css',
+    ],
+    'bootstrap' => [
+        'version' => '5.3.6',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
