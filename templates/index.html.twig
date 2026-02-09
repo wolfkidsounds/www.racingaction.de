@@ -19,7 +19,9 @@
 </div>
 
 
-<div {{ stimulus_controller('calendar') }}>
+<div {{ stimulus_controller('calendar3', {
+    'events': events|default([])
+    }) }}>
     Welcome to the Racing Action Calendar!
 </div>
 {% endblock %}

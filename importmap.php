@@ -71,13 +71,13 @@ return [
         'version' => '6.1.20',
     ],
     'preact' => [
-        'version' => '10.12.1',
+        'version' => '10.28.2',
     ],
     'preact/compat' => [
-        'version' => '10.12.1',
+        'version' => '10.28.2',
     ],
     'preact/hooks' => [
-        'version' => '10.12.1',
+        'version' => '10.28.2',
     ],
     '@fullcalendar/daygrid' => [
         'version' => '6.1.20',
@@ -115,5 +115,24 @@ return [
     ],
     '@fullcalendar/bootstrap5' => [
         'version' => '6.1.20',
+    ],
+    '@schedule-x/calendar' => [
+        'version' => '4.1.0',
+    ],
+    'preact/jsx-runtime' => [
+        'version' => '10.28.2',
+    ],
+    '@preact/signals' => [
+        'version' => '2.5.1',
+    ],
+    '@preact/signals-core' => [
+        'version' => '1.12.1',
+    ],
+    '@schedule-x/theme-default/dist/index.css' => [
+        'version' => '4.1.0',
+        'type' => 'css',
+    ],
+    'temporal-polyfill/global' => [
+        'version' => '0.3.0',
     ],
 ];

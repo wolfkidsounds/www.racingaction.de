@@ -5,13 +5,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-icons/font/bootstrap-icons.css'; // webpack uses file-loader to handle font files
 
 
 export default class extends Controller {
     connect() {
-        var calendar = new Calendar(calendarEl, {
+        this.calendar = new Calendar(this.element, {
             plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin],
             themeSystem: 'bootstrap5',
             headerToolbar: {
@@ -81,8 +79,8 @@ export default class extends Controller {
             ]
         });
 
-        calendar.render();
-        this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+        this.calendar.render();
+        // this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
     }
 }
 
