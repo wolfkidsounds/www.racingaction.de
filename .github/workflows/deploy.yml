@@ -1,0 +1,50 @@
+name: Deploy Symfony App (Tag-based)
+
+on:
+  push:
+    tags:
+      - '*'   # nur Tags triggern den Workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (nur für Metadaten)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # ganze Historie und Tags
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          echo ">>> Deploy Tag: $TAG"
+
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+            set -e
+
+            APP_DIR="${{ secrets.APP_DIR }}"
+
+            echo ">>> Wechsel in Projektverzeichnis"
+            cd "\$APP_DIR"
+
+            echo ">>> Hard reset & clean"
+            git reset --hard
+            git clean -fd
+
+            echo ">>> Git fetch (inkl. Tags)"
+            git fetch origin --tags
+
+            echo ">>> Checkout Release-Tag"
+            git checkout "tags/$TAG" -b "deploy-$TAG"
+
+            echo ">>> Deploy-Script ausführen"
+            ./bin/deploy.sh
+          EOF
