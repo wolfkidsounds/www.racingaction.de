@@ -1,86 +1,43 @@
 import { Controller } from '@hotwired/stimulus';
-import { Calendar } from '@fullcalendar/core';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-import bootstrap5Plugin from '@fullcalendar/bootstrap5';
-
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+import 'temporal-polyfill/global'
 
 export default class extends Controller {
+    static values = {
+        events: Array
+    }
     connect() {
-        this.calendar = new Calendar(this.element, {
-            plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin],
-            themeSystem: 'bootstrap5',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
-            initialDate: '2018-01-12',
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            dayMaxEvents: true, // allow "more" link when too many events
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: '2018-01-01',
-                },
-                {
-                    title: 'Long Event',
-                    start: '2018-01-07',
-                    end: '2018-01-10'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2018-01-09T16:00:00'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2018-01-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: '2018-01-11',
-                    end: '2018-01-13'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2018-01-12T10:30:00',
-                    end: '2018-01-12T12:30:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2018-01-12T12:00:00'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2018-01-12T14:30:00'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: '2018-01-12T17:30:00'
-                },
-                {
-                    title: 'Dinner',
-                    start: '2018-01-12T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2018-01-13T07:00:00'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2018-01-28'
-                }
-            ]
+        // const config = {};
+
+        const dateEvents = this.eventsValue.map(event => ({
+            ...event,
+                start: this.convert(event.start),
+                end: this.convert(event.end)
+        }));
+        console.log(dateEvents);
+
+        const calendar = createCalendar({
+            views: [createViewMonthGrid()],
+            locale: 'de-DE',
+            events: dateEvents,
         });
 
-        this.calendar.render();
-        // this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+        calendar.render(this.element);
+    }
+
+    convert(dateString) {
+        const [date, time] = dateString.split(' ');
+        const [year, month, day] = date.split('-');
+        const [hour, minute] = time.split(':');
+        return Temporal.ZonedDateTime.from({
+            year: parseInt(year),
+            month: parseInt(month),
+            day: parseInt(day),
+            hour: parseInt(hour),
+            minute: parseInt(minute),
+            timeZone: 'UTC',
+        })
     }
 }
 
