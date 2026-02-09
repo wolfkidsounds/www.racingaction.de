@@ -8,15 +8,18 @@ export default class extends Controller {
         events: Array
     }
     connect() {
-        // const config = {};
-
+        /**
+         * Convert the date string to a Temporal.ZonedDateTime
+         */
         const dateEvents = this.eventsValue.map(event => ({
             ...event,
                 start: this.convert(event.start),
                 end: this.convert(event.end)
         }));
-        console.log(dateEvents);
 
+        /**
+         * Create the calendar
+         */
         const calendar = createCalendar({
             views: [createViewMonthGrid()],
             locale: 'de-DE',
@@ -26,6 +29,11 @@ export default class extends Controller {
         calendar.render(this.element);
     }
 
+    /**
+     * Convert a date string to a Temporal.ZonedDateTime
+     * @param {String} dateString
+     * @returns {Temporal.ZonedDateTime}
+     */
     convert(dateString) {
         const [date, time] = dateString.split(' ');
         const [year, month, day] = date.split('-');
