@@ -24,6 +24,8 @@ final class IndexController extends AbstractController
                 'title'=> $event->getTitle(),
                 'start'=> $event->getStartAt()->format('Y-m-d H:m'),
                 'end'=> $event->getEndAt()->format('Y-m-d H:m'),
+                'location'=> $event->getLocation(),
+                'description'=> $event->getDescription(),
 
             ];
         }
