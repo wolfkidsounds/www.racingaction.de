@@ -8,11 +8,12 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Event
 {
-    use TimestampableEntity;
-    use BlameableEntity;
-    
+    // use TimestampableEntity;
+    // use BlameableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -24,7 +25,7 @@ class Event
     #[ORM\Column]
     private ?\DateTimeImmutable $startAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?\DateTimeImmutable $endAt = null;
 
     public function getId(): ?int

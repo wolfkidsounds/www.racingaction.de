@@ -81,4 +81,22 @@ return [
         'version' => '7.1.0',
         'type' => 'css',
     ],
+    'preact' => [
+        'version' => '10.28.2',
+    ],
+    'preact/jsx-runtime' => [
+        'version' => '10.28.2',
+    ],
+    'preact/hooks' => [
+        'version' => '10.28.2',
+    ],
+    'preact/compat' => [
+        'version' => '10.28.2',
+    ],
+    '@preact/signals' => [
+        'version' => '2.5.1',
+    ],
+    '@preact/signals-core' => [
+        'version' => '1.12.1',
+    ],
 ];
