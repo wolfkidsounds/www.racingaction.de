@@ -9,7 +9,12 @@
         {% block javascripts %}{% endblock %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
+
     <body>
+        <twig:Header />
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
+        <twig:Footer />
     </body>
 </html>

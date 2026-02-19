@@ -4,4 +4,11 @@
 
 {% block body %}
 {{ dump(event) }}
+
+title: {{event.title}}
+
+{% for link in event.links %}
+<twig:EventLink url="{{link.url}}"/>
+{% endfor %}
+
 {% endblock %}

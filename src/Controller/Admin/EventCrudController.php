@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Event;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -27,6 +28,8 @@ class EventCrudController extends AbstractCrudController
         yield TextEditorField::new("description");
         yield TextField::new("location");
         yield AssociationField::new("type");
+        yield AssociationField::new("racingClass");
+        yield CollectionField::new("links")->allowAdd()->allowDelete()->setEntryIsComplex()->useEntryCrudForm(LinkCrudController::class);
     }
     
 }

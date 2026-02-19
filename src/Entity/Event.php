@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
@@ -41,6 +43,27 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?EventType $type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $subtitle = null;
+
+    /**
+     * @var Collection<int, RacingClass>
+     */
+    #[ORM\ManyToMany(targetEntity: RacingClass::class, inversedBy: 'events')]
+    private Collection $racingClass;
+
+    /**
+     * @var Collection<int, Link>
+     */
+    #[ORM\ManyToMany(targetEntity: Link::class, cascade: ['persist'])]
+    private Collection $links;
+
+    public function __construct()
+    {
+        $this->racingClass = new ArrayCollection();
+        $this->links = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -127,6 +150,66 @@ class Event
     public function setType(?EventType $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): static
+    {
+        $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RacingClass>
+     */
+    public function getRacingClass(): Collection
+    {
+        return $this->racingClass;
+    }
+
+    public function addRacingClass(RacingClass $racingClass): static
+    {
+        if (!$this->racingClass->contains($racingClass)) {
+            $this->racingClass->add($racingClass);
+        }
+
+        return $this;
+    }
+
+    public function removeRacingClass(RacingClass $racingClass): static
+    {
+        $this->racingClass->removeElement($racingClass);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Link>
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(Link $link): static
+    {
+        if (!$this->links->contains($link)) {
+            $this->links->add($link);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(Link $link): static
+    {
+        $this->links->removeElement($link);
 
         return $this;
     }
