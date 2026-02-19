@@ -1,2 +1,11 @@
-<div {{attributes}}> 
-</div>
+<a {{ attributes }} href="{{ this.url }}" target="_blank" rel="noopener noreferrer">
+    {% if this.withIcon %}
+        {% block icon %}
+            <img src="{{ this.iconUrl }}" width="{{ this.size }}" height="{{ this.size }}" alt="" loading="lazy">
+        {% endblock %}
+    {% endif %}
+
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</a>

@@ -3,12 +3,62 @@
 {% block title %}Hello EventController!{% endblock %}
 
 {% block body %}
-{{ dump(event) }}
+    {{ dump(event) }}
 
-title: {{event.title}}
+    <h1>Event</h1>
+    <h2>Title: {{ event.title }}</h2>
 
-{% for link in event.links %}
-<twig:EventLink url="{{link.url}}"/>
-{% endfor %}
+    <div class="d-flex flex-column"> {# Flexbox -> Als reihe, aber untereinander #}
+        <span>Start: {{ event.startAt|date('d.m.Y H:i') }}</span>
+        <span>End: {{ event.endAt|date('d.m.Y H:i') }}</span>
+        <span>Datum und Zeit: {{ event.startAt|date('d.m.Y H:i') }}</span>
+        <span>Type: {{ event.type.name }}</span>
+    </div>
 
+    <div>
+        {{ event.description|raw }} {# raw verwenden, um HTML zu erlauben -> TextEditorField #}
+    </div>
+
+    class: {# ACHTUNG! - Das ist eine Collection! #}
+    {% for class in event.racingClass %}
+        {{ class.name }}
+    {% endfor %}
+
+    {# EventLink Komponente verwenden #}
+
+    <div class="d-flex flex-row gap-3 mb-3">
+        {% for link in event.links %}
+            <twig:EventLink class="btn btn-secondary text-start" url="{{ link.url }}" />
+        {% endfor %}
+    </div>
+
+    <div class="d-flex flex-column gap-3 mb-3">
+        {% for link in event.links %}
+            <twig:EventLink class="p-3 bg-black" url="{{ link.url }}" withIcon="0">
+                <span class="small me-3">Hier gibts kein icon :(</span>
+
+                Inhalt, kann auch <strong>HTML</strong> enthalten.
+            </twig:EventLink> {# withIcon ist optional standard eingeschaltet #}
+        {% endfor %}
+    </div>
+
+    <div class="d-flex flex-row gap-3 mb-3">
+        {% for link in event.links %}
+            <twig:EventLink class="btn btn-light" url="{{ link.url }}" size="128" /> {# size ist optional und standard 32, achtung hier wird nur "pixel" verwendet! - Websites die kein icon in dieser größe liefern sehen ggf. verpixelt aus #}
+        {% endfor %}
+    </div>
+
+    <div class="p-3 d-flex flex-column gap-3 mb-3 rounded" style="background: rgba(255,255,255,.1);">
+        {% for link in event.links %}
+            <twig:EventLink class="d-flex flex-row align-items-center" size="24" url="{{ link.url }}">
+                <twig:block name="icon"> {# Du kannst auch den icon block überschreiben #}
+                    <div class="bg-black d-flex align-items-center justify-content-center border rounded-5 me-3" style="width: calc(2rem + 0.5rem); height: calc(2rem + 0.5rem);">
+                        <img src="{{ this.iconUrl }}" width="{{ this.size }}" height="{{ this.size }}" alt="" loading="lazy">
+                    </div>
+                </twig:block>
+
+                {{ link.url }}
+            </twig:EventLink>
+        {% endfor %}
+    </div>
 {% endblock %}
