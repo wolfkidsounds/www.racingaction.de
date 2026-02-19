@@ -99,4 +99,7 @@ return [
     '@preact/signals-core' => [
         'version' => '1.12.1',
     ],
+    'axios' => [
+        'version' => '1.13.5',
+    ],
 ];

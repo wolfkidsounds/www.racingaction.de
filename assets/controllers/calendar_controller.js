@@ -1,32 +1,41 @@
 import { Controller } from '@hotwired/stimulus';
-import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
-import '@schedule-x/theme-default/dist/index.css'
-import 'temporal-polyfill/global'
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar';
+import '@schedule-x/theme-default/dist/index.css';
+import 'temporal-polyfill/global';
+import axios from 'axios';
 
 export default class extends Controller {
-    static values = {
-        events: Array
-    }
     connect() {
-        /**
-         * Convert the date string to a Temporal.ZonedDateTime
-         */
-        const dateEvents = this.eventsValue.map(event => ({
+        this.events = []; // Leeres Events Array
+
+        axios.get('/api/events') // von /api/events abfragen
+            .then(response => {
+                console.log(response.data);
+                this.events = this.convertEvents(response.data); // Events in das Events array schreiben (direkt konvertiert)
+                this.createCalendar(this.events); // Kalendar erstellen
+            })
+            .catch(error => console.log(error));
+    }
+
+    createCalendar(events) {
+        const calendar = createCalendar({
+            views: [createViewMonthGrid()],
+            locale: 'de-DE',
+            events: events,
+        });
+
+        calendar.render(this.element);
+    }
+
+    /**
+    * Convert the date string to a Temporal.ZonedDateTime
+    */
+    convertEvents(events) {
+        return events.map(event => ({
             ...event,
                 start: this.convert(event.start),
                 end: this.convert(event.end)
         }));
-
-        /**
-         * Create the calendar
-         */
-        const calendar = createCalendar({
-            views: [createViewMonthGrid()],
-            locale: 'de-DE',
-            events: dateEvents,
-        });
-
-        calendar.render(this.element);
     }
 
     /**
