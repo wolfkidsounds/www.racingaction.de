@@ -22,9 +22,20 @@ export default class extends Controller {
             views: [createViewMonthGrid()],
             locale: 'de-DE',
             events: events,
+            callbacks: {
+                onEventClick(calendarEvent) {
+                    this.goToEvent(calendarEvent);
+                }
+            }
         });
 
         calendar.render(this.element);
+    }
+
+    goToEvent(event) {
+        const id = event.id;
+        if (!id) return;
+        window.location.href = `/events/${id}`;
     }
 
     /**
