@@ -24,18 +24,14 @@ export default class extends Controller {
             events: events,
             callbacks: {
                 onEventClick(calendarEvent) {
-                    this.goToEvent(calendarEvent);
+                    const id = calendarEvent.id;
+                    if (!id) return;
+                    window.location.href = `/events/${id}`;
                 }
             }
         });
 
         calendar.render(this.element);
-    }
-
-    goToEvent(event) {
-        const id = event.id;
-        if (!id) return;
-        window.location.href = `/events/${id}`;
     }
 
     /**
