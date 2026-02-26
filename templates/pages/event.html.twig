@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EventController!{% endblock %}
+{% block title %} {{ event.title }} {% endblock %}
 
 {% block body %}
     {{ dump(event) }}
-
+ 
     <h1>Event</h1>
     <h2>Title: {{ event.title }}</h2>
 
