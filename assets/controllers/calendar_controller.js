@@ -6,32 +6,44 @@ import axios from 'axios';
 
 export default class extends Controller {
     connect() {
-        this.events = []; // Leeres Events Array
-
-        axios.get('/api/events') // von /api/events abfragen
-            .then(response => {
-                console.log(response.data);
-                this.events = this.convertEvents(response.data); // Events in das Events array schreiben (direkt konvertiert)
-                this.createCalendar(this.events); // Kalendar erstellen
-            })
-            .catch(error => console.log(error));
-    }
-
-    createCalendar(events) {
         const calendar = createCalendar({
             views: [createViewMonthGrid()],
             locale: 'de-DE',
-            events: events,
             callbacks: {
-                onEventClick(calendarEvent) {
-                    const id = calendarEvent.id;
-                    if (!id) return;
-                    window.location.href = `/events/${id}`;
-                }
+                fetchEvents: (range) => this.fetchEvents(range), // holt events
+                onEventClick: (calendarEvent) => this.onEventClick(calendarEvent), // wird aufgerufen, wenn ein event geklickt wird
             }
         });
 
         calendar.render(this.element);
+    }
+
+    /**
+     * async -> damit wir die events nachträglich holen können.
+     * Mittels axios die Events aus der API abfragen.
+     * Wir schicken "range.start" und "range.end" als GET-Parameter an die API mit.
+     * Zurückgelieferte events werden dann Konvertiert und in das "events"-Array geschrieben.
+     * */
+    async fetchEvents(range) {
+        const { data } = await axios.get('/api/events', {
+            params: {
+                start: range.start,
+                end: range.end
+            }
+        });
+
+        return this.convertEvents(data);
+    }
+
+    /**
+     * Wird aufgerufen, wenn ein Event geklickt wird.
+     * Es wird die URL zum Event mit der ID erweitert.
+     * Simple Lösung (ohne Modal Fenster), aber funktioniert.
+     */
+    onEventClick(calendarEvent) {
+        const id = calendarEvent.id;
+        if (!id) return;
+        window.location.href = `/events/${id}`;
     }
 
     /**
